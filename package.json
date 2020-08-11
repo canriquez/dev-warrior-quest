@@ -1,0 +1,58 @@
+{
+  "name": "phaser_setup",
+  "version": "1.0.0",
+  "description": "first setup with phaser, webpack, babel",
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "tw": "jest --watch *.js",
+    "build": "webpack --mode production",
+    "buildp": "webpack --mode production --watch",
+    "watch": "webpack --mode development --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "author": "Carlos Anriquez",
+  "license": "MIT",
+  "bugs": {
+    "url": "git@github.com:canriquez/phaser_setup.git"
+  },
+  "homepage": "https://github.com/canriquez/phaser_setup",
+  "devDependencies": {
+    "@babel/core": "^7.11.0",
+    "@babel/preset-env": "^7.11.0",
+    "babel-loader": "^8.1.0",
+    "css-loader": "^3.6.0",
+    "file-loader": "^6.0.0",
+    "jest": "^26.2.2",
+    "style-loader": "^1.2.1",
+    "stylelint": "^13.3.3",
+    "stylelint-config-standard": "^20.0.0",
+    "stylelint-scss": "^3.17.2"
+  },
+  "dependencies": {
+    "copy-webpack-plugin": "^6.0.3",
+    "phaser": "^3.24.1",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "jsx"
+    ],
+    "moduleDirectories": [
+      "node_modules",
+      "bower_components",
+      "shared"
+    ],
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
+      "\\.(css|less)$": "<rootDir>/__mocks__/styleMock.js",
+      "\\.(gif|ttf|eot|svg)$": "<rootDir>/__mocks__/fileMock.js"
+    }
+  }
+}

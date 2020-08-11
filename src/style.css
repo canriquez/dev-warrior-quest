@@ -1,0 +1,59 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  transition: all 0.2s ease-in-out;
+}
+
+body {
+  background-color: #f8f9fa;
+  font-family: futura-light, sans-serif;
+}
+
+/* ================ fonts ================ */
+
+@font-face {
+  font-family: futura-bold;
+  src: url("./fonts/futura/Futura_Heavy_font.ttf") format("ttf");
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: futura-normal;
+  src: url("./fonts/futura/futura_medium_bt.ttf") format("ttf");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: futura-light;
+  src: url("./fonts/futura/futura_light_bt.ttf") format("ttf");
+  font-weight: 200;
+}
+
+/* ================ generic ================ */
+
+.row-flex {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.col-flex {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.hide {
+  display: none !important;
+}
+
+.show {
+  display: "" !important;
+}
+
+/* ================ section ================ */
