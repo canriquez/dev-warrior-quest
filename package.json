@@ -1,7 +1,7 @@
 {
-  "name": "phaser_setup",
+  "name": "dev-warrior-quest",
   "version": "1.0.0",
-  "description": "first setup with phaser, webpack, babel",
+  "description": "RPG game built with JavaScript and Phaser 3 (Final Capstone Project @microverseinc)",
   "private": true,
   "main": "index.js",
   "scripts": {
@@ -18,9 +18,9 @@
   "author": "Carlos Anriquez",
   "license": "MIT",
   "bugs": {
-    "url": "git@github.com:canriquez/phaser_setup.git"
+    "url": "git@github.com:canriquez/dev-warrior-quest.git"
   },
-  "homepage": "https://github.com/canriquez/phaser_setup",
+  "homepage": "https://github.com/canriquez/dev-warrior-quest.git",
   "devDependencies": {
     "@babel/core": "^7.11.0",
     "@babel/preset-env": "^7.11.0",
