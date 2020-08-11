@@ -1,19 +1,26 @@
 import './style.css';
-import { showMessage } from './messager';
+import Phaser from 'phaser';
+import { InitScene } from './scenes/initscene';
+import { WorldMapScene } from './scenes/mapscene';
 
-
-import 'phaser';
-
-import { SimpleScene } from './scenes/simple-scene';
-
-const gameConfig = {
-    width: 680,
-    height: 400,
-    scene: SimpleScene
+const config = {
+    type: Phaser.AUTO,
+    parent: 'content',
+    width: 320,
+    height: 240,
+    zoom: 2,
+    pixelArt: true,
+    physics: {
+        default: 'arcade',
+        arcade: {
+            gravity: { y: 0 },
+            debug: true,
+        },
+    },
+    scene: [
+        InitScene,
+        WorldMapScene,
+    ],
 };
 
-new Phaser.Game(gameConfig);
-
-document.addEventListener('DOMContentLoaded', () => {
-
-});
+const devGame = new Phaser.Game(config);
