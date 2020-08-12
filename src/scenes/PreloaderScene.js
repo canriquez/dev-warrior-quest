@@ -19,7 +19,7 @@ export class PreloaderScene extends Phaser.Scene {
     // this.scene.start(CONST.SCENES.TITLE, "hello from Preloader Scene");
     this.readyCount += 1;
     if (this.readyCount === 2) {
-      //this.scene.start(CONST.SCENES.TITLE, 'hello from Preloader Scene');
+      this.scene.start(CONST.SCENES.TITLE, 'hello from Preloader Scene');
     }
   }
 
@@ -87,11 +87,11 @@ export class PreloaderScene extends Phaser.Scene {
 
     // remove progress bar when complete
     this.load.on('complete', () => {
-      /*       progressBar.destroy();
-            progressBox.destroy();
-            loadingText.destroy();
-            percentText.destroy();
-            assetText.destroy(); */
+      progressBar.destroy();
+      progressBox.destroy();
+      loadingText.destroy();
+      percentText.destroy();
+      assetText.destroy();
       this.ready();
     });
 

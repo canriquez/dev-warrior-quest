@@ -95,13 +95,16 @@ export class WorldMapScene extends Phaser.Scene {
       type: 'hero',
     });
 
-    this.physics.add.existing(this.player);
-
     console.log('this player initial score');
-    console.log(this.player.gameScore);
+    console.log(this.player.globals.corazon.gameScore);
+
 
     console.log('Have I lost?');
-    console.log(this.player.haveILost());
+    console.log(this.player.globals.corazon.haveILost());
+
+
+    this.physics.add.existing(this.player);
+
 
 
     // this.player = this.physics.add.sprite(50, 100, 'player', 6);
