@@ -1,49 +1,32 @@
 import Phaser from 'phaser'
 import Player from './characters';
+import { InitScene } from '../scenes/initscene';
+import { WorldMapScene } from '../scenes/mapscene';
+import './setupTest.js';
 
-var game;
-var scene;
 var player;
 
-/* beforeAll(() => {
-    game = new Phaser.Game({
+//THIS TEST NOT WORKING
+
+beforeAll(async (done) => {
+    console.log('init game creation');
+    const testGame = new Phaser.Game({
         type: Phaser.HEADLESS,
-        scene: {
-            init: function () {
-                scene = new Phaser.scene({ key: 'test' });
-                done();
-            }
-        },
+        parent: 'content',
+        width: 320,
+        height: 240,
+        scene: [InitScene, WorldMapScene],
         callbacks: {
             postBoot: function () {
                 game.loop.stop();
-                testScene = game.scene.getScene('test');
-                player = new Player({
-                    scene: testScene,
-                    x: 50,
-                    y: 100,
-                    texture: 'player',
-                    type: 'hero'
-                });
+                player = game.scene.getScene('WORLDMAP').player;
             }
         }
     });
-}); */
-
-/* afterAll(() => {
-    game.destroy(true, true);
-    game.runDestroy();
+    done();
 });
- */
-/* beforeEach(() => {
-    player = new Player({
-        scene: scene,
-        x: 50,
-        y: 100,
-        texture: 'player',
-        type: 'hero'
-    });
-}); */
+
+
 
 let initGameScore = {
     skill: 20,
@@ -52,10 +35,11 @@ let initGameScore = {
     level: 'student'
 };
 
-console.log('here the score');
-console.log(player);
 
-test('it defines the correct base score for new player', () => {
-    expect(initGameScore).toMatchObject(initGameScore)
+test('it defines the correct base score for new player', async () => {
+    await new Promise((r) => setTimeout(r, 2000));
+    console.log('here the score');
+    console.log(player);
+    expect(player.gameScore).toMatchObject(initGameScore)
 });
 

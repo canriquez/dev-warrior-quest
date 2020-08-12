@@ -96,6 +96,12 @@ export class WorldMapScene extends Phaser.Scene {
 
         this.physics.add.existing(this.player);
 
+        console.log('this player initial score');
+        console.log(this.player.gameScore)
+
+        console.log('Have I lost?');
+        console.log(this.player.haveILost())
+
 
         //this.player = this.physics.add.sprite(50, 100, 'player', 6);
         this.physics.world.bounds.width = map.widthInPixels;
