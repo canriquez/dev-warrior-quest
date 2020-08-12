@@ -17,7 +17,7 @@ class DevGame extends Phaser.Game {
     constructor() {
         super(config);
         const settings = new GlobalSettings();
-        this.globals = { settings };
+        this.globals = { settings, bgMusic: null };
         this.scene.add(CONST.SCENES.INIT, InitScene);
         this.scene.add(CONST.SCENES.PRELOAD, PreloaderScene);
         this.scene.add(CONST.SCENES.TITLE, TitleScene);

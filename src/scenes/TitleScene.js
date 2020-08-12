@@ -1,6 +1,7 @@
 import Phaser from 'phaser';
 import { CONST } from '../components/const';
 import { config } from '../config/config'
+import { Button } from '../components/buttons';
 
 export class TitleScene extends Phaser.Scene {
     constructor() {
@@ -65,6 +66,14 @@ export class TitleScene extends Phaser.Scene {
         this.input.on('pointerout', function (event, gameObjects) {
             gameObjects[0].setTexture('blueButton1');
         });
+
+        this.config = this.sys.game.globals.settings;
+        if (this.config.musicOn === true && this.config.bgMusicPlaying === false) {
+            this.bgMusic = this.sound.add('bgMusic', { volume: 0.5, loop: true });
+            this.bgMusic.play();
+            this.config.bgMusicPlaying = true;
+            this.sys.game.globals.bgMusic = this.bgMusic;
+        }
     };
 
     centerButton(gameObject, offset = 0) {
