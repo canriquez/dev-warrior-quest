@@ -5,7 +5,7 @@ export const CONST = {
         WORLDMAP: 'WORLDMAP',
         TITLE: 'TITLE',
         OPTIONS: 'OPTIONS',
-        OPTIONS: 'CREDITS'
+        CREDITS: 'CREDITS'
     },
 };
 
