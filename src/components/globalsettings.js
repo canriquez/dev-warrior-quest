@@ -1,33 +1,34 @@
+/* eslint-disable no-underscore-dangle */
 export class GlobalSettings {
-    constructor() {
-        this._soundOn = true;
-        this._musicOn = true;
-        this._bgMusicPlaying = false;
-    }
+  constructor() {
+    this._soundOn = true;
+    this._musicOn = true;
+    this._bgMusicPlaying = false;
+  }
 
-    set musicOn(value) {
-        this._musicOn = value;
-    }
+  set musicOn(value) {
+    this._musicOn = value;
+  }
 
-    get musicOn() {
-        return this._musicOn;
-    }
+  get musicOn() {
+    return this._musicOn;
+  }
 
-    set soundOn(value) {
-        this._soundOn = value;
-    }
+  set soundOn(value) {
+    this._soundOn = value;
+  }
 
-    get soundOn() {
-        return this._soundOn;
-    }
+  get soundOn() {
+    return this._soundOn;
+  }
 
-    set bgMusicPlaying(value) {
-        this._bgMusicPlaying = value;
-    }
+  set bgMusicPlaying(value) {
+    this._bgMusicPlaying = value;
+  }
 
-    get bgMusicPlaying() {
-        return this._bgMusicPlaying;
-    }
+  get bgMusicPlaying() {
+    return this._bgMusicPlaying;
+  }
 }
 
 export default GlobalSettings;
