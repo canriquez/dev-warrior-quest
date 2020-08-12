@@ -3,6 +3,9 @@ export const CONST = {
         INIT: 'BOOT',
         PRELOAD: 'PRELOAD',
         WORLDMAP: 'WORLDMAP',
+        TITLE: 'TITLE',
+        OPTIONS: 'OPTIONS',
+        OPTIONS: 'CREDITS'
     },
 };
 

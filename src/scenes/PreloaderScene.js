@@ -1,4 +1,4 @@
-import 'phaser';
+import Phaser from 'phaser';
 import { CONST } from '../components/const';
 
 export class PreloaderScene extends Phaser.Scene {
@@ -14,6 +14,7 @@ export class PreloaderScene extends Phaser.Scene {
     }
 
     ready() {
+        this.scene.start(CONST.SCENES.TITLE, "hello from Preloader Scene");
         this.readyCount++;
         if (this.readyCount === 2) {
             this.scene.start('Title');
