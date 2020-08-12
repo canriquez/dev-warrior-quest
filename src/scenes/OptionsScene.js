@@ -41,14 +41,6 @@ export class OptionsScene extends Phaser.Scene {
 
         this.updateAudioSettings();
 
-        /*         this.menuButton = this.add.sprite(Help.posFixLeftX(0.5), Help.posFixBottomY(0.15), 'blueButton1').setInteractive();
-                this.menuText = this.add.text(0, 0, 'Menu', { fontSize: '32px', fill: '#fff' });
-                Phaser.Display.Align.In.Center(this.menuText, this.menuButton);
-        
-                this.menuButton.on('pointerdown', function (pointer) {
-                    this.scene.start(CONST.SCENES.TITLE);
-                }.bind(this)); */
-
         this.menuButton = new Button(this, Help.posFixLeftX(0.5), Help.posFixBottomY(0.15), 'blueButton1', 'blueButton2', 'Menu', CONST.SCENES.TITLE);
 
         this.updateAudioSettings();
