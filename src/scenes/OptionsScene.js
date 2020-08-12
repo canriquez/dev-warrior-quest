@@ -13,8 +13,10 @@ export class OptionsScene extends Phaser.Scene {
     }
 
     create() {
-        this.musicOn = true;
-        this.soundOn = true;
+        //this.musicOn = true;
+        //this.soundOn = true;
+
+        this.config = this.sys.game.globals.settings
 
         this.text = this.add.text(Help.posFixLeftX(0.32), Help.posFixTopY(0.07), 'Options', { fontSize: 40 });
         this.musicButton = this.add.image(Help.posFixLeftX(0.19), Help.posFixTopY(0.30), 'checkedBox');
@@ -27,12 +29,12 @@ export class OptionsScene extends Phaser.Scene {
         this.soundButton.setInteractive();
 
         this.musicButton.on('pointerdown', function () {
-            this.musicOn = !this.musicOn;
+            this.config.musicOn = !this.config.musicOn;
             this.updateAudioSettings();
         }.bind(this));
 
         this.soundButton.on('pointerdown', function () {
-            this.soundOn = !this.soundOn;
+            this.config.soundOn = !this.config.soundOn;
             this.updateAudioSettings();
         }.bind(this));
 
@@ -45,16 +47,17 @@ export class OptionsScene extends Phaser.Scene {
         this.menuButton.on('pointerdown', function (pointer) {
             this.scene.start(CONST.SCENES.TITLE);
         }.bind(this));
+        this.updateAudioSettings();
     };
 
     updateAudioSettings() {
-        if (this.musicOn === false) {
+        if (this.config.musicOn === false) {
             this.musicButton.setTexture('box');
         } else {
             this.musicButton.setTexture('checkedBox');
         }
 
-        if (this.soundOn === false) {
+        if (this.config.soundOn === false) {
             this.soundButton.setTexture('box');
         } else {
             this.soundButton.setTexture('checkedBox');

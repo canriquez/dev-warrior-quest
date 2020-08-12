@@ -3,9 +3,7 @@ import { CONST } from '../components/const';
 
 export class InitScene extends Phaser.Scene {
     constructor() {
-        super({
-            key: CONST.SCENES.INIT,
-        });
+        super(CONST.SCENES.INIT);
     }
 
     preload() {
