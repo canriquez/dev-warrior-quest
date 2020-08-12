@@ -1,6 +1,7 @@
 import Phaser from 'phaser';
 import { CONST } from '../components/const';
 import { Correct } from '../components/helpers';
+import { Player } from '../components/characters';
 
 export class WorldMapScene extends Phaser.Scene {
     constructor() {
@@ -85,10 +86,20 @@ export class WorldMapScene extends Phaser.Scene {
             faceColor: new Phaser.Display.Color(40, 39, 37, 255) // Color of colliding face edges
         });
 
-        this.player = this.physics.add.sprite(50, 100, 'player', 6);
+        this.player = new Player({
+            scene: this,
+            x: 0,
+            y: 0,
+            texture: 'player',
+            type: 'hero'
+        })
+
+        this.physics.add.existing(this.player);
+
+
+        //this.player = this.physics.add.sprite(50, 100, 'player', 6);
         this.physics.world.bounds.width = map.widthInPixels;
         this.physics.world.bounds.height = map.heightInPixels;
-        this.player.setCollideWorldBounds(true);
 
         //enables collide on worldLayer with player
 
