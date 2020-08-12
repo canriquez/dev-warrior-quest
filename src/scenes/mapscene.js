@@ -1,6 +1,6 @@
 import Phaser from 'phaser';
 import { CONST } from '../components/const';
-import { Correct } from '../components/helpers';
+import { Help } from '../components/helpers';
 import { Player } from '../components/characters';
 
 export class WorldMapScene extends Phaser.Scene {
@@ -117,33 +117,33 @@ export class WorldMapScene extends Phaser.Scene {
         let gA = map.objects[0].objects;
 
         //Player starting point
-        this.player.setPosition(Correct.x(gA[0]), Correct.y(gA[0]));
+        this.player.setPosition(Help.adjXpos(gA[0]), Help.adjYpos(gA[0]));
 
 
         // defines game locations listeners from map objects - End Of the Game
         this.endGame = this.physics.add.group({ classType: Phaser.GameObjects.Zone });
-        this.endGame.create(Correct.x(gA[1]), Correct.y(gA[1]), gA[1].width, gA[1].height);
+        this.endGame.create(Help.adjXpos(gA[1]), Help.adjYpos(gA[1]), gA[1].width, gA[1].height);
         this.physics.add.overlap(this.player, this.endGame, this.onEndGame, false, this);
 
         // defines game locations listeners from map objects - Challenge 1 Area Listener
         this.ch1 = this.physics.add.group({ classType: Phaser.GameObjects.Zone });
         this.ch1.name = gA[2].name;
-        this.ch1.create(Correct.x(gA[2]), Correct.y(gA[2]), gA[2].width, gA[2].height);
+        this.ch1.create(Help.adjXpos(gA[2]), Help.adjYpos(gA[2]), gA[2].width, gA[2].height);
         this.physics.add.overlap(this.player, this.ch1, this.onChallenge1, false, this);
 
         // defines game locations listeners from map objects - Challenge 2 Area Listener
         this.ch2 = this.physics.add.group({ classType: Phaser.GameObjects.Zone });
-        this.ch2.create(Correct.x(gA[3]), Correct.y(gA[3]), gA[3].width, gA[3].height);
+        this.ch2.create(Help.adjXpos(gA[3]), Help.adjYpos(gA[3]), gA[3].width, gA[3].height);
         this.physics.add.overlap(this.player, this.ch2, this.onChallenge2, false, this);
 
         // defines game locations listeners from map objects - Challenge 3 Area Listener
         this.ch3 = this.physics.add.group({ classType: Phaser.GameObjects.Zone });
-        this.ch3.create(Correct.x(gA[4]), Correct.y(gA[4]), gA[4].width, gA[4].height);
+        this.ch3.create(Help.adjXpos(gA[4]), Help.adjYpos(gA[4]), gA[4].width, gA[4].height);
         this.physics.add.overlap(this.player, this.ch3, this.onChallenge3, false, this);
 
         // defines game locations listeners from map objects - Job Interview Area Listener
         this.ji1 = this.physics.add.group({ classType: Phaser.GameObjects.Zone });
-        this.ji1.create(Correct.x(gA[5]), Correct.y(gA[5]), gA[5].width, gA[5].height);
+        this.ji1.create(Help.adjXpos(gA[5]), Help.adjYpos(gA[5]), gA[5].width, gA[5].height);
         this.physics.add.overlap(this.player, this.ji1, this.onJobInterview, false, this);
 
         // enable keystroke detection
