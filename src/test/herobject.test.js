@@ -1,5 +1,3 @@
-import { InitScene } from '../scenes/initscene';
-import { WorldMapScene } from '../scenes/mapscene';
 import { HeroProfile } from '../components/herobject'
 import { DeamonProfile } from '../components/deamonobject'
 
@@ -27,7 +25,7 @@ let firstHitPower = {
 }
 
 
-beforeAll(() => {
+beforeEach(() => {
     heroInstanceObject = new HeroProfile;
     deamInstanceObject = new DeamonProfile(0);
 });
@@ -64,15 +62,53 @@ describe('Player Scoring Logic - Full Challenge', () => {
     test('it attacks enemy and verify hit impact', () => {
         //init battle
         heroInstanceObject.resetChallengePow();
-        deamInstanceObject.resetChallengePow()
+        deamInstanceObject.resetChallengePow();
 
         //hero attacks
         heroInstanceObject.attackEnemy(heroInstanceObject.hitPower().sword, deamInstanceObject);
         expect(deamInstanceObject.challengePow).toEqual(6);
     })
 
-    test('it replentish hitPower object {sword,knife,punch} levels before challenge', () => {
-        heroInstanceObject.resetChallengePow()
-        expect(heroInstanceObject.hitPower()).toMatchObject(firstHitPower)
+    test('it attacks and confirms deamon kill', () => {
+        //init battle
+        heroInstanceObject.resetChallengePow();
+        deamInstanceObject.resetChallengePow();
+
+        //hero attacks
+        heroInstanceObject.attackEnemy(heroInstanceObject.hitPower().sword, deamInstanceObject);
+        heroInstanceObject.attackEnemy(heroInstanceObject.hitPower().sword, deamInstanceObject);
+        heroInstanceObject.attackEnemy(heroInstanceObject.hitPower().sword, deamInstanceObject);
+
+        expect(deamInstanceObject.challengeLost()).toEqual(true);
     });
+
+});
+
+
+describe('Deamon Scoring Logic - Full Challenge', () => {
+    test('it attacks Hero and verify hit impact', () => {
+        //init battle
+        heroInstanceObject.resetChallengePow();
+        deamInstanceObject.resetChallengePow();
+
+        //hero attacks
+        deamInstanceObject.attackEnemy(deamInstanceObject.hitPower().sword, heroInstanceObject);
+        expect(heroInstanceObject.challengePow).toEqual(10 - 0.99);
+    })
+
+    test('it attacks Hero and confirms hero kill', () => {
+        //init battle
+        heroInstanceObject.resetChallengePow();
+        deamInstanceObject.resetChallengePow();
+
+        //hero attacks
+        deamInstanceObject.attackEnemy(deamInstanceObject.hitPower().punch, heroInstanceObject);
+        deamInstanceObject.attackEnemy(deamInstanceObject.hitPower().punch, heroInstanceObject);
+        deamInstanceObject.attackEnemy(deamInstanceObject.hitPower().punch, heroInstanceObject);
+        deamInstanceObject.attackEnemy(deamInstanceObject.hitPower().punch, heroInstanceObject);
+
+
+        expect(heroInstanceObject.challengeLost()).toEqual(true);
+    });
+
 }); 
