@@ -9,7 +9,7 @@ import { OptionsScene } from './scenes/OptionsScene';
 import { CreditsScene } from './scenes/CreditsScene';
 import { WorldMapScene } from './scenes/MapScene';
 import { GlobalSettings } from './components/globalsettings';
-
+import { ChallengeScene } from './scenes/ChallengeScene';
 
 // const devGame = new Phaser.Game(config);
 
@@ -24,6 +24,7 @@ class DevGame extends Phaser.Game {
     this.scene.add(CONST.SCENES.OPTIONS, OptionsScene);
     this.scene.add(CONST.SCENES.CREDITS, CreditsScene);
     this.scene.add(CONST.SCENES.WORLDMAP, WorldMapScene);
+    this.scene.add(CONST.SCENES.CHALLENGE, ChallengeScene);
     this.scene.start(CONST.SCENES.INIT);
   }
 }

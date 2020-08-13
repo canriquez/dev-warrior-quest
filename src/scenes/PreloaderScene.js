@@ -16,10 +16,14 @@ export class PreloaderScene extends Phaser.Scene {
   }
 
   ready() {
-    // this.scene.start(CONST.SCENES.TITLE, "hello from Preloader Scene");
+    this.scene.start(CONST.SCENES.CHALLENGE, "Challenge call: - hello from Preloader Scene");
+
+    //this.scene.start(CONST.SCENES.CHALLENGE, "Challenge call: - hello from Preloader Scene");
     this.readyCount += 1;
     if (this.readyCount === 2) {
-      this.scene.start(CONST.SCENES.TITLE, 'hello from Preloader Scene');
+      //this.scene.start(CONST.SCENES.TITLE, 'hello from Preloader Scene');
+      //this.scene.start(CONST.SCENES.CHALLENGE, "Challenge call: - hello from Preloader Scene");
+
     }
   }
 
@@ -115,6 +119,13 @@ export class PreloaderScene extends Phaser.Scene {
     this.load.image('box', './src/assets/ui/grey_box.png');
     this.load.image('checkedBox', './src/assets/ui/blue_boxCheckmark.png');
     this.load.audio('bgMusic', ['./src/assets/music/TownTheme.mp3']);
+
+    //load challanges assets
+    this.load.image('chall01sm', './src/assets/chall/chall01_480x350.png');
+    this.load.image('board', './src/assets/chall/weapon_board.png');
+    this.load.image('ground', './src/assets/chall/ground.png');
+    this.load.image('w1', './src/assets/worrior/idle.png');
+    this.load.atlas('hero01', './src/assets/hero01/idle/hero01.png', './src/assets/hero01/idle/hero01.json')
   }
 
   create() {

@@ -40,6 +40,10 @@ export class DeamonProfile {
         return this.challengePow <= 0;
     }
 
+    haveILost() {
+        return this.challengePow <= 0;
+    }
+
     hitPower() {
         const pow = this.challengePow;
         return {

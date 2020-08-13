@@ -1,11 +1,13 @@
 export const CONST = {
   SCENES: {
-    INIT: 'BOOT',
+    INIT: 'INIT',
     PRELOAD: 'PRELOAD',
     WORLDMAP: 'WORLDMAP',
     TITLE: 'TITLE',
     OPTIONS: 'OPTIONS',
     CREDITS: 'CREDITS',
+    CHALLENGE: 'CHALLENGE',
+    UICHALL: 'UICHALL',
   },
 };
 

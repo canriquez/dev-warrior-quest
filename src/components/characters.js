@@ -1,13 +1,21 @@
 import Phaser from 'phaser';
-import { HeroProfile } from './herobject'
+import { HeroProfile } from './herobject';
+import { DeamonProfile } from './deamonobject';
 
 export class Player extends Phaser.GameObjects.Sprite {
   constructor(config) {
-    super(config.scene, config.x, config.y, config.texture, 1);
-    const corazon = new HeroProfile();
-    this.globals = { corazon };
+    super(config.scene, config.x, config.y, config.texture);
+
+    if (config.type == 'hero') {
+      const corazon = new HeroProfile();
+      this.globals = { corazon };
+    } else {
+      const corazon = new DeamonProfile(config.deamon);
+      this.globals = { corazon };
+    };
 
     config.scene.add.existing(this);
+    config.scene.physics.add.existing(this);
     this.setInteractive();
 
     this.on('pointerdown', this.clickMe, this);
