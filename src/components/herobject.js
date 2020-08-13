@@ -46,18 +46,6 @@ export class HeroProfile {
         return !(brave >= this.gameScore.fear);
     }
 
-    clickMe() {
-        console.log(`you clicked the sprite :${this.type}`);
-        console.log(`Have I lost ?${this.haveILost()}`);
-
-        console.log(`my challenge Pow before :${this.challengePow}`);
-        this.resetChallengePow();
-        console.log(`my challenge pow after :${this.challengePow}`);
-        console.log(this.hitPower().sword);
-        console.log(this.hitPower().knife);
-        console.log(this.hitPower().punch);
-    }
-
     resetChallengePow() {
         let pow = this.gameScore.skill * this.challengeMultiplier.skill;
         pow += this.gameScore.courage * this.challengeMultiplier.courage;
