@@ -6,7 +6,7 @@ export const Deamons = (() => {
     courage: 10,
     motivation: 10,
     fear: 10,
-    level: 'nice',
+    level: 'Nice Deamon',
   };
 
   const bad = {
@@ -14,7 +14,7 @@ export const Deamons = (() => {
     courage: 20,
     motivation: 20,
     fear: 20,
-    level: 'bad',
+    level: 'Bad Deamon',
   };
 
   const realBad = {
@@ -22,7 +22,7 @@ export const Deamons = (() => {
     courage: 30,
     motivation: 30,
     fear: 30,
-    level: 'realBad',
+    level: 'RealBad Deamon',
   };
   const badness = () => [nice, bad, realBad];
 

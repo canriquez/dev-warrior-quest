@@ -10,6 +10,16 @@ export const Help = (() => {
   const posFixLeftX = (val) => config.width * val;
   const posFixRightX = (val) => config.width * (1 - val);
 
+  const rndHit = () => {
+    let options = {
+      1: 'sword',
+      2: 'knife',
+      3: 'punch'
+    }
+
+    let r = Math.floor(Math.random() * 2);
+    return options[r];
+  }
   return {
     adjXpos,
     adjYpos,
@@ -17,6 +27,7 @@ export const Help = (() => {
     posFixTopY,
     posFixLeftX,
     posFixRightX,
+    rndHit,
   };
 })();
 

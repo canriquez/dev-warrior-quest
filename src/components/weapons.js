@@ -7,6 +7,7 @@ export class Weapon extends Phaser.GameObjects.Container {
     this.x = x;
     this.y = y;
     this.callback = callback;
+    this.alpha = 0.5;
 
     this.button = this.scene.add.sprite(0, 0, key1).setInteractive();
 

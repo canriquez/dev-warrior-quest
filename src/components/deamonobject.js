@@ -3,9 +3,9 @@ import { Deamons } from './deamontypes';
 
 export class DeamonProfile {
   constructor(type) {
-    this._gameScore = Deamons.badness()[type];
+    this.gameScore = Deamons.badness()[type];
 
-    this._challengePow = 0.0;
+    this.challengePow = 0.0;
 
     this.weaponFactor = {
       sword: 0.11,
@@ -20,20 +20,20 @@ export class DeamonProfile {
     };
   }
 
-  get challengePow() {
-    return this._challengePow;
-  }
-
-  get gameScore() {
-    return this._gameScore;
-  }
-
+  /*   get challengePow() {
+      return this._challengePow;
+    }
+  
+    get gameScore() {
+      return this._gameScore;
+    }
+   */
 
   resetChallengePow() {
     let pow = this.gameScore.skill * this.challengeMultiplier.skill;
     pow += this.gameScore.courage * this.challengeMultiplier.courage;
     pow += this.gameScore.motivation * this.challengeMultiplier.motiv;
-    this._challengePow = pow;
+    this.challengePow = pow;
   }
 
   challengeLost() {
@@ -60,7 +60,7 @@ export class DeamonProfile {
   }
 
   takeHit(strikePower) {
-    this._challengePow -= strikePower;
+    this.challengePow -= strikePower;
   }
 }
 

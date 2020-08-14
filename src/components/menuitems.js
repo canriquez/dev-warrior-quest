@@ -14,6 +14,9 @@ export class MenuItem {
         this.selBox.fillStyle(this.c2, 2);
         this.selBox.strokeRect(this.x, this.y, this.boxSize, this.boxSize);
         this.selBox.name = this.cf.name;
+        this.selected = false;
+        this.itemEnabled = false;
+
 
         // Add Button weapon Icon
         this.button = new Weapon(this.cf.scene,
@@ -24,21 +27,52 @@ export class MenuItem {
             (weapon) => {
                 console.log(`From the UI, I got clicked :${this.cf.name}`);
                 this.select();
+                console.log('select is: ' + this._selected);
+                this.cf.callback(this.cf.name, this.cf.item);
             });
         this.deselect();
+        this.disable();
         // Phaser.Display.Align.In.Center(this.selBox, this.button);
     }
 
+
     select() {
-        this.selBox.lineStyle(1, this.c1);
-        this.selBox.fillStyle(this.c1, 2);
-        this.selBox.strokeRect(this.x, this.y, this.boxSize, this.boxSize);
+        if (this.itemEnabled == true) {
+            this.selBox.lineStyle(1, this.c1);
+            this.selBox.fillStyle(this.c1, 2);
+            this.selBox.strokeRect(this.x, this.y, this.boxSize, this.boxSize);
+            this.selected = true;
+        };
     }
 
     deselect() {
+        this.selected = false;
         this.selBox.lineStyle(1, this.c2);
         this.selBox.fillStyle(this.c2, 2);
         this.selBox.strokeRect(this.x, this.y, this.boxSize, this.boxSize);
+    }
+
+    enable() {
+        this.selected = false;
+        this.itemEnabled = true;
+        this.selBox.lineStyle(1, this.c2);
+        this.selBox.fillStyle(this.c2, 2);
+        this.selBox.strokeRect(this.x, this.y, this.boxSize, this.boxSize);
+        //enabling button
+        this.button.alpha = 1.1;
+        //disableInteractive();
+        this.button.setInteractive;
+    };
+
+    disable() {
+        this.selected = false;
+        this.itemEnabled = false;
+        this.selBox.lineStyle(1, this.c2);
+        this.selBox.fillStyle(this.c2, 2);
+        this.selBox.strokeRect(this.x, this.y, this.boxSize, this.boxSize);
+        //enabling button
+        this.button.alpha = 0.2;
+        this.button.disableInteractive;
     }
 }
 

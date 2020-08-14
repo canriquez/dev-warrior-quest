@@ -13,6 +13,7 @@ export class Player extends Phaser.GameObjects.Sprite {
       const corazon = new DeamonProfile(config.deamon);
       this.globals = { corazon };
       this.flipX = true;
+      this.deamonId = config.deamonId;
     }
 
     config.scene.add.existing(this);
@@ -33,6 +34,10 @@ export class Player extends Phaser.GameObjects.Sprite {
     console.log(this.globals.corazon.hitPower().sword);
     console.log(this.globals.corazon.hitPower().knife);
     console.log(this.globals.corazon.hitPower().punch);
+    if (this.type == 'deamon') {
+      console.log('sending deamon message :' + this.deamonId);
+      this.scene.events.emit('attackDeamon', this.deamonId);
+    }
   }
 }
 
