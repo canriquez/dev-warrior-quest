@@ -11,6 +11,21 @@ export class ChallengeScene extends Phaser.Scene {
 
     init(data) {
         console.log('data');
+        this.challengeData = {
+            challengeName: 'HTML/CSS Capstone!',
+            deamons: 3,
+            badness: [1, 1, 1],
+            textures: ['hero01', 'hero01', 'hero01'],
+            positions: [290, 365, 450],
+            winFactor: 0.5, //Affects deamons damage on hero 0-1. 0 easy
+            dnames: ['Perfect Deamon', 'Nice Deamon', 'Nice Deamon'],
+            heroScores: {
+                skills: 100,
+                motivation: 100,
+                courage: 100,
+                fear: 100
+            }
+        }
     }
 
     preload() {
@@ -45,27 +60,42 @@ export class ChallengeScene extends Phaser.Scene {
             type: 'hero',
         });
 
-        //devWarrior.globals.corazon.resetChallengePow();
 
-        const deamon1 = new Player({
-            scene: this,
-            x: 350,
-            y: 100,
-            texture: 'hero01',
-            type: 'deamon',
-            deamon: 1,
-            deamonId: 0,
-        });
+        // Build Deamons Array
+        //this.enemies = [deamon1, deamon2];
+        this.enemies = [];
+        for (let i = 0; i < this.challengeData.badness.length; i += 1) {
+            let deamon = new Player({
+                scene: this,
+                x: this.challengeData.positions[i],
+                y: 100,
+                texture: this.challengeData.textures[i],
+                type: 'deamon',
+                deamon: this.challengeData.badness[i],
+                deamonId: i,
+            });
+            this.enemies.push(deamon);
+        }
 
-        const deamon2 = new Player({
-            scene: this,
-            x: 450,
-            y: 100,
-            texture: 'hero01',
-            type: 'deamon',
-            deamon: 1,
-            deamonId: 1,
-        });
+        /*         const deamon1 = new Player({
+                    scene: this,
+                    x: 350,
+                    y: 100,
+                    texture: 'hero01',
+                    type: 'deamon',
+                    deamon: 1,
+                    deamonId: 0,
+                });
+        
+                const deamon2 = new Player({
+                    scene: this,
+                    x: 450,
+                    y: 100,
+                    texture: 'hero01',
+                    type: 'deamon',
+                    deamon: 1,
+                    deamonId: 1,
+                }); */
 
         this.anims.create({
             key: 'Idle',
@@ -98,22 +128,33 @@ export class ChallengeScene extends Phaser.Scene {
 
         this.physics.add.collider(devWarrior, this.ground);
 
-        deamon1.body.setBounce(0.2);
-        deamon1.body.setCollideWorldBounds(true);
-        deamon1.body.setGravityY(300);
+        //add physics to deamons
+        for (let i = 0; i < this.enemies.length; i += 1) {
+            this.enemies[i].body.setBounce(0.2);
+            this.enemies[i].body.setCollideWorldBounds(true);
+            this.enemies[i].body.setGravityY(300);
+            this.physics.add.collider(this.enemies[i], this.ground);
+        }
 
-        this.physics.add.collider(deamon1, this.ground);
+        console.log('this enemies array: ');
+        console.log(this.enemies);
 
-        deamon2.body.setBounce(0.2);
-        deamon2.body.setCollideWorldBounds(true);
-        deamon2.body.setGravityY(300);
-
-        this.physics.add.collider(deamon2, this.ground);
+        /*         deamon1.body.setBounce(0.2);
+                deamon1.body.setCollideWorldBounds(true);
+                deamon1.body.setGravityY(300);
+        
+                this.physics.add.collider(deamon1, this.ground);
+        
+                deamon2.body.setBounce(0.2);
+                deamon2.body.setCollideWorldBounds(true);
+                deamon2.body.setGravityY(300);
+        
+                this.physics.add.collider(deamon2, this.ground); */
 
         // prepares scene-game variables
 
         this.heroes = [devWarrior];
-        this.enemies = [deamon1, deamon2];
+
         this.enemies[0].globals.corazon.resetChallengePow();
         this.enemies[1].globals.corazon.resetChallengePow();
         this.heroes[0].globals.corazon.resetChallengePow();
