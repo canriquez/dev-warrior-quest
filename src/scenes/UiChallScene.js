@@ -2,9 +2,9 @@ import Phaser from 'phaser';
 import { CONST } from '../components/const';
 import MenuItem from '../components/menuitems';
 import Help from '../components/helpers';
-import Weapon from '../components/weapons';
 import Menus from '../components/menus';
 import MessageChallenge from '../components/challmessages';
+import onScreenInstructions from '../components/osinstructions';
 
 export class UIChallScene extends Phaser.Scene {
     constructor() {
@@ -67,10 +67,12 @@ export class UIChallScene extends Phaser.Scene {
         this.battleScene.events.on("attackDeamon", this.onDeamonSelect, this);
         console.log(this.battleScene);
 
-        this.battleScene.nextTurn();
-
         this.message = new MessageChallenge(this, this.battleScene.events);
+        this.instructions = new onScreenInstructions(this, this.battleScene.events);
         this.add.existing(this.message);
+        this.add.existing(this.instructions);
+
+        this.battleScene.nextTurn();
     };
 
     menuItemSelected(menus, item) {
@@ -93,13 +95,15 @@ export class UIChallScene extends Phaser.Scene {
 
     onDeamonSelect(deamonId) {
         //only react if player has selected a strike in the current move.
-        console.log('current hit ' + this.currentHit);
+        console.log('Hit selected? : ' + this.hitSelected + 'current hit : ' + this.currentHit);
         if (this.hitSelected == true) {
-            this.hitSelected == false;
+            let weapon = Help.hits()[this.currentHit];
+            this.hitSelected = false;
+            this.currentHit = null;
             console.log('this was recieved:');
             console.log('Deamon selected for attack :' + deamonId)
             this.heroMenu.disableMenu();
-            this.events.emit('demonAttacked', deamonId);
+            this.events.emit('demonAttacked', { id: deamonId, weapon: weapon });
 
         } else {
             console.log('select a current hit');

@@ -18,6 +18,7 @@ export class ChallengeScene extends Phaser.Scene {
 
     create() {
         console.log('here we are in challenge');
+        this.challengeStarted = false;
 
         this.index = -1;
 
@@ -61,7 +62,7 @@ export class ChallengeScene extends Phaser.Scene {
             y: 100,
             texture: 'hero01',
             type: 'deamon',
-            deamon: 2,
+            deamon: 1,
             deamonId: 1,
         });
 
@@ -109,6 +110,9 @@ export class ChallengeScene extends Phaser.Scene {
         // single array of characters at play in the scene
         this.characters = this.heroes.concat(this.enemies);
 
+        //GAME STARTS 
+        console.log('##### CHALLENGE STARTS #### :round index is :' + this.index)
+
         // Launch in parallel UI Challenge Scene
         this.scene.launch(CONST.SCENES.UICHALL, 'and so... game starts');
         this.UiChallScene = this.scene.get(CONST.SCENES.UICHALL);
@@ -118,8 +122,17 @@ export class ChallengeScene extends Phaser.Scene {
     };
 
     nextTurn() {
+        console.log('this index : ' + this.index);
+        console.log('challenge started? :' + this.challengeStarted);
+        if (this.index == -1 && this.challengeStarted == false) {
+            console.log('hey I go in!');
+            this.challengeStarted = true
+            this.initialInstructions();
+        }
+
         this.index += 1;
-        if (this.index >= this.characters.length) {
+        console.log('round index is :' + this.index)
+        if (this.index > this.characters.length - 1) {
             this.index = 0;
         }
         if (this.characters[this.index]) {
@@ -151,30 +164,40 @@ export class ChallengeScene extends Phaser.Scene {
         let hero = this.heroes[0].globals.corazon;
         let power = deamon.hitPower()[Help.rndHit()]
         deamon.attackEnemy(power, hero);
-        console.log(' attacked pow after attack? :' + hero.challengePow);
+        console.log('HERO POW after attack? :' + hero.challengePow);
         this.events.emit("Message", deamon.gameScore.level +
             " attacks DevWarrior for " + power + " damage");
     }
 
     onDeamonAtacked(data) {
-        console.log('HEHEH: Demon has been attacked :' + data);
-        let sDeamon = this.enemies[data].globals.corazon;
+        console.log('HEHEH: Hero ATTACKS Demon :' + data);
+        let sDeamon = this.enemies[data.id].globals.corazon;
         let hero = this.heroes[0].globals.corazon;
-        let power = hero.hitPower()[Help.rndHit()]
-        console.log(hero.hitPower());
-        console.log(hero.hitPower()['sword']);
-        hero.attackEnemy(hero.hitPower()[power], sDeamon);
-        console.log('deamon pow after attack :' + sDeamon.challengePow);
+        let power = hero.hitPower()[data.weapon];
 
-        this.events.emit("Message", "DevWorrior" +
-            " attacks " + sDeamon.gameScore.level + " for " + power + " damage");
+        console.log('data coming from ui | hero hit is: ');
+        console.log(data.weapon)
+        console.log('Hero hit power : ');
+        console.log(power);
+        console.log('deamon is: ');
+        console.log(sDeamon);
+
+        hero.attackEnemy(power, sDeamon);
+        console.log('deamon pow after attack :' + sDeamon.challengePow);
+        console.log(sDeamon.gameScore.level);
+        this.events.emit("Message", " DevWarrior attacks  for " + power + " damage");
         this.time.addEvent({ delay: 3000, callback: this.nextTurn, callbackScope: this });
-        this.nextTurn();
+        console.log('general match index is :' + this.index);
     }
 
     onweaponMsg(data) {
         console.log('I got the warning message');
         this.events.emit("Message", data);
+    }
+
+    initialInstructions() {
+        console.log('intial instructions sent out');
+        this.events.emit("Instruc", "Welcome to the challege: Fait will make one weapon dissaper on each round for you. \n Good luck!");
     }
 
 }
