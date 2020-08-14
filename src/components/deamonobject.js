@@ -67,7 +67,6 @@ export class DeamonProfile {
     let maxPow = this.gameScore.skill * this.challengeMultiplier.skill;
     maxPow += this.gameScore.courage * this.challengeMultiplier.courage;
     maxPow += this.gameScore.motivation * this.challengeMultiplier.motiv;
-    maxPow += this.gameScore.fear * this.challengeMultiplier.fear;
     return Math.ceil(this.challengePow / maxPow * 100);
   };
 }

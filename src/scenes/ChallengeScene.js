@@ -224,8 +224,10 @@ export class ChallengeScene extends Phaser.Scene {
 
         hero.attackEnemy(power, sDeamon);
         console.log('deamon pow after attack :' + sDeamon.challengePow);
+        console.log('deamon powBar after attack :' + sDeamon.powBar());
 
         this.dPowBars[data.id].updateEnergyLevel(sDeamon.powBar());
+
         console.log(sDeamon.gameScore.level);
         this.events.emit("Message", " DevWarrior attacks  for " + power + " damage");
         this.time.addEvent({ delay: 3000, callback: this.nextTurn, callbackScope: this });

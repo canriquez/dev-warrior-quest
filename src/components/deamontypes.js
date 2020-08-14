@@ -5,7 +5,7 @@ export const Deamons = (() => {
     skill: 200,
     courage: 100,
     motivation: 100,
-    fear: 100,
+    fear: 10,
     level: 'Nice Deamon',
   };
 
@@ -13,7 +13,7 @@ export const Deamons = (() => {
     skill: 300,
     courage: 200,
     motivation: 200,
-    fear: 200,
+    fear: 20,
     level: 'Bad Deamon',
   };
 
