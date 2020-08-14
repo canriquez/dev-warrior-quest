@@ -126,6 +126,9 @@ export class PreloaderScene extends Phaser.Scene {
     this.load.image('ground', './src/assets/chall/ground.png');
     this.load.image('w1', './src/assets/worrior/idle.png');
     this.load.atlas('hero01', './src/assets/hero01/idle/hero01.png', './src/assets/hero01/idle/hero01.json')
+    this.load.image('knife', './src/assets/chall/knife.png');
+    this.load.image('sword', './src/assets/chall/sword.png');
+    this.load.image('punch', './src/assets/chall/punch.png');
   }
 
   create() {

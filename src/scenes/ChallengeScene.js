@@ -18,9 +18,6 @@ export class ChallengeScene extends Phaser.Scene {
 
     create() {
         console.log('here we are in challenge');
-        //Launch in parallel UI Challenge Scene
-        //this.scene.launch(CONST.SCENES.UICHALL);
-
 
         this.add.image(240, 175, 'chall01sm');
         this.graphics = this.add.graphics();
@@ -44,9 +41,9 @@ export class ChallengeScene extends Phaser.Scene {
             type: 'hero'
         });
 
-        let deamon = new Player({
+        let deamon1 = new Player({
             scene: this,
-            x: 300,
+            x: 380,
             y: 100,
             texture: 'hero01',
             type: 'deamon',
@@ -54,7 +51,7 @@ export class ChallengeScene extends Phaser.Scene {
         });
 
         console.log(devWarrior);
-        console.log(deamon);
+        console.log(deamon1);
 
         this.anims.create({
             key: 'Idle',
@@ -76,6 +73,22 @@ export class ChallengeScene extends Phaser.Scene {
         devWarrior.body.setGravityY(300);
 
         this.physics.add.collider(devWarrior, this.ground);
+
+        deamon1.body.setBounce(0.2);
+        deamon1.body.setCollideWorldBounds(true);
+        deamon1.body.setGravityY(300);
+
+        this.physics.add.collider(deamon1, this.ground);
+
+        //prepares scene-game variables
+
+        this.heroes = [devWarrior];
+        this.enemies = [deamon1]
+        //single array of characters at play in the scene
+        this.characters = this.heroes.concat(this.enemies);
+
+        //Launch in parallel UI Challenge Scene
+        this.scene.launch(CONST.SCENES.UICHALL, 'and so... game starts');
 
     }
 }

@@ -12,6 +12,7 @@ export class Player extends Phaser.GameObjects.Sprite {
     } else {
       const corazon = new DeamonProfile(config.deamon);
       this.globals = { corazon };
+      this.flipX = true;
     };
 
     config.scene.add.existing(this);
