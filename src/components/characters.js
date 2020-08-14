@@ -13,7 +13,7 @@ export class Player extends Phaser.GameObjects.Sprite {
       const corazon = new DeamonProfile(config.deamon);
       this.globals = { corazon };
       this.flipX = true;
-    };
+    }
 
     config.scene.add.existing(this);
     config.scene.physics.add.existing(this);
@@ -21,7 +21,6 @@ export class Player extends Phaser.GameObjects.Sprite {
 
     this.on('pointerdown', this.clickMe, this);
     this.type = config.type;
-
   }
 
   clickMe() {
@@ -34,7 +33,6 @@ export class Player extends Phaser.GameObjects.Sprite {
     console.log(this.globals.corazon.hitPower().sword);
     console.log(this.globals.corazon.hitPower().knife);
     console.log(this.globals.corazon.hitPower().punch);
-
   }
 }
 

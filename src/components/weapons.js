@@ -1,7 +1,7 @@
 import Phaser from 'phaser';
 
 export class Weapon extends Phaser.GameObjects.Container {
-  constructor(scene, x, y, key1, key2, text, callback) {
+  constructor(scene, x, y, key1, text, callback) {
     super(scene);
     this.scene = scene;
     this.x = x;
@@ -12,16 +12,15 @@ export class Weapon extends Phaser.GameObjects.Container {
 
     this.add(this.button);
 
-    this.button.on('pointerdown', () => {
-      console.log("clicking " + text)
+    this.button.on('pointerup', () => {
+      console.log(`clicking ${text}`);
       this.callback(text);
     });
 
     this.button.on('pointerover', () => {
-      //this.button.setTexture(key2);
+      // this.button.setTexture(key2);
       console.log('attempt to rotate');
       this.rotate(this.button);
-
     });
 
     this.button.on('pointerout', () => {
@@ -29,7 +28,7 @@ export class Weapon extends Phaser.GameObjects.Container {
     });
 
     this.scene.add.existing(this);
-  };
+  }
 
   rotate(sprite) {
     for (let i = 0; i < 361; i += 1) {

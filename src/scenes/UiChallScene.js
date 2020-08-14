@@ -20,48 +20,56 @@ export class UIChallScene extends Phaser.Scene {
 
     create() {
 
-        this.box1 = new MenuItem({
+        this.menuItemSword = new MenuItem({
             scene: this,
-            a: 28,
-            b: 298,
-            c: 40,
-            d: 40,
-            c1: 0xFFFFFF,
-            c2: 0x000000,
-            name: 'item1'
+            item: 0,
+            name: 'theSword',
+            weapon: 'sword',
+        });
+        this.menuItemKnife = new MenuItem({
+            scene: this,
+            item: 1,
+            name: 'theKnife',
+            weapon: 'knife',
+        });
+        this.menuItemPunch = new MenuItem({
+            scene: this,
+            item: 2,
+            name: 'thePunch',
+            weapon: 'punch',
         });
 
-        this.box1.select();
-        console.log(this.box1);
+        //this.menuItemSword.select();
+        // console.log(this.menuItemSword);
 
 
         // Play Game Button
-        this.sword = new Weapon(this,
-            Help.posFixLeftX(0.100),
-            Help.posFixBottomY(0.11),
-            'sword',
-            'sword',
-            'theSword',
-            (weapon) => {
-                console.log("From the UI, I got clicked :" + weapon);
-            }
-        );
+        /*         this.sword = new Weapon(this,
+                        Help.posFixLeftX(0.100),
+                        Help.posFixBottomY(0.11),
+                        'sword',
+                        'sword',
+                        'theSword',
+                        (weapon) => {
+                            console.log("From the UI, I got clicked :" + weapon);
+                        }
+                    ); */
 
-        this.knife = new Weapon(this,
-            Help.posFixLeftX(0.235),
-            Help.posFixBottomY(0.11),
-            'knife',
-            'knife',
-            'theKnife'
-        );
+        /*         this.knife = new Weapon(this,
+                        Help.posFixLeftX(0.235),
+                        Help.posFixBottomY(0.11),
+                        'knife',
+                        'knife',
+                        'theKnife'
+                    ); */
 
-        this.punch = new Weapon(this,
-            Help.posFixLeftX(0.365),
-            Help.posFixBottomY(0.11),
-            'punch',
-            'punch',
-            'thePunch'
-        );
+        /*         this.punch = new Weapon(this,
+                        Help.posFixLeftX(0.365),
+                        Help.posFixBottomY(0.11),
+                        'punch',
+                        'punch',
+                        'thePunch'
+                    ); */
 
         this.menus = this.add.container();
         this.heroMenu = new Menus(100, 100, this);
@@ -70,13 +78,11 @@ export class UIChallScene extends Phaser.Scene {
         // add menu to the container
         this.menus.add(this.heroMenu);
         this.battleScene = this.scene.get(CONST.SCENES.CHALLENGE);
-
-    };
+    }
 
     weaponSelected(weapon) {
 
     }
-
-};
+}
 
 export default UIChallScene;

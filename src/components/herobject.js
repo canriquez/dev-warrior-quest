@@ -1,81 +1,81 @@
 /* eslint-disable no-underscore-dangle */
 export class HeroProfile {
-    constructor() {
-        this._gameScore = {
-            skill: 10,
-            courage: 20,
-            motivation: 30,
-            fear: 20,
-            level: 'student',
-        };
-
-        this.challengePow = 0.0;
-
-        this.weaponFactor = {
-            sword: 0.3,
-            knife: 0.2,
-            punch: 0.1,
-        };
-        this.challengeMultiplier = {
-            skill: 0.1,
-            courage: 0.2,
-            motiv: 0.5,
-            fear: -0.5,
-        };
-    }
-
-    get gameScore() {
-        return this._gameScore;
+  constructor() {
+    this._gameScore = {
+      skill: 10,
+      courage: 20,
+      motivation: 30,
+      fear: 20,
+      level: 'student',
     };
 
+    this.challengePow = 0.0;
 
-    updateWinGameScore(prize) { // prize will be an object with the match score elements
-        this.gameScore.skill += prize.skill;
-        this.gameScore.courage += prize.courage;
-        this.gameScore.motivation += prize.motivation;
-    }
+    this.weaponFactor = {
+      sword: 0.3,
+      knife: 0.2,
+      punch: 0.1,
+    };
+    this.challengeMultiplier = {
+      skill: 0.1,
+      courage: 0.2,
+      motiv: 0.5,
+      fear: -0.5,
+    };
+  }
 
-    updateLossGameScore(prize) {
-        this.gameScore.skill -= prize.skill;
-        this.gameScore.courage -= prize.courage;
-        this.gameScore.motivation -= prize.motivation;
-    }
+  get gameScore() {
+    return this._gameScore;
+  }
 
-    haveILost() {
-        const brave = this.gameScore.skill + this.gameScore.courage + this.gameScore.motivation;
-        return !(brave >= this.gameScore.fear);
-    }
 
-    resetChallengePow() {
-        let pow = this.gameScore.skill * this.challengeMultiplier.skill;
-        pow += this.gameScore.courage * this.challengeMultiplier.courage;
-        pow += this.gameScore.motivation * this.challengeMultiplier.motiv;
-        pow += this.gameScore.fear * this.challengeMultiplier.fear;
-        this.challengePow = pow;
-    }
+  updateWinGameScore(prize) { // prize will be an object with the match score elements
+    this.gameScore.skill += prize.skill;
+    this.gameScore.courage += prize.courage;
+    this.gameScore.motivation += prize.motivation;
+  }
 
-    challengeLost() {
-        return this.challengePow <= 0;
-    }
+  updateLossGameScore(prize) {
+    this.gameScore.skill -= prize.skill;
+    this.gameScore.courage -= prize.courage;
+    this.gameScore.motivation -= prize.motivation;
+  }
 
-    hitPower() {
-        const pow = this.challengePow;
-        return {
-            sword: (pow * this.weaponFactor.sword),
-            knife: (pow * this.weaponFactor.knife),
-            punch: (pow * this.weaponFactor.punch),
-        };
-    }
+  haveILost() {
+    const brave = this.gameScore.skill + this.gameScore.courage + this.gameScore.motivation;
+    return !(brave >= this.gameScore.fear);
+  }
 
-    // I plan to call thislike this gamePlayer.attackEnemy(game.Player.hitPower.sword, target);
-    // eslint-disable-next-line class-methods-use-this
-    attackEnemy(hitPower, target) {
-        target.takeHit(hitPower);
-    }
+  resetChallengePow() {
+    let pow = this.gameScore.skill * this.challengeMultiplier.skill;
+    pow += this.gameScore.courage * this.challengeMultiplier.courage;
+    pow += this.gameScore.motivation * this.challengeMultiplier.motiv;
+    pow += this.gameScore.fear * this.challengeMultiplier.fear;
+    this.challengePow = pow;
+  }
 
-    takeHit(strikePower) {
-        this.challengePow -= strikePower;
-    }
+  challengeLost() {
+    return this.challengePow <= 0;
+  }
+
+  hitPower() {
+    const pow = this.challengePow;
+    return {
+      sword: (pow * this.weaponFactor.sword),
+      knife: (pow * this.weaponFactor.knife),
+      punch: (pow * this.weaponFactor.punch),
+    };
+  }
+
+  // I plan to call thislike this gamePlayer.attackEnemy(game.Player.hitPower.sword, target);
+  // eslint-disable-next-line class-methods-use-this
+  attackEnemy(hitPower, target) {
+    target.takeHit(hitPower);
+  }
+
+  takeHit(strikePower) {
+    this.challengePow -= strikePower;
+  }
 }
 
 
