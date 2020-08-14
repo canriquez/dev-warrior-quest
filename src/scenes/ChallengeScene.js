@@ -17,8 +17,9 @@ export class ChallengeScene extends Phaser.Scene {
             badness: [1, 1, 1],
             textures: ['hero01', 'hero01', 'hero01'],
             positions: [290, 365, 450],
-            winFactor: 0.5, //Affects deamons damage on hero 0-1. 0 easy
+            winFactor: 0.1, //Affects deamons damage on hero 0-1. 0 easy
             dnames: ['Perfect Deamon', 'Nice Deamon', 'Nice Deamon'],
+            dPBars: [[260, 20], [380, 20], [380, 60],],
             heroScores: {
                 skills: 100,
                 motivation: 100,
@@ -59,6 +60,8 @@ export class ChallengeScene extends Phaser.Scene {
             texture: 'hero01',
             type: 'hero',
         });
+        //initializes power for challenge
+        devWarrior.globals.corazon.resetChallengePow();
 
 
         // Build Deamons Array
@@ -74,28 +77,15 @@ export class ChallengeScene extends Phaser.Scene {
                 deamon: this.challengeData.badness[i],
                 deamonId: i,
             });
+            deamon.globals.corazon.resetChallengePow();
             this.enemies.push(deamon);
         }
 
-        /*         const deamon1 = new Player({
-                    scene: this,
-                    x: 350,
-                    y: 100,
-                    texture: 'hero01',
-                    type: 'deamon',
-                    deamon: 1,
-                    deamonId: 0,
-                });
-        
-                const deamon2 = new Player({
-                    scene: this,
-                    x: 450,
-                    y: 100,
-                    texture: 'hero01',
-                    type: 'deamon',
-                    deamon: 1,
-                    deamonId: 1,
-                }); */
+
+        /*         this.enemies[0].globals.corazon.resetChallengePow();
+                this.enemies[1].globals.corazon.resetChallengePow();
+                this.heroes[0].globals.corazon.resetChallengePow();
+         */
 
         this.anims.create({
             key: 'Idle',
@@ -109,18 +99,6 @@ export class ChallengeScene extends Phaser.Scene {
             frameRate: 8,
             repeat: -1,
         });
-
-
-        /*        let container = this.add.container(30, 20);
-               let pBar = this.add.graphics();
-               let pBox = this.add.graphics();
-               pBar.fillStyle(0xFCF787, 0.8);
-               pBar.fillRect(2, 2, 75, 12);
-               pBox.fillStyle(0x031f4c, 0.8);
-               pBox.fillRect(0, 0, 80, 17);
-               container.add([pBox, pBar]); */
-
-        // devWarrior.play('Idle');
 
         devWarrior.body.setBounce(0.2);
         devWarrior.body.setCollideWorldBounds(true);
@@ -139,25 +117,10 @@ export class ChallengeScene extends Phaser.Scene {
         console.log('this enemies array: ');
         console.log(this.enemies);
 
-        /*         deamon1.body.setBounce(0.2);
-                deamon1.body.setCollideWorldBounds(true);
-                deamon1.body.setGravityY(300);
-        
-                this.physics.add.collider(deamon1, this.ground);
-        
-                deamon2.body.setBounce(0.2);
-                deamon2.body.setCollideWorldBounds(true);
-                deamon2.body.setGravityY(300);
-        
-                this.physics.add.collider(deamon2, this.ground); */
-
         // prepares scene-game variables
 
         this.heroes = [devWarrior];
 
-        this.enemies[0].globals.corazon.resetChallengePow();
-        this.enemies[1].globals.corazon.resetChallengePow();
-        this.heroes[0].globals.corazon.resetChallengePow();
 
 
         // single array of characters at play in the scene
@@ -176,6 +139,23 @@ export class ChallengeScene extends Phaser.Scene {
         this.heroEB = new HeroEnergyBar(this, 30, 20, 100, "Hero's Name");
         this.add.existing(this.heroEB);
         this.heroEB.updateEnergyLevel(100);
+
+        // generates deamons bars
+
+        this.dPowBars = []
+
+        for (let i = 0; i < this.challengeData.dnames.length; i += 1) {
+            let deamonPW = new HeroEnergyBar(this,
+                this.challengeData.dPBars[i][0],
+                this.challengeData.dPBars[i][1],
+                100,
+                this.challengeData.dnames[i]
+            );
+            deamonPW.updateEnergyLevel(100);
+            this.dPowBars.push(deamonPW);
+            this.add.existing(deamonPW);
+        }
+        // this.add.existing(this.dPowBars);
 
 
     };
@@ -221,7 +201,7 @@ export class ChallengeScene extends Phaser.Scene {
     onHeroAttacked() {
         let deamon = this.characters[this.index].globals.corazon;
         let hero = this.heroes[0].globals.corazon;
-        let power = deamon.hitPower()[Help.rndHit()]
+        let power = deamon.hitPower()[Help.rndHit()] * this.challengeData.winFactor
         deamon.attackEnemy(power, hero);
         console.log('HERO POW after attack? :' + hero.challengePow);
         this.heroEB.updateEnergyLevel(hero.powBar());
@@ -244,6 +224,8 @@ export class ChallengeScene extends Phaser.Scene {
 
         hero.attackEnemy(power, sDeamon);
         console.log('deamon pow after attack :' + sDeamon.challengePow);
+
+        this.dPowBars[data.id].updateEnergyLevel(sDeamon.powBar());
         console.log(sDeamon.gameScore.level);
         this.events.emit("Message", " DevWarrior attacks  for " + power + " damage");
         this.time.addEvent({ delay: 3000, callback: this.nextTurn, callbackScope: this });
