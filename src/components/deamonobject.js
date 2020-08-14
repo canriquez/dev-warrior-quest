@@ -33,7 +33,7 @@ export class DeamonProfile {
     let pow = this.gameScore.skill * this.challengeMultiplier.skill;
     pow += this.gameScore.courage * this.challengeMultiplier.courage;
     pow += this.gameScore.motivation * this.challengeMultiplier.motiv;
-    this.challengePow = pow;
+    this.challengePow = Math.ceil(pow);
   }
 
   challengeLost() {
@@ -47,9 +47,9 @@ export class DeamonProfile {
   hitPower() {
     const pow = this.challengePow;
     return {
-      sword: (pow * this.weaponFactor.sword),
-      knife: (pow * this.weaponFactor.knife),
-      punch: (pow * this.weaponFactor.punch),
+      sword: Math.ceil(pow * this.weaponFactor.sword),
+      knife: Math.ceil(pow * this.weaponFactor.knife),
+      punch: Math.ceil(pow * this.weaponFactor.punch),
     };
   }
 
@@ -60,7 +60,7 @@ export class DeamonProfile {
   }
 
   takeHit(strikePower) {
-    this.challengePow -= strikePower;
+    this.challengePow -= Math.ceil((strikePower));
   }
 }
 

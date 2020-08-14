@@ -2,6 +2,7 @@ import Phaser from 'phaser';
 import { CONST } from '../components/const';
 import { Help } from '../components/helpers';
 import { Player } from '../components/characters';
+import { HeroEnergyBar } from '../components/energybars'
 
 export class ChallengeScene extends Phaser.Scene {
     constructor() {
@@ -79,6 +80,16 @@ export class ChallengeScene extends Phaser.Scene {
             repeat: -1,
         });
 
+
+        /*        let container = this.add.container(30, 20);
+               let pBar = this.add.graphics();
+               let pBox = this.add.graphics();
+               pBar.fillStyle(0xFCF787, 0.8);
+               pBar.fillRect(2, 2, 75, 12);
+               pBox.fillStyle(0x031f4c, 0.8);
+               pBox.fillRect(0, 0, 80, 17);
+               container.add([pBox, pBar]); */
+
         // devWarrior.play('Idle');
 
         devWarrior.body.setBounce(0.2);
@@ -107,6 +118,7 @@ export class ChallengeScene extends Phaser.Scene {
         this.enemies[1].globals.corazon.resetChallengePow();
         this.heroes[0].globals.corazon.resetChallengePow();
 
+
         // single array of characters at play in the scene
         this.characters = this.heroes.concat(this.enemies);
 
@@ -117,7 +129,13 @@ export class ChallengeScene extends Phaser.Scene {
         this.scene.launch(CONST.SCENES.UICHALL, 'and so... game starts');
         this.UiChallScene = this.scene.get(CONST.SCENES.UICHALL);
         this.UiChallScene.events.on("demonAttacked", this.onDeamonAtacked, this);
-        this.UiChallScene.events.on('selectWeapon', this.onweaponMsg, this)
+        this.UiChallScene.events.on('selectWeapon', this.onweaponMsg, this);
+        this.UiChallScene.events.on('notYourself', this.notYourself, this);
+
+        this.heroEB = new HeroEnergyBar(this, 30, 20, 100, "Hero's Name");
+        this.add.existing(this.heroEB);
+        this.heroEB.updateEnergyLevel(100);
+
 
     };
 
@@ -165,6 +183,7 @@ export class ChallengeScene extends Phaser.Scene {
         let power = deamon.hitPower()[Help.rndHit()]
         deamon.attackEnemy(power, hero);
         console.log('HERO POW after attack? :' + hero.challengePow);
+        this.heroEB.updateEnergyLevel(hero.powBar());
         this.events.emit("Message", deamon.gameScore.level +
             " attacks DevWarrior for " + power + " damage");
     }
@@ -191,6 +210,11 @@ export class ChallengeScene extends Phaser.Scene {
     }
 
     onweaponMsg(data) {
+        console.log('I got the warning message');
+        this.events.emit("Message", data);
+    }
+
+    notYourself(data) {
         console.log('I got the warning message');
         this.events.emit("Message", data);
     }

@@ -129,6 +129,10 @@ export class PreloaderScene extends Phaser.Scene {
     this.load.image('knife', './src/assets/chall/knife.png');
     this.load.image('sword', './src/assets/chall/sword.png');
     this.load.image('punch', './src/assets/chall/punch.png');
+
+    //challenge energy bars
+    this.load.image("energycontainer", "./src/assets/chall/energycontainer.png");
+    this.load.image("energybar", "./src/assets/chall/energybar.png");
   }
 
   create() {

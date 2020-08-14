@@ -28,15 +28,17 @@ export class Player extends Phaser.GameObjects.Sprite {
     console.log(`you clicked the sprite :${this.type}`);
     console.log(`Have I lost ?${this.globals.corazon.haveILost()}`);
 
-    console.log(`my challenge Pow before :${this.globals.corazon.challengePow}`);
-    this.globals.corazon.resetChallengePow();
-    console.log(`my challenge pow after :${this.globals.corazon.challengePow}`);
+    console.log(`my current pow for this is challenge :${this.globals.corazon.challengePow}`);
     console.log(this.globals.corazon.hitPower().sword);
     console.log(this.globals.corazon.hitPower().knife);
     console.log(this.globals.corazon.hitPower().punch);
     if (this.type == 'deamon') {
       console.log('sending deamon message :' + this.deamonId);
       this.scene.events.emit('attackDeamon', this.deamonId);
+    }
+    if (this.type == 'hero') {
+      console.log('sending deamon message :' + this.deamonId);
+      this.scene.events.emit('notYourself');
     }
   }
 }

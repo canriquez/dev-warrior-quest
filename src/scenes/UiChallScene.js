@@ -65,6 +65,9 @@ export class UIChallScene extends Phaser.Scene {
         this.battleScene.events.on("HeroSelect", this.onHeroSelect, this);
 
         this.battleScene.events.on("attackDeamon", this.onDeamonSelect, this);
+        this.battleScene.events.on("notYourself", this.notYourself, this);
+
+
         console.log(this.battleScene);
 
         this.message = new MessageChallenge(this, this.battleScene.events);
@@ -111,6 +114,13 @@ export class UIChallScene extends Phaser.Scene {
             this.events.emit('selectWeapon', msg);
         }
     };
-}
+
+    notYourself() {
+        if (this.hitSelected == true) {
+            let msg = 'You can do this!. Attack the deamon, not yourself!'
+            this.events.emit('notYourself', msg);
+        };
+    };
+};
 
 export default UIChallScene;

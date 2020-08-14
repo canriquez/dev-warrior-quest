@@ -2,10 +2,10 @@
 export class HeroProfile {
   constructor() {
     this._gameScore = {
-      skill: 10,
-      courage: 20,
-      motivation: 30,
-      fear: 20,
+      skill: 100,
+      courage: 200,
+      motivation: 300,
+      fear: 200,
       level: 'student',
     };
 
@@ -51,7 +51,7 @@ export class HeroProfile {
     pow += this.gameScore.courage * this.challengeMultiplier.courage;
     pow += this.gameScore.motivation * this.challengeMultiplier.motiv;
     pow += this.gameScore.fear * this.challengeMultiplier.fear;
-    this.challengePow = pow;
+    this.challengePow = Math.ceil(pow);
   }
 
   challengeLost() {
@@ -61,9 +61,9 @@ export class HeroProfile {
   hitPower() {
     const pow = this.challengePow;
     return {
-      sword: (pow * this.weaponFactor.sword),
-      knife: (pow * this.weaponFactor.knife),
-      punch: (pow * this.weaponFactor.punch),
+      sword: Math.ceil(pow * this.weaponFactor.sword),
+      knife: Math.ceil(pow * this.weaponFactor.knife),
+      punch: Math.ceil(pow * this.weaponFactor.punch),
     };
   }
 
@@ -74,8 +74,16 @@ export class HeroProfile {
   }
 
   takeHit(strikePower) {
-    this.challengePow -= strikePower;
+    this.challengePow -= Math.ceil((strikePower) * 0.7);
   }
+
+  powBar() {
+    let maxPow = this.gameScore.skill * this.challengeMultiplier.skill;
+    maxPow += this.gameScore.courage * this.challengeMultiplier.courage;
+    maxPow += this.gameScore.motivation * this.challengeMultiplier.motiv;
+    maxPow += this.gameScore.fear * this.challengeMultiplier.fear;
+    return Math.ceil(this.challengePow / maxPow * 100);
+  };
 }
 
 
