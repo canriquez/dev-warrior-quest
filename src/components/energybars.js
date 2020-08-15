@@ -1,5 +1,4 @@
 import Phaser from 'phaser';
-import { Help } from './helpers';
 
 export class HeroEnergyBar extends Phaser.GameObjects.Container {
 

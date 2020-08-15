@@ -3,6 +3,7 @@ import Phaser from 'phaser';
 import { CONST } from '../components/const';
 import { Help } from '../components/helpers';
 import { Player } from '../components/characters';
+import { GameScoreBoard } from '../components/gamescoreboard';
 
 export class WorldMapScene extends Phaser.Scene {
   constructor() {
@@ -156,6 +157,23 @@ export class WorldMapScene extends Phaser.Scene {
     this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
     this.cameras.main.startFollow(this.player);
     this.cameras.main.roundPixels = false;
+
+
+    this.scoreObj = {
+      score: ('NAME - Score : ' + 300),
+      skill: 20,
+      motiv: 90,
+      coura: 20,
+      fear: 130
+    }
+
+    //load score board
+    this.scBoard = new GameScoreBoard(this, 180, 10, this.scoreObj);
+    this.add.existing(this.scBoard);
+
+    this.scBoard.updateScoreBoard(this.scoreObj);
+
+
   }
 
   update() {
