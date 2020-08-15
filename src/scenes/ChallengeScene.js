@@ -19,7 +19,7 @@ export class ChallengeScene extends Phaser.Scene {
             htextures: ['hero01'],
             dtextures: ['hero01', 'hero01', 'hero01'],
             positions: [290, 365, 450],
-            winFactor: 0.1, //Affects deamons damage on hero 0-1. 0 easy
+            winFactor: 1, //Affects deamons damage on hero 0-1. 0 easy
             extraPower: 20, //increses player power for the match
             hnames: ['dev Warrior'],
             dnames: ['Deamon-1', 'Deamon-2', 'Deamon-3'],
@@ -76,7 +76,6 @@ export class ChallengeScene extends Phaser.Scene {
 
 
         // Build Deamons Array
-        //this.enemies = [deamon1, deamon2];
         this.enemies = [];
         for (let i = 0; i < this.challengeData.badness.length; i += 1) {
             let deamon = new Player({
@@ -214,11 +213,13 @@ export class ChallengeScene extends Phaser.Scene {
         let hero = this.heroes[0].globals.corazon;
         let power = Math.ceil(deamon.hitPower()[Help.rndHit()] * this.challengeData.winFactor);
         deamon.attackEnemy(power, hero);
-        console.log('HERO POW after attack? :' + hero.challengePow);
-        this.heroEB.updateEnergyLevel(hero.powBar());
-        this.events.emit("Message", this.characters[this.index].name +
-            " attacks DevWarrior for " + power + " damage");
-        this.checkHealth(this.heroes[0], 0);
+        if (power > 0) {
+            console.log('HERO POW after attack? :' + hero.challengePow);
+            this.heroEB.updateEnergyLevel(hero.powBar());
+            this.events.emit("Message", this.characters[this.index].name +
+                " attacks DevWarrior for " + power + " damage");
+            this.checkHealth(this.heroes[0], 0);
+        }
     }
 
     onDeamonAtacked(data) {
@@ -299,18 +300,38 @@ export class ChallengeScene extends Phaser.Scene {
     endChallenge() {
         console.log('Challenge ending...');
         if (this.heroes[0].alive) {
+            this.challengeResult = true;
             console.log("challenge success");
-            this.endChallengeMsg.showMessage(Help.ecMsg(0, -100, -100, -100, +100));
+            let msg = Help.ecMsg(0,
+                this.challengeData.prize.skills,
+                this.challengeData.prize.motivation,
+                this.challengeData.prize.courage,
+                this.challengeData.prize.deamonx * this.challengeData.deamons
+            );
+            this.endChallengeMsg.showMessage(msg);
         } else {
+            this.challengeResult = false;
             console.log("challenge lost")
-            this.endChallengeMsg.showMessage(Help.ecMsg(1, -100, -100, -100, +100));
+            let msg = Help.ecMsg(1,
+                this.challengeData.penalty.skills,
+                this.challengeData.penalty.motivation,
+                this.challengeData.penalty.courage,
+                this.challengeData.penalty.fear
+            );
+            this.endChallengeMsg.showMessage(msg);
         }
-        //message on challsnge end - Game over or challenge success
         //go back to map scene
         //put to sleep this scene.
     }
     backToParent() {
         console.log('heading back to map scene');
+        this.cameras.main.fade(1000);
+        this.scene.sleep(CONST.SCENES.CHALLENGE);
+        this.scene.switch(CONST.SCENES.WORLDMAP, { win: this.challengeResult });
+    }
+
+    startChallenge() {
+
     }
 }
 

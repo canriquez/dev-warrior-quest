@@ -23,13 +23,13 @@ export const Help = (() => {
   };
 
   const ecMsg = (type, a, b, c, d) => {
-    let result = ['WON', 'LOST', 'EXTRA     :', 'FEAR      :']
+    let result = ['WON', 'LOST', 'Challenge success :', 'FEAR      :']
     let text = {
       r1: 'YOU HAVE ' + result[type],
       r2: 'Skills    : ' + ((a >= 0) ? '+ ' + a : a),
       r3: 'Motivation: ' + ((b >= 0) ? '+ ' + b : b),
       r4: 'Courage   : ' + ((c >= 0) ? '+ ' + c : c),
-      r5: result[type + 2] + ' ' + ((d >= 0) ? '+ ' + d : d)
+      r5: result[type + 2] + ' ' + ((d >= 0) ? '+ ' + d : d) + ' points.'
     };
     return text;
   }

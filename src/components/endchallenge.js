@@ -21,7 +21,7 @@ export class EndChallenge extends Phaser.GameObjects.Container {
         this.add(this.text3);
         this.text4 = new Phaser.GameObjects.Text(scene, 0, 90, "", { color: '#ffffff', align: 'left', fontSize: 14, wordWrap: { width: 240, useAdvancedWrap: true } });
         this.add(this.text4);
-        this.text5 = new Phaser.GameObjects.Text(scene, 0, 115, "", { color: '#ffffff', align: 'left', fontSize: 14, wordWrap: { width: 240, useAdvancedWrap: true } });
+        this.text5 = new Phaser.GameObjects.Text(scene, 0, 115, "", { color: '#ffffff', align: 'left', fontSize: 14, wordWrap: { width: 280, useAdvancedWrap: true } });
         this.add(this.text5);
 
         this.exitButton = new Weapon(this.scene, 0, 160, 'bluebtn', 'exit', (text) => {
