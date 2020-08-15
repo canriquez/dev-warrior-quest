@@ -3,6 +3,7 @@ import { CONST } from '../components/const';
 import { Help } from '../components/helpers';
 import { Player } from '../components/characters';
 import { HeroEnergyBar } from '../components/energybars'
+import { EndChallenge } from '../components/endchallenge'
 
 export class ChallengeScene extends Phaser.Scene {
     constructor() {
@@ -92,12 +93,6 @@ export class ChallengeScene extends Phaser.Scene {
             this.enemies.push(deamon);
         }
 
-
-        /*         this.enemies[0].globals.corazon.resetChallengePow();
-                this.enemies[1].globals.corazon.resetChallengePow();
-                this.heroes[0].globals.corazon.resetChallengePow();
-         */
-
         this.anims.create({
             key: 'Idle',
             frames: this.anims.generateFrameNames('hero01', {
@@ -138,13 +133,6 @@ export class ChallengeScene extends Phaser.Scene {
         //GAME STARTS 
         console.log('##### CHALLENGE STARTS #### :round index is :' + this.index)
 
-        // Launch in parallel UI Challenge Scene
-        this.scene.launch(CONST.SCENES.UICHALL, 'and so... game starts');
-        this.UiChallScene = this.scene.get(CONST.SCENES.UICHALL);
-        this.UiChallScene.events.on("demonAttacked", this.onDeamonAtacked, this);
-        this.UiChallScene.events.on('selectWeapon', this.onweaponMsg, this);
-        this.UiChallScene.events.on('notYourself', this.notYourself, this);
-
         this.heroEB = new HeroEnergyBar(this, 30, 20, 100, this.challengeData.hnames[0]);
         this.add.existing(this.heroEB);
         this.heroEB.updateEnergyLevel(100);
@@ -165,6 +153,17 @@ export class ChallengeScene extends Phaser.Scene {
             this.add.existing(deamonPW);  //if I dont add them, they wont show
         }
 
+
+        //Final message instance ready
+        this.endChallengeMsg = new EndChallenge(this);
+        this.add.existing(this.endChallengeMsg);
+
+        // Launch in parallel UI Challenge Scene
+        this.scene.launch(CONST.SCENES.UICHALL, 'and so... game starts');
+        this.UiChallScene = this.scene.get(CONST.SCENES.UICHALL);
+        this.UiChallScene.events.on("demonAttacked", this.onDeamonAtacked, this);
+        this.UiChallScene.events.on('selectWeapon', this.onweaponMsg, this);
+        this.UiChallScene.events.on('notYourself', this.notYourself, this);
     };
 
     nextTurn() {
@@ -209,17 +208,6 @@ export class ChallengeScene extends Phaser.Scene {
         };
 
     }
-
-    /*     rndHit() {
-            let options = {
-                1: 'sword',
-                2: 'knife',
-                3: 'punch'
-            }
-    
-            let r = Math.floor(Math.random() * 2);
-            return options[r];
-        } */
 
     onHeroAttacked() {
         let deamon = this.characters[this.index].globals.corazon;
@@ -274,9 +262,6 @@ export class ChallengeScene extends Phaser.Scene {
             if ((index - 1) >= 0) {
                 this.dPowBars[index - 1].turnOff();
             }
-            /*             if (this.characters[index].type == 'hero') {
-                            this.endChallenge();
-                        } */
         }
     }
 
@@ -315,12 +300,17 @@ export class ChallengeScene extends Phaser.Scene {
         console.log('Challenge ending...');
         if (this.heroes[0].alive) {
             console.log("challenge success");
+            this.endChallengeMsg.showMessage(Help.ecMsg(0, -100, -100, -100, +100));
         } else {
             console.log("challenge lost")
+            this.endChallengeMsg.showMessage(Help.ecMsg(1, -100, -100, -100, +100));
         }
         //message on challsnge end - Game over or challenge success
         //go back to map scene
         //put to sleep this scene.
+    }
+    backToParent() {
+        console.log('heading back to map scene');
     }
 }
 
