@@ -75,6 +75,9 @@ export class HeroProfile {
 
   takeHit(strikePower) {
     this.challengePow -= Math.ceil((strikePower) * 0.7);
+    if (this.challengePow <= 0) {
+      this.challengePow = 0;
+    }
   }
 
   powBar() {
@@ -84,6 +87,7 @@ export class HeroProfile {
     maxPow += this.gameScore.fear * this.challengeMultiplier.fear;
     return Math.ceil(this.challengePow / maxPow * 100);
   };
+
 }
 
 

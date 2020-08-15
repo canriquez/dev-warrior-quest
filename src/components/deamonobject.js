@@ -7,6 +7,8 @@ export class DeamonProfile {
 
     this.challengePow = 0.0;
 
+    this.alive = true;
+
     this.weaponFactor = {
       sword: 0.11,
       knife: 0.11,
@@ -61,6 +63,9 @@ export class DeamonProfile {
 
   takeHit(strikePower) {
     this.challengePow -= Math.ceil((strikePower));
+    if (this.challengePow <= 0) {
+      this.challengePow = 0;
+    }
   }
 
   powBar() {

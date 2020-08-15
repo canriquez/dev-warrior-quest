@@ -48,6 +48,11 @@ export class HeroEnergyBar extends Phaser.GameObjects.Container {
             this.pbar.fillStyle(0xff3b30, 0.8);
         }
         this.pbar.fillRect(0, 0, lvl, 17);
+    };
+
+    turnOff() {
+        this.active = false;
+        this.visible = false;
     }
 };
 

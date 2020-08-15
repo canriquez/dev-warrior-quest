@@ -15,6 +15,8 @@ export class Player extends Phaser.GameObjects.Sprite {
       this.flipX = true;
       this.deamonId = config.deamonId;
     }
+    this.name = config.name;
+    this.alive = true;
 
     config.scene.add.existing(this);
     config.scene.physics.add.existing(this);
@@ -41,6 +43,15 @@ export class Player extends Phaser.GameObjects.Sprite {
       this.scene.events.emit('notYourself');
     }
   }
+
+  die() {
+    if (!this.alive) {
+      this.active = false;
+      //call dead animation if possible
+      this.visible = false;
+    }
+  }
+
 }
 
 export default Player;

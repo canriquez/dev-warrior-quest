@@ -15,16 +15,18 @@ export class ChallengeScene extends Phaser.Scene {
             challengeName: 'HTML/CSS Capstone!',
             deamons: 3,
             badness: [1, 1, 1],
-            textures: ['hero01', 'hero01', 'hero01'],
+            htextures: ['hero01'],
+            dtextures: ['hero01', 'hero01', 'hero01'],
             positions: [290, 365, 450],
-            winFactor: 0.1, //Affects deamons damage on hero 0-1. 0 easy
-            dnames: ['Perfect Deamon', 'Nice Deamon', 'Nice Deamon'],
+            winFactor: 2, //Affects deamons damage on hero 0-1. 0 easy
+            hnames: ['dev Warrior'],
+            dnames: ['Deamon-1', 'Deamon-2', 'Deamon-3'],
             dPBars: [[260, 20], [380, 20], [380, 60],],
-            heroScores: {
-                skills: 100,
-                motivation: 100,
-                courage: 100,
-                fear: 100
+            prize: {
+                skills: 50,
+                motivation: 50,
+                courage: 50,
+                deamonx: 90
             }
         }
     }
@@ -57,8 +59,9 @@ export class ChallengeScene extends Phaser.Scene {
             scene: this,
             x: 100,
             y: 100,
-            texture: 'hero01',
+            texture: this.challengeData.htextures[0],
             type: 'hero',
+            name: this.challengeData.hnames[0],
         });
         //initializes power for challenge
         devWarrior.globals.corazon.resetChallengePow();
@@ -72,8 +75,9 @@ export class ChallengeScene extends Phaser.Scene {
                 scene: this,
                 x: this.challengeData.positions[i],
                 y: 100,
-                texture: this.challengeData.textures[i],
+                texture: this.challengeData.dtextures[i],
                 type: 'deamon',
+                name: this.challengeData.dnames[i],
                 deamon: this.challengeData.badness[i],
                 deamonId: i,
             });
@@ -121,8 +125,6 @@ export class ChallengeScene extends Phaser.Scene {
 
         this.heroes = [devWarrior];
 
-
-
         // single array of characters at play in the scene
         this.characters = this.heroes.concat(this.enemies);
 
@@ -136,7 +138,7 @@ export class ChallengeScene extends Phaser.Scene {
         this.UiChallScene.events.on('selectWeapon', this.onweaponMsg, this);
         this.UiChallScene.events.on('notYourself', this.notYourself, this);
 
-        this.heroEB = new HeroEnergyBar(this, 30, 20, 100, "Hero's Name");
+        this.heroEB = new HeroEnergyBar(this, 30, 20, 100, this.challengeData.hnames[0]);
         this.add.existing(this.heroEB);
         this.heroEB.updateEnergyLevel(100);
 
@@ -153,10 +155,8 @@ export class ChallengeScene extends Phaser.Scene {
             );
             deamonPW.updateEnergyLevel(100);
             this.dPowBars.push(deamonPW);
-            this.add.existing(deamonPW);
+            this.add.existing(deamonPW);  //if I dont add them, they wont show
         }
-        // this.add.existing(this.dPowBars);
-
 
     };
 
@@ -169,51 +169,68 @@ export class ChallengeScene extends Phaser.Scene {
             this.initialInstructions();
         }
 
-        this.index += 1;
-        console.log('round index is :' + this.index)
-        if (this.index > this.characters.length - 1) {
-            this.index = 0;
-        }
+        //increments index until next character is alive.
+        //it also checks for match finished
+
+        do {
+            if (this.checkEndChallenge()) {
+                this.endChallenge();
+                return;
+            }
+
+            this.index += 1;
+            console.log('round index is :' + this.index)
+            if (this.index > this.characters.length - 1) {
+                this.index = 0;
+            }
+
+        } while (!this.characters[this.index].alive);
+
         if (this.characters[this.index]) {
+
+            this.checkHealth(this.characters[this.index], this.index);
             //if it is the hero's turn
-            if (this.characters[this.index].type == 'hero') {
+            if (this.characters[this.index].type == 'hero' && this.characters[this.index].alive) {
                 this.events.emit('HeroSelect', this.index);
-            } else { // if it is a demon then...
-                this.onHeroAttacked();
-                // add timer 
-                this.time.addEvent({ delay: 3000, callback: this.nextTurn, callbackScope: this });
+            } else { // if it is a demon then... attack hero
+                if (this.characters[0].alive) {// deamons attack only if hero is alive
+                    this.onHeroAttacked();
+                    // add timer 
+                    this.time.addEvent({ delay: 3000, callback: this.nextTurn, callbackScope: this });
+                }
             };
         };
 
     }
 
-    rndHit() {
-        let options = {
-            1: 'sword',
-            2: 'knife',
-            3: 'punch'
-        }
-
-        let r = Math.floor(Math.random() * 2);
-        return options[r];
-    }
+    /*     rndHit() {
+            let options = {
+                1: 'sword',
+                2: 'knife',
+                3: 'punch'
+            }
+    
+            let r = Math.floor(Math.random() * 2);
+            return options[r];
+        } */
 
     onHeroAttacked() {
         let deamon = this.characters[this.index].globals.corazon;
         let hero = this.heroes[0].globals.corazon;
-        let power = deamon.hitPower()[Help.rndHit()] * this.challengeData.winFactor
+        let power = Math.ceil(deamon.hitPower()[Help.rndHit()] * this.challengeData.winFactor);
         deamon.attackEnemy(power, hero);
         console.log('HERO POW after attack? :' + hero.challengePow);
         this.heroEB.updateEnergyLevel(hero.powBar());
-        this.events.emit("Message", deamon.gameScore.level +
+        this.events.emit("Message", this.characters[this.index].name +
             " attacks DevWarrior for " + power + " damage");
+        this.checkHealth(this.heroes[0], 0);
     }
 
     onDeamonAtacked(data) {
         console.log('HEHEH: Hero ATTACKS Demon :' + data);
         let sDeamon = this.enemies[data.id].globals.corazon;
         let hero = this.heroes[0].globals.corazon;
-        let power = hero.hitPower()[data.weapon];
+        let power = Math.ceil(hero.hitPower()[data.weapon]) * 1; //erase this 20 -  only for test
 
         console.log('data coming from ui | hero hit is: ');
         console.log(data.weapon)
@@ -229,9 +246,31 @@ export class ChallengeScene extends Phaser.Scene {
         this.dPowBars[data.id].updateEnergyLevel(sDeamon.powBar());
 
         console.log(sDeamon.gameScore.level);
-        this.events.emit("Message", " DevWarrior attacks  for " + power + " damage");
+        this.events.emit("Message", this.characters[this.index].name + " attacks  for " + power + " damage");
         this.time.addEvent({ delay: 3000, callback: this.nextTurn, callbackScope: this });
         console.log('general match index is :' + this.index);
+    }
+
+    checkHealth(character, index) {
+
+        console.log('####- Checking Health:');
+        console.log('character Name ' + character.name);
+        console.log('character type ' + character.type);
+        console.log('Index is ' + index);
+        console.log('Is IT alive?:' + character.alive);
+        console.log('####- End Checking Health ####');
+
+        if (character.globals.corazon.challengePow == 0) {
+            character.alive = false;
+            character.die();
+            console.log(character.name + ': has died ## <<<=======');
+            if ((index - 1) >= 0) {
+                this.dPowBars[index - 1].turnOff();
+            }
+            /*             if (this.characters[index].type == 'hero') {
+                            this.endChallenge();
+                        } */
+        }
     }
 
     onweaponMsg(data) {
@@ -249,6 +288,28 @@ export class ChallengeScene extends Phaser.Scene {
         this.events.emit("Instruc", "Welcome to the challege: Fait will make one weapon dissaper on each round for you. \n Good luck!");
     }
 
+    checkEndChallenge() {
+        let success = true;
+        for (let i = 0; i < this.enemies.length; i += 1) {
+            if (this.enemies[i].alive) {
+                success = false;
+            }
+        }
+        let challengeLost = true;
+        for (let i = 0; i < this.heroes.length; i += 1) {
+            if (this.heroes[i].alive) {
+                challengeLost = false;
+            }
+        }
+        return success || challengeLost;
+    }
+
+    endChallenge() {
+        console.log('Challenge ending...');
+        //message on challsnge end - Game over or challenge success
+        //go back to map scene
+        //put to sleep this scene.
+    }
 }
 
 export default ChallengeScene;
