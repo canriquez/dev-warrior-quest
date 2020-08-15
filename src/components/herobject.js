@@ -9,6 +9,8 @@ export class HeroProfile {
       level: 'student',
     };
 
+    this._extraScore = 0;
+
     this.challengePow = 0.0;
 
     this.weaponFactor = {
@@ -26,6 +28,14 @@ export class HeroProfile {
 
   get gameScore() {
     return this._gameScore;
+  }
+
+  get extraScore() {
+    return this._extraScore;
+  }
+
+  set extraScore(data) {
+    this._extraScore += data;
   }
 
 

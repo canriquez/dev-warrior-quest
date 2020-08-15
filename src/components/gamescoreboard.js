@@ -3,8 +3,11 @@ import Phaser from 'phaser';
 export class GameScoreBoard extends Phaser.GameObjects.Container {
 
     constructor(scene, x, y, sObj) {
+
         super(scene, x, y);
-        this.scoreObject = sObj;
+
+        this.scoreObject = scene.player.globals.corazon.gameScore;
+        //this.scoreObject = sObj;
         // display progress bar
 
 
@@ -141,6 +144,8 @@ export class GameScoreBoard extends Phaser.GameObjects.Container {
 
 
     updateScoreBoard(sO) {
+
+
         let maxScale = 55;
         let scoreA = [sO.skill, sO.motiv, sO.coura];
         let fear = sO.fear;

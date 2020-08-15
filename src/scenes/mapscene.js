@@ -159,6 +159,9 @@ export class WorldMapScene extends Phaser.Scene {
     this.cameras.main.roundPixels = false;
 
 
+
+
+
     this.scoreObj = {
       score: ('NAME - Score : ' + 300),
       skill: 20,
