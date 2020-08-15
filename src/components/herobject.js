@@ -11,6 +11,8 @@ export class HeroProfile {
 
     this._extraScore = 0;
 
+    this._playerName = '';
+
     this.challengePow = 0.0;
 
     this.weaponFactor = {
@@ -37,6 +39,15 @@ export class HeroProfile {
   set extraScore(data) {
     this._extraScore += data;
   }
+
+  get playerName() {
+    return this._playerName;
+  }
+
+  set playerName(data) {
+    this._playerName = data;
+  }
+
 
 
   updateWinGameScore(prize) { // prize will be an object with the match score elements
