@@ -11,7 +11,7 @@ export class HeroProfile {
 
     this._extraScore = 0;
 
-    this._playerName = '';
+    this._playerName = 'N.N.';
 
     this.challengePow = 0.0;
 

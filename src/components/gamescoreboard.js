@@ -6,10 +6,14 @@ export class GameScoreBoard extends Phaser.GameObjects.Container {
 
         super(scene, x, y);
 
+        //Instantiates with a variable to obtain total score. 
         this.scoreObject = scene.player.globals.corazon.gameScore;
-        //this.scoreObject = sObj;
-        // display progress bar
+        this.totalScore = this.scoreObject.skill +
+            this.scoreObject.courage +
+            this.scoreObject.motivation +
+            scene.player.globals.corazon.extraScore;
 
+        this.playerName = scene.player.globals.corazon.playerName;
 
         //Background box
 
@@ -97,15 +101,15 @@ export class GameScoreBoard extends Phaser.GameObjects.Container {
 
         //Overall Score
         this.ScoreText = new Phaser.GameObjects.Text(
-            scene, 150, 0,
-            this.scoreObject.score,
+            scene, 80, 0,
+            '----',
             {
                 color: '#ffffff',
                 align: 'left',
                 fontSize: 13,
                 wordWrap:
                 {
-                    width: 180,
+                    width: 210,
                     useAdvancedWrap: true
                 }
             });
@@ -143,12 +147,14 @@ export class GameScoreBoard extends Phaser.GameObjects.Container {
     };
 
 
-    updateScoreBoard(sO) {
+    updateScoreBoard() {
 
 
         let maxScale = 55;
-        let scoreA = [sO.skill, sO.motiv, sO.coura];
-        let fear = sO.fear;
+        let scoreA = [this.scoreObject.skill,
+        this.scoreObject.motivation,
+        this.scoreObject.courage];
+        let fear = this.scoreObject.fear;
         let maxScore = scoreA.reduce(function (a, b) {
             return Math.max(a, b);
         });
@@ -162,7 +168,7 @@ export class GameScoreBoard extends Phaser.GameObjects.Container {
         ]; //[skill, motivation, courage, fear]
 
         console.log('Score Board Class: this is the level I got');
-        console.log(sO);
+        console.log(this.scoreObject);
 
         //Update Fear
         this.fBox.clear();
@@ -188,10 +194,11 @@ export class GameScoreBoard extends Phaser.GameObjects.Container {
         //Update score numbers
 
         //TEXT KEYs and individual scores
-        this.ScoreKey.setText("Skill: " + sO.skill);
-        this.ScoreKey1.setText("Motivation: " + sO.motiv);
-        this.ScoreKey2.setText("Courage: " + sO.coura);
-        this.ScoreKey3.setText("Fear: " + sO.fear);
+        this.ScoreText.setText(this.playerName + ' -  Total Score : ' + this.totalScore);
+        this.ScoreKey.setText("Skill: " + this.scoreObject.skill);
+        this.ScoreKey1.setText("Motivation: " + this.scoreObject.motivation);
+        this.ScoreKey2.setText("Courage: " + this.scoreObject.courage);
+        this.ScoreKey3.setText("Fear: " + this.scoreObject.fear);
 
     };
 

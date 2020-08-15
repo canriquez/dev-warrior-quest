@@ -174,7 +174,7 @@ export class WorldMapScene extends Phaser.Scene {
     this.scBoard = new GameScoreBoard(this, 180, 10, this.scoreObj);
     this.add.existing(this.scBoard);
 
-    this.scBoard.updateScoreBoard(this.scoreObj);
+    this.scBoard.updateScoreBoard();
 
 
   }
