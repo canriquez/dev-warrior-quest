@@ -15,9 +15,84 @@ export class GameScoreBoard extends Phaser.GameObjects.Container {
         this.add(graphics);
         graphics.lineStyle(1, 0xffffff, 0.8);
         graphics.fillStyle(0x031f4c, 0.5);
-        graphics.strokeRect(0, 0, 290, 65);
-        graphics.fillRect(0, 0, 290, 65);
+        graphics.strokeRect(0, 0, 295, 65);
+        graphics.fillRect(0, 0, 295, 65);
 
+        //TEXT KEYs and individual scores
+
+        this.ScoreKey = new Phaser.GameObjects.Text(
+            scene, 80, 20,
+            "Skill: -- ",
+            {
+                color: '#F5EE9E',
+                align: 'left',
+                fontSize: 13,
+                wordWrap:
+                {
+                    width: 180,
+                    useAdvancedWrap: true
+                }
+            });
+
+        this.ScoreKey.setScrollFactor(0);
+        this.add(this.ScoreKey);
+
+        this.ScoreKey1 = new Phaser.GameObjects.Text(
+            scene, 170, 20,
+            "Motivation: ---",
+            {
+                color: '#d78521',
+                align: 'left',
+                fontSize: 13,
+                wordWrap:
+                {
+                    width: 180,
+                    useAdvancedWrap: true
+                }
+            });
+
+
+        this.ScoreKey1.setScrollFactor(0);
+        this.add(this.ScoreKey1);
+
+
+        this.ScoreKey2 = new Phaser.GameObjects.Text(
+            scene, 80, 40,
+            "Courage: ---",
+            {
+                color: '#2E933C',
+                align: 'left',
+                fontSize: 13,
+                wordWrap:
+                {
+                    width: 180,
+                    useAdvancedWrap: true
+                }
+            });
+
+        this.ScoreKey2.setScrollFactor(0);
+        this.add(this.ScoreKey2);
+
+        this.ScoreKey3 = new Phaser.GameObjects.Text(
+            scene, 190, 40,
+            "Fear: ---",
+            {
+                color: '#d81e5b',
+                align: 'left',
+                fontSize: 13,
+                wordWrap:
+                {
+                    width: 180,
+                    useAdvancedWrap: true
+                }
+            });
+
+
+        this.ScoreKey3.setScrollFactor(0);
+        this.add(this.ScoreKey3);
+
+
+        //Overall Score
         this.ScoreText = new Phaser.GameObjects.Text(
             scene, 150, 0,
             this.scoreObject.score,
@@ -35,12 +110,15 @@ export class GameScoreBoard extends Phaser.GameObjects.Container {
         this.ScoreText.setScrollFactor(0);
         this.add(this.ScoreText);
 
+
         //Add fear box in the back
         this.fBox = this.scene.add.graphics();
         this.fBox.setScrollFactor(0);
         this.fBox.fillStyle(0xd81e5b, 1);
         this.fBox.fillRect(3, 63, 68, 0);
         this.add(this.fBox);
+
+        //Add Skill boxes
 
         this.sBar = this.scene.add.graphics();
         this.sBar.setScrollFactor(0);
@@ -104,6 +182,11 @@ export class GameScoreBoard extends Phaser.GameObjects.Container {
 
         //Update score numbers
 
+        //TEXT KEYs and individual scores
+        this.ScoreKey.setText("Skill: " + sO.skill);
+        this.ScoreKey1.setText("Motivation: " + sO.motiv);
+        this.ScoreKey2.setText("Courage: " + sO.coura);
+        this.ScoreKey3.setText("Fear: " + sO.fear);
 
     };
 
