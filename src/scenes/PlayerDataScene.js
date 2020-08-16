@@ -2,6 +2,7 @@
 import Phaser from 'phaser';
 import { CONST } from '../components/const';
 import { Weapon } from '../components/weapons';
+import { MicroverseAPI } from '../components/leaderboardapi';
 
 
 export class PlayerDataScene extends Phaser.Scene {
@@ -52,8 +53,11 @@ export class PlayerDataScene extends Phaser.Scene {
     this.userName = this.sys.game.globals.settings;
     this.inputTag.classList.remove('showtag');
     this.userName.userName = this.inputTag.value;
-    console.log('User name is: ' + this.sys.game.globals.settings.userName)
-    this.scene.start(CONST.SCENES.TITLE, "Go from UserName Scene");
+    console.log('User name is: ' + this.sys.game.globals.settings.userName);
+
+    let response = MicroverseAPI.setScore('Carlos', 140, 0);
+    console.log(response);
+    //this.scene.start(CONST.SCENES.TITLE, "Go from UserName Scene");
   }
 
 }

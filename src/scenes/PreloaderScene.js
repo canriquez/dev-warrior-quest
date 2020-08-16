@@ -122,8 +122,6 @@ export class PreloaderScene extends Phaser.Scene {
 
     // load input user name
     this.load.image("usrinput", "./src/assets/ui/user_input.png");
-    this.load.html("userinput", './src/assets/ui/txt/userinput.html');
-
 
     // load challanges assets
     this.load.image('chall01sm', './src/assets/chall/chall01_480x350.png');
