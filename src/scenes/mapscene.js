@@ -19,50 +19,44 @@ export class WorldMapScene extends Phaser.Scene {
   }
 
   onChallenge1(player, zone) {
-
-    if (Help.challengeDone(this, 0)) { return };
-    console.log('Challenge 0 is next');
-    this.cameras.main.shake(300);
-    console.log('starting challenge 0');
-    Help.updSysNextChallenge(this, 0)
-    //saving current player data on system before switing scenes
-    Help.savePlayerDataSys(this, this.player);
-    this.scene.switch(CONST.SCENES.CHALLENGE);
+    this.runChallenge(0)
   }
 
   onChallenge2(player, zone) {
-    if (Help.challengeDone(this, 1)) { return };
-    console.log('Challenge 0 is next');
-    this.cameras.main.shake(300);
-    console.log('starting challenge 0');
-    Help.updSysNextChallenge(this, 1)
-    //saving current player data on system before switing scenes
-    Help.savePlayerDataSys(this, this.player);
-    this.scene.switch(CONST.SCENES.CHALLENGE);
+    this.runChallenge(1)
+    /*     if (Help.challengeDone(this, 1)) { return };
+        console.log('Challenge 1 is next');
+        this.cameras.main.shake(300);
+        console.log('starting challenge 1');
+        Help.updSysNextChallenge(this, 1)
+        //saving current player data on system before switing scenes
+        Help.savePlayerDataSys(this, this.player);
+        this.scene.switch(CONST.SCENES.CHALLENGE); */
   }
 
   onChallenge3(player, zone) {
-    console.log('I am here in the on this area method');
-    this.cameras.main.shake(300);
-    console.log('starting challenge 3');
-    this.cameras.main.fade(1000);
-    this.cameras.main.fadeIn(1000);
+    this.runChallenge(2)
+    /*     if (Help.challengeDone(this, 3)) { return };
+        console.log('Challenge 1 is next');
+        this.cameras.main.shake(300);
+        console.log('starting challenge 1');
+        Help.updSysNextChallenge(this, 1)
+        //saving current player data on system before switing scenes
+        Help.savePlayerDataSys(this, this.player);
+        this.scene.switch(CONST.SCENES.CHALLENGE); */
   }
 
   onJobInterview(player, zone) {
-    console.log('I am here in the on this area method');
-    this.cameras.main.shake(300);
-    console.log('starting JobInterview');
-    this.cameras.main.fade(1000);
-    this.cameras.main.fadeIn(1000);
+    this.runChallenge(3)
+    /*     console.log('I am here in the on this area method');
+        this.cameras.main.shake(300);
+        console.log('starting JobInterview');
+        this.cameras.main.fade(1000);
+        this.cameras.main.fadeIn(1000); */
   }
 
   onEndGame(player, zone) {
-    console.log('I am here in the on this area method');
-    this.cameras.main.shake(300);
-    console.log('starting EngGame');
-    this.cameras.main.fade(1000);
-    this.cameras.main.fadeIn(1000);
+    console.log('End game');
   }
 
   preload() {
@@ -227,6 +221,17 @@ export class WorldMapScene extends Phaser.Scene {
     console.log(this.player.globals.corazon.gameScore);
     this.scBoard.updateScoreBoard(this.player.globals.corazon.gameScore);
   };
+
+  runChallenge(data) {
+    if (Help.challengeDone(this, data)) { return };
+    console.log('Challenge 1 is next');
+    this.cameras.main.shake(300);
+    console.log('starting challenge 1');
+    Help.updSysNextChallenge(this, data)
+    //saving current player data on system before switing scenes
+    Help.savePlayerDataSys(this, this.player);
+    this.scene.switch(CONST.SCENES.CHALLENGE);
+  }
 }
 
 export default WorldMapScene;

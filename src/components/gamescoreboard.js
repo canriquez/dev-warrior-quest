@@ -152,18 +152,18 @@ export class GameScoreBoard extends Phaser.GameObjects.Container {
         let maxScale = 55;
         let scoreA = [scoreObject.skill,
         scoreObject.motivation,
-        scoreObject.courage];
+        scoreObject.courage, scoreObject.fear];
         let fear = scoreObject.fear;
         let maxScore = scoreA.reduce(function (a, b) {
             return Math.max(a, b);
         });
-        let totScore = scoreA.reduce((a, b) => a + b, 0)
+        let totScore = scoreA.reduce((a, b) => a + b, 0) - fear
 
         let pixScore = [
             scoreA[0] / maxScore * maxScale * -1,
             scoreA[1] / maxScore * maxScale * -1,
             scoreA[2] / maxScore * maxScale * -1,
-            fear / totScore * 60 * -1
+            fear / maxScore * 55 * -1
         ]; //[skill, motivation, courage, fear]
 
         console.log('Score Board Class: this is the level I got');
