@@ -4,6 +4,7 @@ import { CONST } from '../components/const';
 import { Help } from '../components/helpers';
 import { Player } from '../components/characters';
 import { GameScoreBoard } from '../components/gamescoreboard';
+//import { HashedModuleIdsPlugin } from 'webpack';
 
 export class WorldMapScene extends Phaser.Scene {
   constructor() {
@@ -19,28 +20,24 @@ export class WorldMapScene extends Phaser.Scene {
   }
 
   onChallenge1(player, zone) {
-    if (this.sys.game.globals.settings.nextChallenge.done[0] == true) { return }
-    console.log('I am here in the on this area method');
+
+    if (Help.challengeDone(this, 0)) { return };
+    console.log('Challenge 0 is next');
     this.cameras.main.shake(300);
-    console.log('starting challenge 1');
-    console.log(this.sys.game.globals.settings.nextChallenge);
-    this.sys.game.globals.settings.nextChallenge = {
-      message: 'from world map',
-      index: 0,
-      last: null,
-      done: [true, false, false, false],
-    };
-    console.log(this.sys.game.globals.settings.nextChallenge);
-    this.sys.game.globals.settings.nextChallenge.done[0] == true; //challenge done;
+    console.log('starting challenge 0');
+    Help.updSysNextChallenge(this, 0)
+    //saving current player data on system before switing scenes
+    Help.savePlayerDataSys(this, this.player);
     this.scene.switch(CONST.SCENES.CHALLENGE);
   }
 
   onChallenge2(player, zone) {
-    console.log('I am here in the on this area method');
+    if (Help.challengeDone(this, 1)) { return };
+    console.log('Challenge 1 is next');
     this.cameras.main.shake(300);
-    console.log('starting challenge 2');
-    this.cameras.main.fade(1000);
-    this.cameras.main.fadeIn(1000);
+    console.log('starting challenge 1');
+    Help.updSysNextChallenge(this, +1)
+    this.scene.switch(CONST.SCENES.CHALLENGE);
   }
 
   onChallenge3(player, zone) {
@@ -180,7 +177,6 @@ export class WorldMapScene extends Phaser.Scene {
     this.scBoard.updateScoreBoard(this.player.globals.corazon.gameScore);
 
     this.sys.events.on('wake', this.wake, this);
-
 
   }
 

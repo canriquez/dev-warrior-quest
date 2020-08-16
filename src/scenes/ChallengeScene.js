@@ -13,6 +13,7 @@ export class ChallengeScene extends Phaser.Scene {
 
     init() {
         this.data = this.sys.game.globals.settings.nextChallenge
+        this.challengeId = this.data.done[this.data.done.length - 1]
         console.log('i am on challenge scene...')
         console.log(this.sys.game.globals.settings.nextChallenge);
         //retrieve map scene
@@ -20,13 +21,10 @@ export class ChallengeScene extends Phaser.Scene {
         this.playerData = this.mapScene.player.globals.corazon
 
         //Obtain challenge data object from Module challenges
-        this.challengeData = ChallengeConfig.getChallenge(this.data.index);
+        this.challengeData = ChallengeConfig.getChallenge(this.challengeId);
 
         console.log("Player's extra score is :" +
             this.mapScene.player.globals.corazon.extraScore);
-
-
-
     }
 
     preload() {
@@ -66,9 +64,10 @@ export class ChallengeScene extends Phaser.Scene {
         console.log('here just before inheriting data from player');
         // Inherits score values from mapscene 
 
-        devWarrior.globals.corazon.gameScore = this.playerData.gameScore;
-        devWarrior.globals.corazon.extraScore = this.playerData.extraScore;
-        devWarrior.globals.corazon.playerName = this.playerData.playerName;
+        Help.loadSysPlayerData(this, devWarrior);
+        //devWarrior.globals.corazon.gameScore = this.playerData.gameScore;
+        //devWarrior.globals.corazon.extraScore = this.playerData.extraScore;
+        //devWarrior.globals.corazon.playerName = this.playerData.playerName;
 
 
         //initializes power for challenge
@@ -163,6 +162,9 @@ export class ChallengeScene extends Phaser.Scene {
         this.UiChallScene.events.on("demonAttacked", this.onDeamonAtacked, this);
         this.UiChallScene.events.on('selectWeapon', this.onweaponMsg, this);
         this.UiChallScene.events.on('notYourself', this.notYourself, this);
+
+        this.sys.events.on('wake', this.wake, this);
+
     };
 
     nextTurn() {
@@ -330,7 +332,7 @@ export class ChallengeScene extends Phaser.Scene {
 
     backToParent() {
         console.log('heading back to map scene');
-        this.cameras.main.fade(1000);
+        //this.cameras.main.fade(1000);
         //this.scene.sleep(CONST.SCENES.CHALLENGE);
         this.scene.switch(CONST.SCENES.WORLDMAP, 'back from challenge');
         this.scene.destroy(CONST.SCENES.CHALLENGE);
@@ -371,16 +373,8 @@ export class ChallengeScene extends Phaser.Scene {
 
         console.log('new Player data is now ');
         console.log(newD);
-        //Storing back challenge results to the player object at map scene
-        /*         this.playerData.gameScore = this.heroes[0].globals.corazon.gameScore;
-                this.playerData.extraScore = this.heroes[0].globals.corazon.extraScore;
-                this.playerData.playerName = this.heroes[0].globals.corazon.playerName;
-                console.log('this is how the player looks like after :');
-                console.log(this.mapScene.player.globals.corazon.gameScore);
-                console.log('extra score :' + this.playerData.extraScore);
-                console.log('name: ' + this.playerData.playerName) */
+        //Storing back challenge results to the sys variables
         console.log(this.sys.game.globals.settings.nextChallenge);
-
         this.sys.game.globals.settings.chScore = {
             ['c' + this.data.index]: this.heroes[0].globals.corazon.gameScore,
         };
@@ -392,7 +386,20 @@ export class ChallengeScene extends Phaser.Scene {
         console.log('stored on system storage (Challenge Side): ');
         console.log(this.sys.game.globals.settings.chScore);
         console.log(this.sys.game.globals.settings.last);
+    }
 
+
+    wake() {
+        console.log('|||###@@##||| weaking up challenge scene for the next challege')
+        console.log(this.sys.game.globals.settings);
+        this.scene.restart();
+        //this.scene.run(CONST.SCENES.WORLDMAP);
+        //this.cameras.main.fadeIn(1000);
+        //this.scene.run(CONST.SCENES.UICHALL);
+        //this.time.addEvent({delay: 2000, callback: this.exitBattle, callbackScope: this});  
+        //update score from system memory
+        //set flag to update score from system memory
+        //go.
     }
 }
 

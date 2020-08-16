@@ -7,9 +7,7 @@ export class GlobalSettings {
     this._globalScore = {}
     this._nextChallenge = {
       message: '',
-      index: null,
-      last: null,
-      done: [false, false, false, false]
+      done: []
     };
     this._last = null;
     this._chScore = {

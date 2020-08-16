@@ -34,6 +34,75 @@ export const Help = (() => {
     return text;
   }
 
+  const updSysNextChallenge = (scene, callChallenge = 0) => {
+    let oldD = scene.sys.game.globals.settings.nextChallenge;
+
+    console.log('updNExtCHallenge : #before update nextChallenge object');
+    console.log(oldD);
+    //let oldD = obj
+    let doneArray = oldD.done;
+    doneArray.push(+callChallenge);
+
+    console.log('done array is now : ');
+    console.log(doneArray);
+    let newD = {
+      message: oldD.message,
+      done: (doneArray),
+    };
+    console.log('updNExtCHallenge : #Pushing this onto nextChallenge object');
+    console.log(newD);
+    return newD
+  }
+
+  const challengeDone = (scene, challenge) => {
+    console.log('i am testing challenge done');
+    let sysNextChallenge = scene.sys.game.globals.settings.nextChallenge;
+    let challengeDone = sysNextChallenge.done;
+    console.log('Challenge: ' + challenge)
+    console.log(challengeDone)
+
+    return challengeDone[challenge] == challenge;
+
+
+
+  }
+
+  const savePlayerDataSys = (scene, obj) => {
+    let playerData = obj.globals.corazon;
+    let sysPlayerScore = scene.sys.game.globals.settings;
+    sysPlayerScore.chScore = playerData.gameScore;
+    sysPlayerScore.extraScor = playerData.extraScor;
+    sysPlayerScore.playerName = playerData.playerName;
+
+
+    console.log('####|| Saving player data on syste...');
+    console.log('####|| Current Player data score..');
+    console.log(playerData);
+    console.log('####|| Data score on system after saving it...');
+    console.log(sysPlayerScore);
+
+    return
+
+  }
+  const loadSysPlayerData = (scene, obj) => {
+    let playerData = obj.globals.corazon;
+    let sysPlayerScore = scene.sys.game.globals.settings;
+
+    console.log('####|| Loading player data from system...');
+    console.log('####|| Current System data score..');
+    console.log(sysPlayerScore);
+
+    playerData.gameScore = sysPlayerScore.chScore
+    playerData.extraScore = sysPlayerScore.extras
+    playerData.playerName = sysPlayerScore.playerName
+
+
+    console.log('####|| Data score on Player Obj after saving it...');
+    console.log(playerData);
+
+    return
+  }
+
 
   return {
     adjXpos,
@@ -45,6 +114,10 @@ export const Help = (() => {
     rndHit,
     hits,
     ecMsg,
+    updSysNextChallenge,
+    challengeDone,
+    savePlayerDataSys,
+    loadSysPlayerData,
   };
 })();
 
