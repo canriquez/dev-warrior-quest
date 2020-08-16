@@ -8,6 +8,7 @@ export const CONST = {
     CREDITS: 'CREDITS',
     CHALLENGE: 'CHALLENGE',
     UICHALL: 'UICHALL',
+    INPUT: 'INPUT'
   },
 };
 

@@ -16,9 +16,9 @@ export class PreloaderScene extends Phaser.Scene {
   }
 
   ready() {
-    //this.scene.start(CONST.SCENES.CHALLENGE, 'Challenge call: - hello from Preloader Scene');
+    this.scene.start(CONST.SCENES.INPUT, 'Player Input call: - hello from Preloader Scene');
 
-    this.scene.start(CONST.SCENES.WORLDMAP, "WorldMap call: - hello from Preloader Scene");
+    //this.scene.start(CONST.SCENES.WORLDMAP, "WorldMap call: - hello from Preloader Scene");
     this.readyCount += 1;
     if (this.readyCount === 2) {
       this.scene.start(CONST.SCENES.TITLE, 'hello from Preloader Scene');
@@ -119,6 +119,11 @@ export class PreloaderScene extends Phaser.Scene {
     this.load.image('box', './src/assets/ui/grey_box.png');
     this.load.image('checkedBox', './src/assets/ui/blue_boxCheckmark.png');
     this.load.audio('bgMusic', ['./src/assets/music/TownTheme.mp3']);
+
+    // load input user name
+    this.load.image("usrinput", "./src/assets/ui/user_input.png");
+    this.load.html("userinput", './src/assets/ui/txt/userinput.html');
+
 
     // load challanges assets
     this.load.image('chall01sm', './src/assets/chall/chall01_480x350.png');

@@ -9,6 +9,7 @@ export class GlobalSettings {
       message: '',
       done: []
     };
+    this._playerName = '';
     this._last = null;
     this._chScore = {
     };
@@ -16,6 +17,13 @@ export class GlobalSettings {
     };
   }
 
+  set playerName(value) {
+    this._playerName = value;
+  }
+
+  get playerName() {
+    return this._playerName;
+  }
   set last(value) {
     this._last = value;
   }
