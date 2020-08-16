@@ -23,12 +23,13 @@ export class MessageChallenge extends Phaser.GameObjects.Container {
     };
 
     showInstruc(text) {
-        console.log('someone send instruc :' + text)
+        console.log('## Small Message Box: someone send instruc :' + text)
         this.text.setText(text);
         this.visible = true;
         if (this.hideEvent)
             this.hideEvent.remove(false);
         this.hideEvent = this.scene.time.addEvent({ delay: 6000, callback: this.hideMessage, callbackScope: this });
+        console.log('## Small message box: Finishing displaying message:' + text)
     };
     hideMessage() {
         this.hideEvent = null;

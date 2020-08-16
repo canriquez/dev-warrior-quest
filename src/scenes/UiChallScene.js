@@ -23,7 +23,12 @@ export class UIChallScene extends Phaser.Scene {
     }
 
     create() {
+        this.buildScene();
+        this.sys.events.on('wake', this.wake, this);
+    };
 
+    buildScene() {
+        console.log('#####- UI: Creating buttons');
         let menuItemSword = new MenuItem({
             scene: this,
             item: 0,
@@ -54,32 +59,36 @@ export class UIChallScene extends Phaser.Scene {
                 this.menuItemSelected(this.heroMenu, item);
             },
         });
-
+        console.log('#####- UI: Add menu Items for buttons');
         this.heroMenu.addMenuItem(menuItemSword);
         this.heroMenu.addMenuItem(menuItemKnife);
         this.heroMenu.addMenuItem(menuItemPunch);
 
+
+        console.log('#####- Loading challenge Scene to setup event listeners');
         //retrive Challange scene
         this.battleScene = this.scene.get(CONST.SCENES.CHALLENGE);
 
-        this.battleScene.events.on("HeroSelect", this.onHeroSelect, this);
 
+        console.log('#####- UI: Adding listeners for HeroSelect, attack and not yourslef');
+        this.battleScene.events.on("HeroSelect", this.onHeroSelect, this);
         this.battleScene.events.on("attackDeamon", this.onDeamonSelect, this);
         this.battleScene.events.on("notYourself", this.notYourself, this);
 
-
+        console.log('#####- UI: battle scene is here below');
         console.log(this.battleScene);
 
         //setup listeners for UI messages and Instructions
         this.message = new MessageChallenge(this, this.battleScene.events);
         this.instructions = new onScreenInstructions(this, this.battleScene.events);
+
+        console.log('#####- UI: Add message listeners to to Scene');
         this.add.existing(this.message);
         this.add.existing(this.instructions);
 
+        console.log('#####- Messages listeners done. Now attempt to request next turn');
         this.battleScene.nextTurn();
-
-        this.sys.events.on('wake', this.wake, this);
-    };
+    }
 
     menuItemSelected(menus, item) {
         menus.cleanTheOthers(item);
@@ -93,10 +102,6 @@ export class UIChallScene extends Phaser.Scene {
     onHeroSelect(id) {
         console.log('hero index recieved :' + id);
         this.heroMenu.enableMenu(); //this will enable all but one weapon randomly
-        /*         this.actionsMenu((data) => {
-                    console.log(data) //prints deamon selected
-                })
-                this.currentMenu = this.actionsMenu; */
     };
 
     onDeamonSelect(deamonId) {
@@ -128,8 +133,7 @@ export class UIChallScene extends Phaser.Scene {
     wake() {
         console.log('|||###@@##||| weaking up challenge scene UI for the next challege')
         console.log(this.sys.game.globals.settings);
-        //this.buildScene();
-        //this.scene.restart();
+        this.battleScene.nextTurn();
     }
 };
 

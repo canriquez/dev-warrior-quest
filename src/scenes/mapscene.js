@@ -202,22 +202,27 @@ export class WorldMapScene extends Phaser.Scene {
   wake() {
     //this.scene.run(CONST.SCENES.WORLDMAP);
     this.cameras.main.fadeIn(1000);
-
+    //reset coursor keys 
     this.cursors.left.reset();
     this.cursors.right.reset();
     this.cursors.up.reset();
     this.cursors.down.reset();
 
-    console.log('stored on system storage: ');
-    console.log(this.sys.game.globals.settings.last);
-    //last is the global variable storing the challenge number's score
-    //stored in the chScore Object. its the key used to look for the score's 
-    //object
-    let lastKey = this.sys.game.globals.settings.last
+    console.log('## stored on system storage :(global map side) ');
+    console.log(this.sys.game.globals.settings);
 
-    console.log(this.sys.game.globals.settings.chScore[lastKey]);
-    this.player.globals.corazon.gameScore = this.sys.game.
-      globals.settings.chScore[lastKey];
+    //update player score variable from system 
+
+    console.log('here just before loading system data for player');
+    Help.loadSysPlayerData(this, this.player);
+
+
+    //last is the global variable storing the challenge number's score
+
+
+    /*     console.log(this.sys.game.globals.settings.chScore[lastKey]);
+        this.player.globals.corazon.gameScore = this.sys.game.
+          globals.settings.chScore[lastKey]; */
     console.log('after update on Player Object....');
     console.log(this.player.globals.corazon.gameScore);
     this.scBoard.updateScoreBoard(this.player.globals.corazon.gameScore);

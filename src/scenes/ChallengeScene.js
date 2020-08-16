@@ -384,15 +384,17 @@ export class ChallengeScene extends Phaser.Scene {
         console.log('new Player data is now ');
         console.log(newD);
         //Storing back challenge results to the sys variables
-        console.log(this.sys.game.globals.settings.nextChallenge);
-        this.sys.game.globals.settings.chScore = {
-            ['c' + this.data.index]: this.heroes[0].globals.corazon.gameScore,
-        };
-        this.sys.game.globals.settings.extras = {
-            ['c' + this.data.index]: this.heroes[0].globals.corazon.extraScore,
-        };
-        this.sys.game.globals.
-            settings.last = 'c' + this.data.index;
+        Help.savePlayerDataSys(this, this.heroes[0])
+
+        /*         console.log(this.sys.game.globals.settings.nextChallenge);
+                this.sys.game.globals.settings.chScore = {
+                    ['c' + this.data.index]: this.heroes[0].globals.corazon.gameScore,
+                };
+                this.sys.game.globals.settings.extras = {
+                    ['c' + this.data.index]: this.heroes[0].globals.corazon.extraScore,
+                };
+                this.sys.game.globals.
+                    settings.last = 'c' + this.data.index; */
         console.log('stored on system storage (Challenge Side): ');
         console.log(this.sys.game.globals.settings.chScore);
         console.log(this.sys.game.globals.settings.last);
@@ -402,7 +404,7 @@ export class ChallengeScene extends Phaser.Scene {
         console.log('|||###@@##||| weaking up challenge scene for the next challege')
         console.log(this.sys.game.globals.settings);
         this.buildScene();
-        this.scene.launch(CONST.SCENES.UICHALL, '####: And so... game starts AGAIN');
+        this.scene.run(CONST.SCENES.UICHALL, '####: And so... game starts AGAIN');
         //this.scene.restart();
     }
 }

@@ -26,12 +26,14 @@ export class onScreenInstructions extends Phaser.GameObjects.Container {
     };
 
     showInstruc(text) {
-        console.log('someone send instruc :' + text)
+        console.log('Inial OS Screen:  someone send instruc :' + text)
         this.text.setText(text);
+        console.log('Text was made visible..');
         this.visible = true;
         if (this.hideEvent)
             this.hideEvent.remove(false);
         this.hideEvent = this.scene.time.addEvent({ delay: 6000, callback: this.hideMessage, callbackScope: this });
+        console.log('FInishing displaying message:' + text)
     };
     hideMessage() {
         this.hideEvent = null;
