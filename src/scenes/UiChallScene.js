@@ -70,12 +70,15 @@ export class UIChallScene extends Phaser.Scene {
 
         console.log(this.battleScene);
 
+        //setup listeners for UI messages and Instructions
         this.message = new MessageChallenge(this, this.battleScene.events);
         this.instructions = new onScreenInstructions(this, this.battleScene.events);
         this.add.existing(this.message);
         this.add.existing(this.instructions);
 
         this.battleScene.nextTurn();
+
+        this.sys.events.on('wake', this.wake, this);
     };
 
     menuItemSelected(menus, item) {
@@ -121,6 +124,13 @@ export class UIChallScene extends Phaser.Scene {
             this.events.emit('notYourself', msg);
         };
     };
+
+    wake() {
+        console.log('|||###@@##||| weaking up challenge scene UI for the next challege')
+        console.log(this.sys.game.globals.settings);
+        //this.buildScene();
+        //this.scene.restart();
+    }
 };
 
 export default UIChallScene;

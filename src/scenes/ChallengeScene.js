@@ -33,6 +33,26 @@ export class ChallengeScene extends Phaser.Scene {
 
     create() {
         console.log('here we are in challenge');
+        this.buildScene();
+
+        console.log("###: Lunch User Interface Scene to catch User's input");
+        // Launch in parallel UI Challenge Scene
+        this.scene.launch(CONST.SCENES.UICHALL, 'and so... game starts');
+
+        console.log("###: Reading UiChallScene data information");
+        this.UiChallScene = this.scene.get(CONST.SCENES.UICHALL);
+
+        console.log("###: Setting up UiChallScene data listeners ");
+        this.UiChallScene.events.on("demonAttacked", this.onDeamonAtacked, this);
+        this.UiChallScene.events.on('selectWeapon', this.onweaponMsg, this);
+        this.UiChallScene.events.on('notYourself', this.notYourself, this);
+
+        console.log("###: Loading sys.events listeners - for weake ");
+        this.sys.events.on('wake', this.wake, this);
+    };
+
+
+    buildScene() {
         this.challengeStarted = false;
 
         this.index = -1;
@@ -61,9 +81,7 @@ export class ChallengeScene extends Phaser.Scene {
         });
 
 
-        console.log('here just before inheriting data from player');
-        // Inherits score values from mapscene 
-
+        console.log('here just before loading system data for player');
         Help.loadSysPlayerData(this, devWarrior);
         //devWarrior.globals.corazon.gameScore = this.playerData.gameScore;
         //devWarrior.globals.corazon.extraScore = this.playerData.extraScore;
@@ -151,19 +169,10 @@ export class ChallengeScene extends Phaser.Scene {
             this.add.existing(deamonPW);  //if I dont add them, they wont show
         }
 
-
+        console.log('###: Instatiating Initial challenge message');
         //Final message instance ready
         this.endChallengeMsg = new EndChallenge(this);
         this.add.existing(this.endChallengeMsg);
-
-        // Launch in parallel UI Challenge Scene
-        this.scene.launch(CONST.SCENES.UICHALL, 'and so... game starts');
-        this.UiChallScene = this.scene.get(CONST.SCENES.UICHALL);
-        this.UiChallScene.events.on("demonAttacked", this.onDeamonAtacked, this);
-        this.UiChallScene.events.on('selectWeapon', this.onweaponMsg, this);
-        this.UiChallScene.events.on('notYourself', this.notYourself, this);
-
-        this.sys.events.on('wake', this.wake, this);
 
     };
 
@@ -334,8 +343,9 @@ export class ChallengeScene extends Phaser.Scene {
         console.log('heading back to map scene');
         //this.cameras.main.fade(1000);
         //this.scene.sleep(CONST.SCENES.CHALLENGE);
+        this.scene.sleep(CONST.SCENES.UICHALL);
         this.scene.switch(CONST.SCENES.WORLDMAP, 'back from challenge');
-        this.scene.destroy(CONST.SCENES.CHALLENGE);
+
     }
 
     updateHeroResults(data) {
@@ -388,18 +398,12 @@ export class ChallengeScene extends Phaser.Scene {
         console.log(this.sys.game.globals.settings.last);
     }
 
-
     wake() {
         console.log('|||###@@##||| weaking up challenge scene for the next challege')
         console.log(this.sys.game.globals.settings);
-        this.scene.restart();
-        //this.scene.run(CONST.SCENES.WORLDMAP);
-        //this.cameras.main.fadeIn(1000);
-        //this.scene.run(CONST.SCENES.UICHALL);
-        //this.time.addEvent({delay: 2000, callback: this.exitBattle, callbackScope: this});  
-        //update score from system memory
-        //set flag to update score from system memory
-        //go.
+        this.buildScene();
+        this.scene.launch(CONST.SCENES.UICHALL, '####: And so... game starts AGAIN');
+        //this.scene.restart();
     }
 }
 

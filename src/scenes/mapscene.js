@@ -4,7 +4,6 @@ import { CONST } from '../components/const';
 import { Help } from '../components/helpers';
 import { Player } from '../components/characters';
 import { GameScoreBoard } from '../components/gamescoreboard';
-//import { HashedModuleIdsPlugin } from 'webpack';
 
 export class WorldMapScene extends Phaser.Scene {
   constructor() {
@@ -33,10 +32,12 @@ export class WorldMapScene extends Phaser.Scene {
 
   onChallenge2(player, zone) {
     if (Help.challengeDone(this, 1)) { return };
-    console.log('Challenge 1 is next');
+    console.log('Challenge 0 is next');
     this.cameras.main.shake(300);
-    console.log('starting challenge 1');
-    Help.updSysNextChallenge(this, +1)
+    console.log('starting challenge 0');
+    Help.updSysNextChallenge(this, 1)
+    //saving current player data on system before switing scenes
+    Help.savePlayerDataSys(this, this.player);
     this.scene.switch(CONST.SCENES.CHALLENGE);
   }
 
