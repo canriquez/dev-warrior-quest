@@ -10,6 +10,7 @@ export class WorldMapScene extends Phaser.Scene {
     super({
       key: CONST.SCENES.WORLDMAP,
     });
+    this.challenges = [false, false, false, false]
   }
 
   init(data) {
@@ -18,9 +19,20 @@ export class WorldMapScene extends Phaser.Scene {
   }
 
   onChallenge1(player, zone) {
+    if (this.sys.game.globals.settings.nextChallenge.done[0] == true) { return }
     console.log('I am here in the on this area method');
     this.cameras.main.shake(300);
     console.log('starting challenge 1');
+    console.log(this.sys.game.globals.settings.nextChallenge);
+    this.sys.game.globals.settings.nextChallenge = {
+      message: 'from world map',
+      index: 0,
+      last: null,
+      done: [true, false, false, false],
+    };
+    console.log(this.sys.game.globals.settings.nextChallenge);
+    this.sys.game.globals.settings.nextChallenge.done[0] == true; //challenge done;
+    this.scene.switch(CONST.SCENES.CHALLENGE);
   }
 
   onChallenge2(player, zone) {
@@ -61,6 +73,9 @@ export class WorldMapScene extends Phaser.Scene {
 
   create() {
     console.log('Starting World Map Scene');
+    //Stores all challenges configurations to be available on other scenes
+
+    //this.challenges = ChallengeConfig.getAllChallenges;
 
     const map = this.make.tilemap({ key: 'map' });
 
@@ -158,23 +173,13 @@ export class WorldMapScene extends Phaser.Scene {
     this.cameras.main.startFollow(this.player);
     this.cameras.main.roundPixels = false;
 
-
-
-
-
-    this.scoreObj = {
-      score: ('NAME - Score : ' + 300),
-      skill: 20,
-      motiv: 90,
-      coura: 20,
-      fear: 130
-    }
-
     //load score board
-    this.scBoard = new GameScoreBoard(this, 180, 10, this.scoreObj);
+    this.scBoard = new GameScoreBoard(this, 180, 10);
     this.add.existing(this.scBoard);
 
     this.scBoard.updateScoreBoard();
+
+    this.sys.events.on('wake', this.wake, this);
 
 
   }
@@ -195,7 +200,29 @@ export class WorldMapScene extends Phaser.Scene {
     } else if (this.cursors.down.isDown) {
       this.player.body.setVelocityY(80);
     }
-  }
+  };
+
+  wake() {
+    //this.scene.run(CONST.SCENES.WORLDMAP);
+    this.cameras.main.fadeIn(1000);
+
+    this.cursors.left.reset();
+    this.cursors.right.reset();
+    this.cursors.up.reset();
+    this.cursors.down.reset();
+
+    console.log('stored on system storage: ');
+    console.log(this.sys.game.globals.settings.chScore);
+
+    this.player.globals.corazon.gameScore = {
+      skill: 1,
+      courage: 2,
+      motivation: 5,
+      fear: 90,
+      level: 'student',
+    };
+    this.scBoard.updateScoreBoard();
+  };
 }
 
 export default WorldMapScene;

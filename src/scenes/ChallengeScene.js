@@ -2,41 +2,31 @@ import Phaser from 'phaser';
 import { CONST } from '../components/const';
 import { Help } from '../components/helpers';
 import { Player } from '../components/characters';
-import { HeroEnergyBar } from '../components/energybars'
-import { EndChallenge } from '../components/endchallenge'
+import { HeroEnergyBar } from '../components/energybars';
+import { EndChallenge } from '../components/endchallenge';
+import { ChallengeConfig } from '../components/challenges';
 
 export class ChallengeScene extends Phaser.Scene {
     constructor() {
         super({ key: CONST.SCENES.CHALLENGE });
     }
 
-    init(data) {
-        console.log('data');
-        this.challengeData = {
-            challengeName: 'HTML/CSS Capstone!',
-            deamons: 3,
-            badness: [1, 1, 1],
-            htextures: ['hero01'],
-            dtextures: ['hero01', 'hero01', 'hero01'],
-            positions: [290, 365, 450],
-            winFactor: 1, //Affects deamons damage on hero 0-1. 0 easy
-            extraPower: 20, //increses player power for the match
-            hnames: ['dev Warrior'],
-            dnames: ['Deamon-1', 'Deamon-2', 'Deamon-3'],
-            dPBars: [[260, 20], [380, 20], [380, 60],],
-            prize: {
-                skills: 50,
-                motivation: 50,
-                courage: 50,
-                deamonx: 90,
-            },
-            penalty: {
-                skills: -5,
-                motivation: -10,
-                courage: -20,
-                fear: 20,
-            }
-        }
+    init() {
+        this.data = this.sys.game.globals.settings.nextChallenge
+        console.log('i am on challenge scene...')
+        console.log(this.sys.game.globals.settings.nextChallenge);
+        //retrieve map scene
+        this.mapScene = this.scene.get(CONST.SCENES.WORLDMAP);
+        this.playerData = this.mapScene.player.globals.corazon
+
+        //Obtain challenge data object from Module challenges
+        this.challengeData = ChallengeConfig.getChallenge(this.data.index);
+
+        console.log("Player's extra score is :" +
+            this.mapScene.player.globals.corazon.extraScore);
+
+
+
     }
 
     preload() {
@@ -61,7 +51,7 @@ export class ChallengeScene extends Phaser.Scene {
         this.ground = this.physics.add.staticGroup();
         this.ground.create(240, 265, 'ground');
 
-
+        console.log('here just before dev warrior creation');
         // Create Player Characters
         const devWarrior = new Player({
             scene: this,
@@ -71,6 +61,16 @@ export class ChallengeScene extends Phaser.Scene {
             type: 'hero',
             name: this.challengeData.hnames[0],
         });
+
+
+        console.log('here just before inheriting data from player');
+        // Inherits score values from mapscene 
+
+        devWarrior.globals.corazon.gameScore = this.playerData.gameScore;
+        devWarrior.globals.corazon.extraScore = this.playerData.extraScore;
+        devWarrior.globals.corazon.playerName = this.playerData.playerName;
+
+
         //initializes power for challenge
         devWarrior.globals.corazon.resetChallengePow();
 
@@ -309,6 +309,9 @@ export class ChallengeScene extends Phaser.Scene {
                 this.challengeData.prize.deamonx * this.challengeData.deamons
             );
             this.endChallengeMsg.showMessage(msg);
+            this.updateHeroResults(0);
+            //Update the current score object with new results.
+            this.heroes[0].globals.corazon.gameScore = {}
         } else {
             this.challengeResult = false;
             console.log("challenge lost")
@@ -319,19 +322,75 @@ export class ChallengeScene extends Phaser.Scene {
                 this.challengeData.penalty.fear
             );
             this.endChallengeMsg.showMessage(msg);
+            this.updateHeroResults(1);
         }
         //go back to map scene
         //put to sleep this scene.
     }
+
     backToParent() {
         console.log('heading back to map scene');
         this.cameras.main.fade(1000);
-        this.scene.sleep(CONST.SCENES.CHALLENGE);
-        this.scene.switch(CONST.SCENES.WORLDMAP, { win: this.challengeResult });
+        //this.scene.sleep(CONST.SCENES.CHALLENGE);
+        this.scene.switch(CONST.SCENES.WORLDMAP, 'back from challenge');
+        this.scene.destroy(CONST.SCENES.CHALLENGE);
     }
 
-    startChallenge() {
+    updateHeroResults(data) {
+        console.log('i am about to update hero data with : ' + data);
+        let old = this.heroes[0].globals.corazon.gameScore;
+        let newD;
+        console.log('old Score is');
+        console.log(old);
+        if (data == 0) {
+            //win
+            newD = {
+                skill: old.skill + this.challengeData.prize.skills,
+                motivation: old.motivation + this.challengeData.prize.motivation,
+                courage: old.courage + this.challengeData.prize.courage,
+                fear: old.fear, //fear does not change.
+                level: old.level,
+            }
+            this.heroes[0].globals.corazon.gameScore = newD;
+            this.heroes[0].globals.corazon.extraScore = this.challengeData.prize.deamonx * this.challengeData.deamons;
+        } else {
+            //lost
+            console.log('I am updating a loss score ..');
+            newD = {
+                skill: (old.skill + this.challengeData.penalty.skills),
+                motivation: (old.motivation + this.challengeData.penalty.motivation),
+                courage: (old.courage + this.challengeData.penalty.courage),
+                fear: (old.fear + this.challengeData.penalty.fear), //fear does count on penalty.
+                level: old.level,
+            }
+            console.log('in a loss, end skills on penalty is :');
+            console.log(old.skill);
+            this.heroes[0].globals.corazon.gameScore = newD;
+            console.log(newD);
+        }
 
+        console.log('new Player data is now ');
+        console.log(newD);
+        //Storing back challenge results to the player object at map scene
+        /*         this.playerData.gameScore = this.heroes[0].globals.corazon.gameScore;
+                this.playerData.extraScore = this.heroes[0].globals.corazon.extraScore;
+                this.playerData.playerName = this.heroes[0].globals.corazon.playerName;
+                console.log('this is how the player looks like after :');
+                console.log(this.mapScene.player.globals.corazon.gameScore);
+                console.log('extra score :' + this.playerData.extraScore);
+                console.log('name: ' + this.playerData.playerName) */
+        console.log(this.sys.game.globals.settings.nextChallenge);
+
+        this.sys.game.globals.settings.chscore = {
+            ['c' + this.data.index]: this.heroes[0].globals.corazon.gameScore,
+        };
+        this.sys.game.globals.settings.extras = {
+            ['c' + this.data.index]: this.heroes[0].globals.corazon.extraScore,
+        };
+        this.sys.game.globals.
+            settings.last = this.data.index;
+        console.log('stored on system storage (Challenge Side): ');
+        console.log(this.sys.game.globals.settings.chScore);
     }
 }
 

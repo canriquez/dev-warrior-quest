@@ -2,10 +2,10 @@
 export class HeroProfile {
   constructor() {
     this._gameScore = {
-      skill: 100,
-      courage: 200,
-      motivation: 300,
-      fear: 200,
+      skill: 10,
+      courage: 20,
+      motivation: 30,
+      fear: 15,
       level: 'student',
     };
 
@@ -30,6 +30,10 @@ export class HeroProfile {
 
   get gameScore() {
     return this._gameScore;
+  }
+
+  set gameScore(obj) {
+    this._gameScore = obj;
   }
 
   get extraScore() {

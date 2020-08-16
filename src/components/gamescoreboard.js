@@ -2,7 +2,7 @@ import Phaser from 'phaser';
 
 export class GameScoreBoard extends Phaser.GameObjects.Container {
 
-    constructor(scene, x, y, sObj) {
+    constructor(scene, x, y) {
 
         super(scene, x, y);
 
@@ -194,7 +194,7 @@ export class GameScoreBoard extends Phaser.GameObjects.Container {
         //Update score numbers
 
         //TEXT KEYs and individual scores
-        this.ScoreText.setText(this.playerName + ' -  Total Score : ' + this.totalScore);
+        this.ScoreText.setText(this.playerName + ' - Score : ' + this.totalScore);
         this.ScoreKey.setText("Skill: " + this.scoreObject.skill);
         this.ScoreKey1.setText("Motivation: " + this.scoreObject.motivation);
         this.ScoreKey2.setText("Courage: " + this.scoreObject.courage);
