@@ -7,7 +7,7 @@ export class GameScoreBoard extends Phaser.GameObjects.Container {
         super(scene, x, y);
 
         //Instantiates with a variable to obtain total score. 
-        this.scoreObject = scene.player.globals.corazon.gameScore;
+        this.scoreObject = this.scene.player.globals.corazon.gameScore;
         this.totalScore = this.scoreObject.skill +
             this.scoreObject.courage +
             this.scoreObject.motivation +
@@ -147,14 +147,13 @@ export class GameScoreBoard extends Phaser.GameObjects.Container {
     };
 
 
-    updateScoreBoard() {
-
+    updateScoreBoard(scoreObject) {
 
         let maxScale = 55;
-        let scoreA = [this.scoreObject.skill,
-        this.scoreObject.motivation,
-        this.scoreObject.courage];
-        let fear = this.scoreObject.fear;
+        let scoreA = [scoreObject.skill,
+        scoreObject.motivation,
+        scoreObject.courage];
+        let fear = scoreObject.fear;
         let maxScore = scoreA.reduce(function (a, b) {
             return Math.max(a, b);
         });
@@ -168,7 +167,7 @@ export class GameScoreBoard extends Phaser.GameObjects.Container {
         ]; //[skill, motivation, courage, fear]
 
         console.log('Score Board Class: this is the level I got');
-        console.log(this.scoreObject);
+        console.log(scoreObject);
 
         //Update Fear
         this.fBox.clear();
@@ -195,10 +194,10 @@ export class GameScoreBoard extends Phaser.GameObjects.Container {
 
         //TEXT KEYs and individual scores
         this.ScoreText.setText(this.playerName + ' - Score : ' + this.totalScore);
-        this.ScoreKey.setText("Skill: " + this.scoreObject.skill);
-        this.ScoreKey1.setText("Motivation: " + this.scoreObject.motivation);
-        this.ScoreKey2.setText("Courage: " + this.scoreObject.courage);
-        this.ScoreKey3.setText("Fear: " + this.scoreObject.fear);
+        this.ScoreKey.setText("Skill: " + scoreObject.skill);
+        this.ScoreKey1.setText("Motivation: " + scoreObject.motivation);
+        this.ScoreKey2.setText("Courage: " + scoreObject.courage);
+        this.ScoreKey3.setText("Fear: " + scoreObject.fear);
 
     };
 

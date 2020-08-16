@@ -381,16 +381,18 @@ export class ChallengeScene extends Phaser.Scene {
                 console.log('name: ' + this.playerData.playerName) */
         console.log(this.sys.game.globals.settings.nextChallenge);
 
-        this.sys.game.globals.settings.chscore = {
+        this.sys.game.globals.settings.chScore = {
             ['c' + this.data.index]: this.heroes[0].globals.corazon.gameScore,
         };
         this.sys.game.globals.settings.extras = {
             ['c' + this.data.index]: this.heroes[0].globals.corazon.extraScore,
         };
         this.sys.game.globals.
-            settings.last = this.data.index;
+            settings.last = 'c' + this.data.index;
         console.log('stored on system storage (Challenge Side): ');
         console.log(this.sys.game.globals.settings.chScore);
+        console.log(this.sys.game.globals.settings.last);
+
     }
 }
 

@@ -177,7 +177,7 @@ export class WorldMapScene extends Phaser.Scene {
     this.scBoard = new GameScoreBoard(this, 180, 10);
     this.add.existing(this.scBoard);
 
-    this.scBoard.updateScoreBoard();
+    this.scBoard.updateScoreBoard(this.player.globals.corazon.gameScore);
 
     this.sys.events.on('wake', this.wake, this);
 
@@ -212,16 +212,18 @@ export class WorldMapScene extends Phaser.Scene {
     this.cursors.down.reset();
 
     console.log('stored on system storage: ');
-    console.log(this.sys.game.globals.settings.chScore);
+    console.log(this.sys.game.globals.settings.last);
+    //last is the global variable storing the challenge number's score
+    //stored in the chScore Object. its the key used to look for the score's 
+    //object
+    let lastKey = this.sys.game.globals.settings.last
 
-    this.player.globals.corazon.gameScore = {
-      skill: 1,
-      courage: 2,
-      motivation: 5,
-      fear: 90,
-      level: 'student',
-    };
-    this.scBoard.updateScoreBoard();
+    console.log(this.sys.game.globals.settings.chScore[lastKey]);
+    this.player.globals.corazon.gameScore = this.sys.game.
+      globals.settings.chScore[lastKey];
+    console.log('after update on Player Object....');
+    console.log(this.player.globals.corazon.gameScore);
+    this.scBoard.updateScoreBoard(this.player.globals.corazon.gameScore);
   };
 }
 
