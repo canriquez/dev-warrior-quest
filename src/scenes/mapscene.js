@@ -59,6 +59,7 @@ export class WorldMapScene extends Phaser.Scene {
 
   onEndGame(player, zone) {
     console.log('End game');
+    this.finishGame();
   }
 
   preload() {
@@ -184,6 +185,8 @@ export class WorldMapScene extends Phaser.Scene {
     console.log('FInally the total score!: ');
     console.log(Help.playerScoreToSave(this));
 
+    this.finishGame()
+
   }
 
   update() {
@@ -226,7 +229,7 @@ export class WorldMapScene extends Phaser.Scene {
     this.scBoard.updateScoreBoard(this);
 
     //On GAme Over sends message and saves score
-    if (this.player.globals.corazon.haveILost) {
+    if (this.player.globals.corazon.haveILost()) {
       this.gameOver();
       this.saveScore(this.playerName, Help.playerScoreToSave(this));
     }
@@ -249,6 +252,7 @@ export class WorldMapScene extends Phaser.Scene {
       this.player.globals.corazon.gameScore.motivation,
       this.player.globals.corazon.gameScore.courage,
       this.player.globals.corazon.gameScore.fear,
+      Help.playerScoreToSave(this),
     );
     console.log(msg);
     this.gameoverMessage.showMessage(msg);
@@ -260,6 +264,19 @@ export class WorldMapScene extends Phaser.Scene {
     //this.scene.sleep(CONST.SCENES.CHALLENGE);
     this.scene.start(CONST.SCENES.TITLE, 'back to main menu');
 
+  }
+
+  finishGame() {
+    let msg = Help.gameOverMsg(0,
+      this.player.globals.corazon.gameScore.skill,
+      this.player.globals.corazon.gameScore.motivation,
+      this.player.globals.corazon.gameScore.courage,
+      this.player.globals.corazon.gameScore.fear,
+      Help.playerScoreToSave(this),
+    );
+    console.log(msg);
+    this.gameoverMessage.showMessage(msg);
+    this.saveScore(this.playerName, Help.playerScoreToSave(this));
   }
 
   saveScore(name, score) {

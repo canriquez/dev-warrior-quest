@@ -22,7 +22,7 @@ export const Help = (() => {
     return hOptions[r];
   };
 
-  const ecMsg = (type, a, b, c, d) => {
+  const ecMsg = (type, a, b, c, d, f) => {
     let result = ['WON', 'LOST', 'Challenge success :', 'FEAR      :']
     let text = {
       r1: 'YOU HAVE ' + result[type],
@@ -34,7 +34,7 @@ export const Help = (() => {
     return text;
   }
 
-  const gameOverMsg = (type, a, b, c, d) => {
+  const gameOverMsg = (type, a, b, c, d, f) => {
     let result = ['CONGRATULATIONS', 'GAME IS OVER', 'Challenge success :', 'FEAR      :']
     let text = {
       r1: '' + result[type],
@@ -42,7 +42,7 @@ export const Help = (() => {
       r3: 'Motivation: ' + ((b >= 0) ? '+ ' + b : b),
       r4: 'Courage   : ' + ((c >= 0) ? '+ ' + c : c),
       r5: result[type + 2] + ' ' + ((d >= 0) ? '+ ' + d : d) + ' points.',
-      r6: 'Your fear cannot let you continue. Take a rest!'
+      r6: (type == 0) ? ('Final Score : ' + f) : 'Your fear cannot let you continue. Take a rest!',
     };
     return text;
   }
