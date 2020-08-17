@@ -9,7 +9,7 @@ export class InitScene extends Phaser.Scene {
   preload() {
     // load resources here
     // map tiles
-    this.load.image('logo', './src/assets/items/logo.png', { frameWidth: 32, frameHeight: 16 });
+    this.load.image('logo', './src/assets/ui/dev-warrior-quest.png', { frameWidth: 32, frameHeight: 16 });
   }
 
   create() {

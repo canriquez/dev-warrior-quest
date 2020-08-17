@@ -19,14 +19,22 @@ export class TitleScene extends Phaser.Scene {
   }
 
   create() {
+
+    this.add.image(240, 175, 'mainmenu');
+
+    let y = Help.posFixTopY(0.37);
+    let sc = 45;
     // Play Game Button
-    this.menuButton = new Button(this, Help.posFixLeftX(0.5), Help.posFixTopY(0.25), 'blueButton1', 'blueButton2', 'Play', CONST.SCENES.WORLDMAP);
+    this.menuButton = new Button(this, Help.posFixLeftX(0.5), y, 'blueButton1', 'blueButton2', 'Play', CONST.SCENES.WORLDMAP);
 
     // Options button
-    this.menuButton = new Button(this, Help.posFixLeftX(0.5), Help.posFixTopY(0.5), 'blueButton1', 'blueButton2', 'Settings', CONST.SCENES.OPTIONS);
+    this.menuButton = new Button(this, Help.posFixLeftX(0.5), y + sc, 'blueButton1', 'blueButton2', 'Settings', CONST.SCENES.OPTIONS);
 
     // Credits button
-    this.menuButton = new Button(this, Help.posFixLeftX(0.5), Help.posFixTopY(0.75), 'blueButton1', 'blueButton2', 'Credits', CONST.SCENES.CREDITS);
+    this.menuButton = new Button(this, Help.posFixLeftX(0.5), y + (2 * sc), 'blueButton1', 'blueButton2', 'Credits', CONST.SCENES.CREDITS);
+
+    // Leader BOard
+    this.menuButton = new Button(this, Help.posFixLeftX(0.5), y + (3 * sc), 'blueButton1', 'blueButton2', 'Leaders', CONST.SCENES.LEADER);
 
     this.input.on('pointerover', (event, gameObjects) => {
       gameObjects[0].setTexture('blueButton2');

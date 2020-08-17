@@ -16,7 +16,7 @@ export class PreloaderScene extends Phaser.Scene {
   }
 
   ready() {
-    this.scene.start(CONST.SCENES.LEADER, 'Leader call: - hello from Preloader Scene');
+    this.scene.start(CONST.SCENES.INPUT, 'Leader call: - hello from Preloader Scene');
 
     //this.scene.start(CONST.SCENES.WORLDMAP, "WorldMap call: - hello from Preloader Scene");
     this.readyCount += 1;
@@ -29,7 +29,9 @@ export class PreloaderScene extends Phaser.Scene {
 
   preload() {
     // add logo image
-    this.add.image(176, 50, 'logo');
+    this.logo = this.add.image(250, 50, 'logo');
+    this.logo.scale = 0.5;
+
 
     // display progress bar
     const dpbX = Help.posFixLeftX(0.15);
@@ -119,6 +121,10 @@ export class PreloaderScene extends Phaser.Scene {
     this.load.image('box', './src/assets/ui/grey_box.png');
     this.load.image('checkedBox', './src/assets/ui/blue_boxCheckmark.png');
     this.load.audio('bgMusic', ['./src/assets/music/TownTheme.mp3']);
+
+    //main menu
+    this.load.image("mainmenu", "./src/assets/ui/main_menu.png");
+
 
     // load input user name
     this.load.image("usrinput", "./src/assets/ui/user_input.png");

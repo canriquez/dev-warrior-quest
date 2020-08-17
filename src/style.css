@@ -70,14 +70,19 @@ body {
 }
 
 #utext {
+  width: 30%;
+  height: 10%;
   position: absolute;
-  top: 50%;
+  top: 59%;
   left: 50%;
   transform: translateX(-50%) translateY(-50%);
   display: none;
   text-align: center;
-  font-size: 14px;
   text-transform: capitalize;
+
+  background-color: transparent;
+  color: white;
+  font-size: 45px;
 }
 
 .showtag {

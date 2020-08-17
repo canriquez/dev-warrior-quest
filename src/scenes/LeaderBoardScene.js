@@ -27,9 +27,7 @@ export class LeaderBoardScene extends Phaser.Scene {
         this.saveButton = new Weapon(this, 240, 295, 'bluebtn', 'exit', (text) => {
             this.hideEvent = null;
             this.visible = false;
-            if (this.inputTag.value == '') { return }
-            console.log('I cought from the input tag :' + this.inputTag.value);
-            //this.scene.backToParent();
+            this.backToParent();
         });
         this.saveButton.scale = 0.2;
 
@@ -80,23 +78,12 @@ export class LeaderBoardScene extends Phaser.Scene {
                     this.add.existing(scoreObject);
                 }
             }
-
-
         });
-
-
-
-
-
-
     };
 
-
-
-
-
-    //this.scene.start(CONST.SCENES.TITLE, "Go from UserName Scene");
-
+    backToParent() {
+        this.scene.start(CONST.SCENES.TITLE, "Go from UserName Scene");
+    }
 
 }
 
