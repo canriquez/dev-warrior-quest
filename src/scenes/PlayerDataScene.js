@@ -55,8 +55,12 @@ export class PlayerDataScene extends Phaser.Scene {
     this.userName.userName = this.inputTag.value;
     console.log('User name is: ' + this.sys.game.globals.settings.userName);
 
-    let response = MicroverseAPI.setScore('Carlos', 140, 0);
+    let response = MicroverseAPI.setScore('sussi', 240, 0);
     console.log(response);
+    MicroverseAPI.getScore(0).then((response) => {
+      console.log(response);
+    });
+
     //this.scene.start(CONST.SCENES.TITLE, "Go from UserName Scene");
   }
 

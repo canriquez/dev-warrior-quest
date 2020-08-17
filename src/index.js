@@ -12,6 +12,7 @@ import { GlobalSettings } from './components/globalsettings';
 import { ChallengeScene } from './scenes/ChallengeScene';
 import { UIChallScene } from './scenes/UiChallScene';
 import { PlayerDataScene } from './scenes/PlayerDataScene';
+import { LeaderBoardScene } from './scenes/LeaderBoardScene'
 
 // const devGame = new Phaser.Game(config);
 
@@ -26,6 +27,7 @@ class DevGame extends Phaser.Game {
     this.scene.add(CONST.SCENES.OPTIONS, OptionsScene);
     this.scene.add(CONST.SCENES.CREDITS, CreditsScene);
     this.scene.add(CONST.SCENES.INPUT, PlayerDataScene);
+    this.scene.add(CONST.SCENES.LEADER, LeaderBoardScene);
     this.scene.add(CONST.SCENES.WORLDMAP, WorldMapScene);
     this.scene.add(CONST.SCENES.CHALLENGE, ChallengeScene);
     this.scene.add(CONST.SCENES.UICHALL, UIChallScene);

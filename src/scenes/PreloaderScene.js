@@ -16,7 +16,7 @@ export class PreloaderScene extends Phaser.Scene {
   }
 
   ready() {
-    this.scene.start(CONST.SCENES.INPUT, 'Player Input call: - hello from Preloader Scene');
+    this.scene.start(CONST.SCENES.LEADER, 'Leader call: - hello from Preloader Scene');
 
     //this.scene.start(CONST.SCENES.WORLDMAP, "WorldMap call: - hello from Preloader Scene");
     this.readyCount += 1;
@@ -122,6 +122,10 @@ export class PreloaderScene extends Phaser.Scene {
 
     // load input user name
     this.load.image("usrinput", "./src/assets/ui/user_input.png");
+
+    //Leader Board
+    this.load.image("leadboard", "./src/assets/ui/leader_board.png");
+
 
     // load challanges assets
     this.load.image('chall01sm', './src/assets/chall/chall01_480x350.png');

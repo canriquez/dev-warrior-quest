@@ -60,9 +60,37 @@ export const MicroverseAPI = (() => {
         }
     }
 
+    const getScore = async (type) => {
+        const request = {
+            method: 'GET',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+        };
+
+        try {
+            const response = await fetch(appURL[type], request);
+            const obj = await response.json();
+
+            return obj.result;
+            //return [].sort.call(response, (a, b) => b.score - a.score);
+
+        } catch (err) {
+            throw ('Something went wrong with API Game Id request - getScore:', err);
+        }
+    }
+
+    /*     sortArgument = (arguments) => {
+            return [].sort.call(arguments).sort(function (a, b) {
+                return b - a;
+            });
+        } */
+
     return {
         getAppId,
         setScore,
+        getScore,
     };
 })();
 
