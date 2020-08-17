@@ -49,8 +49,6 @@ export class WorldMapScene extends Phaser.Scene {
     this.playerName = this.sys.game.globals.settings.playerName;
     // Stores all challenges configurations to be available on other scenes
 
-    // this.challenges = ChallengeConfig.getAllChallenges;
-
     const map = this.make.tilemap({ key: 'map' });
 
     const grassTileSet = map.addTilesetImage('[A]Grass1_pipo', 'tgrass');
@@ -70,12 +68,12 @@ export class WorldMapScene extends Phaser.Scene {
 
 
     /* Check debug rendering for collide assets in layer */
-    const debugGraphics = this.add.graphics().setAlpha(0.75);
-    worldLayer.renderDebug(debugGraphics, {
-      tileColor: null, // Color of non-colliding tiles
-      collidingTileColor: new Phaser.Display.Color(243, 134, 48, 255), // Color of colliding tiles
-      faceColor: new Phaser.Display.Color(40, 39, 37, 255), // Color of colliding face edges
-    });
+    /*     const debugGraphics = this.add.graphics().setAlpha(0.75);
+        worldLayer.renderDebug(debugGraphics, {
+          tileColor: null, // Color of non-colliding tiles
+          collidingTileColor: new Phaser.Display.Color(243, 134, 48, 255), // Color of colliding tiles
+          faceColor: new Phaser.Display.Color(40, 39, 37, 255), // Color of colliding face edges
+        }); */
 
     this.player = new Player({
       scene: this,
@@ -87,7 +85,6 @@ export class WorldMapScene extends Phaser.Scene {
     this.physics.add.existing(this.player);
 
 
-    // this.player = this.physics.add.sprite(50, 100, 'player', 6);
     this.physics.world.bounds.width = map.widthInPixels;
     this.physics.world.bounds.height = map.heightInPixels;
 
@@ -225,7 +222,7 @@ export class WorldMapScene extends Phaser.Scene {
   }
 
   saveScore(name, score) {
-    const response = MicroverseAPI.setScore(name, score, 0);
+    const response = MicroverseAPI.setScore(name, score, 1);
     MicroverseAPI.getScore(0).then((response) => {
     });
   }

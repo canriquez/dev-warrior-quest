@@ -71,14 +71,9 @@ export class ChallengeScene extends Phaser.Scene {
 
 
     Help.loadSysPlayerData(this, devWarrior);
-    // devWarrior.globals.corazon.gameScore = this.playerData.gameScore;
-    // devWarrior.globals.corazon.extraScore = this.playerData.extraScore;
-    // devWarrior.globals.corazon.playerName = this.playerData.playerName;
-
 
     // initializes power for challenge
     devWarrior.globals.corazon.resetChallengePow();
-
 
     // Build Deamons Array
     this.enemies = [];
@@ -202,7 +197,7 @@ export class ChallengeScene extends Phaser.Scene {
     if (power > 0) {
       this.heroEB.updateEnergyLevel(hero.powBar());
       this.events.emit('Message', `${this.characters[this.index].name
-      } attacks DevWarrior for ${power} damage`);
+        } attacks DevWarrior for ${power} damage`);
       this.checkHealth(this.heroes[0], 0);
     }
   }

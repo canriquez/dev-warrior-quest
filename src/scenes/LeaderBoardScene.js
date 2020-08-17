@@ -58,7 +58,7 @@ export class LeaderBoardScene extends Phaser.Scene {
 
 
     // Fetch Leader Score Object from API
-    MicroverseAPI.getScore(0).then((response) => {
+    MicroverseAPI.getScore(1).then((response) => {
       response.sort((a, b) => b.score - a.score);
 
       // build score objects
