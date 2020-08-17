@@ -197,7 +197,7 @@ export class ChallengeScene extends Phaser.Scene {
     if (power > 0) {
       this.heroEB.updateEnergyLevel(hero.powBar());
       this.events.emit('Message', `${this.characters[this.index].name
-        } attacks DevWarrior for ${power} damage`);
+      } attacks DevWarrior for ${power} damage`);
       this.checkHealth(this.heroes[0], 0);
     }
   }

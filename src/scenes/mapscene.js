@@ -1,4 +1,4 @@
-/* eslint-disable class-methods-use-this, no-unused-vars */
+/* eslint-disable class-methods-use-this, no-unused-vars, max-len */
 import Phaser from 'phaser';
 import { CONST } from '../components/const';
 import { Help } from '../components/helpers';
@@ -104,8 +104,10 @@ export class WorldMapScene extends Phaser.Scene {
 
     // defines game locations listeners from map objects - End Of the Game
     this.endGame = this.physics.add.group({ classType: Phaser.GameObjects.Zone });
-    this.endGame.create(Help.adjXpos(gA[1]), Help.adjYpos(gA[1]), gA[1].width, gA[1].height);
-    this.physics.add.overlap(this.player, this.endGame, this.onEndGame, false, this);
+    this.endGame.create(Help.adjXpos(gA[1]),
+      Help.adjYpos(gA[1]), gA[1].width, gA[1].height);
+    this.physics.add.overlap(this.player,
+      this.endGame, this.onEndGame, false, this);
 
     // defines game locations listeners from map objects - Challenge 1 Area Listener
     this.ch1 = this.physics.add.group({ classType: Phaser.GameObjects.Zone });
@@ -148,7 +150,6 @@ export class WorldMapScene extends Phaser.Scene {
 
     this.gameoverMessage = new GameOverScreen(this);
     this.add.existing(this.gameoverMessage);
-
   }
 
   update() {
@@ -224,7 +225,7 @@ export class WorldMapScene extends Phaser.Scene {
   }
 
   saveScore(name, score) {
-    if (this.saveScore === true) { return }
+    if (this.saveScore === true) { return; }
     this.saveScore = true;
     const response = MicroverseAPI.setScore(name, score, 1);
   }
