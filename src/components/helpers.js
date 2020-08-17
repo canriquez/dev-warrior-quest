@@ -34,6 +34,19 @@ export const Help = (() => {
     return text;
   }
 
+  const gameOverMsg = (type, a, b, c, d) => {
+    let result = ['CONGRATULATIONS', 'GAME IS OVER', 'Challenge success :', 'FEAR      :']
+    let text = {
+      r1: '' + result[type],
+      r2: 'Skills    : ' + ((a >= 0) ? '+ ' + a : a),
+      r3: 'Motivation: ' + ((b >= 0) ? '+ ' + b : b),
+      r4: 'Courage   : ' + ((c >= 0) ? '+ ' + c : c),
+      r5: result[type + 2] + ' ' + ((d >= 0) ? '+ ' + d : d) + ' points.',
+      r6: 'Your fear cannot let you continue. Take a rest!'
+    };
+    return text;
+  }
+
   const updSysNextChallenge = (scene, callChallenge = 0) => {
     let oldD = scene.sys.game.globals.settings.nextChallenge;
 
@@ -55,11 +68,11 @@ export const Help = (() => {
   }
 
   const challengeDone = (scene, challenge) => {
-    console.log('i am testing challenge done');
+    //console.log('i am testing challenge done');
     let sysNextChallenge = scene.sys.game.globals.settings.nextChallenge;
     let challengeDone = sysNextChallenge.done;
-    console.log('Challenge: ' + challenge)
-    console.log(challengeDone)
+    //console.log('Challenge: ' + challenge)
+    //console.log(challengeDone)
 
     return challengeDone[challenge] == challenge;
 
@@ -71,7 +84,7 @@ export const Help = (() => {
     let playerData = obj.globals.corazon;
     let sysPlayerScore = scene.sys.game.globals.settings;
     sysPlayerScore.chScore = playerData.gameScore;
-    sysPlayerScore.extraScor = playerData.extraScor;
+    sysPlayerScore.extras = playerData.extraScore;
     sysPlayerScore.playerName = playerData.playerName;
 
 
@@ -103,6 +116,16 @@ export const Help = (() => {
     return
   }
 
+  const playerScoreToSave = (obj) => {
+    let extraScore = obj.player.globals.corazon.extraScore;
+    let scoreObject = obj.player.globals.corazon.gameScore;
+    let totalScore = scoreObject.skill +
+      scoreObject.courage +
+      scoreObject.motivation +
+      extraScore;
+    return totalScore;
+  }
+
 
   return {
     adjXpos,
@@ -118,6 +141,8 @@ export const Help = (() => {
     challengeDone,
     savePlayerDataSys,
     loadSysPlayerData,
+    gameOverMsg,
+    playerScoreToSave,
   };
 })();
 

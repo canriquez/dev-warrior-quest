@@ -5,8 +5,8 @@ export const ChallengeConfig = (() => {
   let challenges = [
     {
       challengeName: 'HTML/CSS Capstone!',
-      deamons: 3,
-      badness: [1, 1, 1],
+      deamons: 2,
+      badness: [1, 1],
       htextures: ['hero01'],
       dtextures: ['hero01', 'hero01', 'hero01'],
       positions: [290, 365, 450],
@@ -57,7 +57,7 @@ export const ChallengeConfig = (() => {
     ,
     {
       challengeName: 'Javascript! - Ract',
-      deamons: 2,
+      deamons: 3,
       badness: [1, 1, 1],
       htextures: ['hero01'],
       dtextures: ['hero01', 'hero01', 'hero01'],

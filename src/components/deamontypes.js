@@ -2,23 +2,23 @@ import { config } from '../config/config';
 
 export const Deamons = (() => {
   const nice = {
-    skill: 200,
-    courage: 100,
-    motivation: 100,
+    skill: 5,
+    courage: 5,
+    motivation: 10,
     fear: 10,
     level: 'Nice Deamon',
   };
 
   const bad = {
-    skill: 300,
-    courage: 200,
-    motivation: 200,
+    skill: 10,
+    courage: 10,
+    motivation: 10,
     fear: 20,
     level: 'Bad Deamon',
   };
 
   const realBad = {
-    skill: 40,
+    skill: 30,
     courage: 30,
     motivation: 30,
     fear: 30,

@@ -4,6 +4,8 @@ import { CONST } from '../components/const';
 import { Help } from '../components/helpers';
 import { Player } from '../components/characters';
 import { GameScoreBoard } from '../components/gamescoreboard';
+import { GameOverScreen } from '../components/gameover';
+import { MicroverseAPI } from '../components/leaderboardapi';
 
 export class WorldMapScene extends Phaser.Scene {
   constructor() {
@@ -65,6 +67,7 @@ export class WorldMapScene extends Phaser.Scene {
 
   create() {
     console.log('Starting World Map Scene');
+    this.playerName = this.sys.game.globals.settings.playerName;
     //Stores all challenges configurations to be available on other scenes
 
     //this.challenges = ChallengeConfig.getAllChallenges;
@@ -169,9 +172,17 @@ export class WorldMapScene extends Phaser.Scene {
     this.scBoard = new GameScoreBoard(this, 180, 10);
     this.add.existing(this.scBoard);
 
-    this.scBoard.updateScoreBoard(this.player.globals.corazon.gameScore);
+    this.scBoard.updateScoreBoard(this);
 
     this.sys.events.on('wake', this.wake, this);
+
+    //Game Over Screen Instance
+
+    this.gameoverMessage = new GameOverScreen(this)
+    this.add.existing(this.gameoverMessage);
+
+    console.log('FInally the total score!: ');
+    console.log(Help.playerScoreToSave(this));
 
   }
 
@@ -210,27 +221,55 @@ export class WorldMapScene extends Phaser.Scene {
     console.log('here just before loading system data for player');
     Help.loadSysPlayerData(this, this.player);
 
-
-    //last is the global variable storing the challenge number's score
-
-
-    /*     console.log(this.sys.game.globals.settings.chScore[lastKey]);
-        this.player.globals.corazon.gameScore = this.sys.game.
-          globals.settings.chScore[lastKey]; */
     console.log('after update on Player Object....');
     console.log(this.player.globals.corazon.gameScore);
-    this.scBoard.updateScoreBoard(this.player.globals.corazon.gameScore);
+    this.scBoard.updateScoreBoard(this);
+
+    //On GAme Over sends message and saves score
+    if (this.player.globals.corazon.haveILost) {
+      this.gameOver();
+      this.saveScore(this.playerName, Help.playerScoreToSave(this));
+    }
+
   };
 
   runChallenge(data) {
     if (Help.challengeDone(this, data)) { return };
-    console.log('Challenge 1 is next');
     this.cameras.main.shake(300);
-    console.log('starting challenge 1');
     Help.updSysNextChallenge(this, data)
     //saving current player data on system before switing scenes
     Help.savePlayerDataSys(this, this.player);
     this.scene.switch(CONST.SCENES.CHALLENGE);
+  }
+
+  gameOver() {
+    console.log("gameOver - this is the message")
+    let msg = Help.gameOverMsg(1,
+      this.player.globals.corazon.gameScore.skill,
+      this.player.globals.corazon.gameScore.motivation,
+      this.player.globals.corazon.gameScore.courage,
+      this.player.globals.corazon.gameScore.fear,
+    );
+    console.log(msg);
+    this.gameoverMessage.showMessage(msg);
+  }
+
+  backToParent() {
+    console.log('heading back Main Scene');
+    //this.cameras.main.fade(1000);
+    //this.scene.sleep(CONST.SCENES.CHALLENGE);
+    this.scene.start(CONST.SCENES.TITLE, 'back to main menu');
+
+  }
+
+  saveScore(name, score) {
+    console.log('name is : ' + name);
+    console.log('score is : ' + score);
+    let response = MicroverseAPI.setScore(name, score, 0);
+    console.log(response);
+    MicroverseAPI.getScore(0).then((response) => {
+      console.log(response);
+    });
   }
 }
 

@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import { Help } from './helpers'
 
 export class GameScoreBoard extends Phaser.GameObjects.Container {
 
@@ -13,8 +14,8 @@ export class GameScoreBoard extends Phaser.GameObjects.Container {
             this.scoreObject.motivation +
             scene.player.globals.corazon.extraScore;
 
-        this.playerName = scene.player.globals.corazon.playerName;
-
+        this.playerName = this.scene.sys.game.globals.settings.playerName;
+        //this.sys.game.globals.settings.userName
         //Background box
 
         let graphics = this.scene.add.graphics();
@@ -147,7 +148,10 @@ export class GameScoreBoard extends Phaser.GameObjects.Container {
     };
 
 
-    updateScoreBoard(scoreObject) {
+    updateScoreBoard(obj) {
+
+        let scoreObject = obj.player.globals.corazon.gameScore;
+        let finalScore = Help.playerScoreToSave(obj);
 
         let maxScale = 55;
         let scoreA = [scoreObject.skill,
@@ -193,11 +197,13 @@ export class GameScoreBoard extends Phaser.GameObjects.Container {
         //Update score numbers
 
         //TEXT KEYs and individual scores
-        this.ScoreText.setText(this.playerName + ' - Score : ' + this.totalScore);
+        this.ScoreText.setText(this.playerName + ' - Score : ' + finalScore);
         this.ScoreKey.setText("Skill: " + scoreObject.skill);
         this.ScoreKey1.setText("Motivation: " + scoreObject.motivation);
         this.ScoreKey2.setText("Courage: " + scoreObject.courage);
         this.ScoreKey3.setText("Fear: " + scoreObject.fear);
+
+        return;
 
     };
 

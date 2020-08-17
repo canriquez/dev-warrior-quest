@@ -83,8 +83,9 @@ export class PlayerDataScene extends Phaser.Scene {
   saveAndStart() {
     this.userName = this.sys.game.globals.settings;
     this.inputTag.classList.remove('showtag');
-    this.userName.userName = this.inputTag.value;
-    console.log('User name is: ' + this.sys.game.globals.settings.userName);
+    this.userName.playerName = this.inputTag.value;
+    console.log('User name is: ' + this.sys.game.globals.settings.playerName);
+    console.log(this.sys.game.globals.settings);
 
     /*     let response = MicroverseAPI.setScore('sussi', 240, 0);
         console.log(response);
