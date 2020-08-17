@@ -1,7 +1,7 @@
 import 'regenerator-runtime';
 
 export const MicroverseAPI = (() => {
-  const appURL = ['https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/kZpOvzmDySnCTvoWMzBf/scores/',
+  const appURL = ['https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/76iZcjsds6vK8FEYOUkr/scores/',
     'https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/uYI4G9Bt3H7ZY8R11dCa/scores/'];
   const BASEURL = 'https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/';
 
@@ -9,7 +9,7 @@ export const MicroverseAPI = (() => {
   const getAppId = async () => {
     // Game with ID: kZpOvzmDySnCTvoWMzBf added.
     const postObj = JSON.stringify({
-      name: 'Dew Warrior Quest',
+      name: 'Dev Warrior Quest',
     });
 
     const request = {

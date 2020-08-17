@@ -14,6 +14,7 @@ export class WorldMapScene extends Phaser.Scene {
     });
     this.challenges = [false, false, false, false];
     this.endGame = false;
+    this.savedScore = false;
   }
 
   init(data) {
@@ -147,6 +148,7 @@ export class WorldMapScene extends Phaser.Scene {
 
     this.gameoverMessage = new GameOverScreen(this);
     this.add.existing(this.gameoverMessage);
+
   }
 
   update() {
@@ -222,9 +224,9 @@ export class WorldMapScene extends Phaser.Scene {
   }
 
   saveScore(name, score) {
+    if (this.saveScore === true) { return }
+    this.saveScore = true;
     const response = MicroverseAPI.setScore(name, score, 1);
-    MicroverseAPI.getScore(0).then((response) => {
-    });
   }
 }
 
