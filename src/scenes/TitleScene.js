@@ -11,8 +11,7 @@ export class TitleScene extends Phaser.Scene {
     });
   }
 
-  init(data) {
-    console.log(data);
+  init() {
   }
 
   preload() {

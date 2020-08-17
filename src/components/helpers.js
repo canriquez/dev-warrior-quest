@@ -49,21 +49,12 @@ export const Help = (() => {
 
   const updSysNextChallenge = (scene, callChallenge = 0) => {
     const oldD = scene.sys.game.globals.settings.nextChallenge;
-
-    console.log('updNExtCHallenge : #before update nextChallenge object');
-    console.log(oldD);
-    // let oldD = obj
     const doneArray = oldD.done;
     doneArray.push(+callChallenge);
-
-    console.log('done array is now : ');
-    console.log(doneArray);
     const newD = {
       message: oldD.message,
       done: (doneArray),
     };
-    console.log('updNExtCHallenge : #Pushing this onto nextChallenge object');
-    console.log(newD);
     return newD;
   };
 
@@ -79,29 +70,13 @@ export const Help = (() => {
     sysPlayerScore.chScore = playerData.gameScore;
     sysPlayerScore.extras = playerData.extraScore;
     sysPlayerScore.playerName = playerData.playerName;
-
-
-    console.log('####|| Saving player data on syste...');
-    console.log('####|| Current Player data score..');
-    console.log(playerData);
-    console.log('####|| Data score on system after saving it...');
-    console.log(sysPlayerScore);
   };
   const loadSysPlayerData = (scene, obj) => {
     const playerData = obj.globals.corazon;
     const sysPlayerScore = scene.sys.game.globals.settings;
-
-    console.log('####|| Loading player data from system...');
-    console.log('####|| Current System data score..');
-    console.log(sysPlayerScore);
-
     playerData.gameScore = sysPlayerScore.chScore;
     playerData.extraScore = sysPlayerScore.extras;
     playerData.playerName = sysPlayerScore.playerName;
-
-
-    console.log('####|| Data score on Player Obj after saving it...');
-    console.log(playerData);
   };
 
   const playerScoreToSave = (obj) => {

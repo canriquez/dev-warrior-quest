@@ -1,6 +1,6 @@
 import Phaser from 'phaser';
 
-export class onScreenInstructions extends Phaser.GameObjects.Container {
+export class OnScreenInstructions extends Phaser.GameObjects.Container {
   constructor(scene, events) {
     super(scene, 240, 80);
     const graphics = this.scene.add.graphics();
@@ -25,22 +25,19 @@ export class onScreenInstructions extends Phaser.GameObjects.Container {
     this.hideEvent = this.scene.time.addEvent({
       delay: 10000,
       callback: this.hideMessage,
-      callbackScope: this
+      callbackScope: this,
     });
   }
 
   showInstruc(text) {
-    console.log(`Inial OS Screen:  someone send instruc :${text}`);
     this.text.setText(text);
-    console.log('Text was made visible..');
     this.visible = true;
     if (this.hideEvent) this.hideEvent.remove(false);
     this.hideEvent = this.scene.time.addEvent({
       delay: 6000,
       callback: this.hideMessage,
-      callbackScope: this
+      callbackScope: this,
     });
-    console.log(`FInishing displaying message:${text}`);
   }
 
   hideMessage() {
@@ -49,4 +46,4 @@ export class onScreenInstructions extends Phaser.GameObjects.Container {
   }
 }
 
-export default onScreenInstructions;
+export default OnScreenInstructions;

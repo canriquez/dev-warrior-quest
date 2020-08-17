@@ -13,11 +13,10 @@ export class WorldMapScene extends Phaser.Scene {
       key: CONST.SCENES.WORLDMAP,
     });
     this.challenges = [false, false, false, false];
+    this.endGame = false;
   }
 
   init(data) {
-    console.log(data);
-    console.log('I got it');
   }
 
   onChallenge1(player, zone) {
@@ -26,39 +25,19 @@ export class WorldMapScene extends Phaser.Scene {
 
   onChallenge2(player, zone) {
     this.runChallenge(1);
-    /*     if (Help.challengeDone(this, 1)) { return };
-        console.log('Challenge 1 is next');
-        this.cameras.main.shake(300);
-        console.log('starting challenge 1');
-        Help.updSysNextChallenge(this, 1)
-        //saving current player data on system before switing scenes
-        Help.savePlayerDataSys(this, this.player);
-        this.scene.switch(CONST.SCENES.CHALLENGE); */
   }
 
   onChallenge3(player, zone) {
     this.runChallenge(2);
-    /*     if (Help.challengeDone(this, 3)) { return };
-        console.log('Challenge 1 is next');
-        this.cameras.main.shake(300);
-        console.log('starting challenge 1');
-        Help.updSysNextChallenge(this, 1)
-        //saving current player data on system before switing scenes
-        Help.savePlayerDataSys(this, this.player);
-        this.scene.switch(CONST.SCENES.CHALLENGE); */
   }
 
   onJobInterview(player, zone) {
     this.runChallenge(3);
-    /*     console.log('I am here in the on this area method');
-        this.cameras.main.shake(300);
-        console.log('starting JobInterview');
-        this.cameras.main.fade(1000);
-        this.cameras.main.fadeIn(1000); */
   }
 
   onEndGame(player, zone) {
-    console.log('End game');
+    if (this.endGame === true) { return; }
+    this.endGame = true;
     this.finishGame();
   }
 
@@ -67,7 +46,6 @@ export class WorldMapScene extends Phaser.Scene {
   }
 
   create() {
-    console.log('Starting World Map Scene');
     this.playerName = this.sys.game.globals.settings.playerName;
     // Stores all challenges configurations to be available on other scenes
 
@@ -106,15 +84,6 @@ export class WorldMapScene extends Phaser.Scene {
       texture: 'player',
       type: 'hero',
     });
-
-    console.log('this player initial score');
-    console.log(this.player.globals.corazon.gameScore);
-
-
-    console.log('Have I lost?');
-    console.log(this.player.globals.corazon.haveILost());
-
-
     this.physics.add.existing(this.player);
 
 
@@ -181,9 +150,6 @@ export class WorldMapScene extends Phaser.Scene {
 
     this.gameoverMessage = new GameOverScreen(this);
     this.add.existing(this.gameoverMessage);
-
-    console.log('FInally the total score!: ');
-    console.log(Help.playerScoreToSave(this));
   }
 
   update() {
@@ -212,17 +178,9 @@ export class WorldMapScene extends Phaser.Scene {
     this.cursors.right.reset();
     this.cursors.up.reset();
     this.cursors.down.reset();
-
-    console.log('## stored on system storage :(global map side) ');
-    console.log(this.sys.game.globals.settings);
-
     // update player score variable from system
 
-    console.log('here just before loading system data for player');
     Help.loadSysPlayerData(this, this.player);
-
-    console.log('after update on Player Object....');
-    console.log(this.player.globals.corazon.gameScore);
     this.scBoard.updateScoreBoard(this);
 
     // On GAme Over sends message and saves score
@@ -242,21 +200,16 @@ export class WorldMapScene extends Phaser.Scene {
   }
 
   gameOver() {
-    console.log('gameOver - this is the message');
     const msg = Help.gameOverMsg(1,
       this.player.globals.corazon.gameScore.skill,
       this.player.globals.corazon.gameScore.motivation,
       this.player.globals.corazon.gameScore.courage,
       this.player.globals.corazon.gameScore.fear,
       Help.playerScoreToSave(this));
-    console.log(msg);
     this.gameoverMessage.showMessage(msg);
   }
 
   backToParent() {
-    console.log('heading back Main Scene');
-    // this.cameras.main.fade(1000);
-    // this.scene.sleep(CONST.SCENES.CHALLENGE);
     this.scene.start(CONST.SCENES.TITLE, 'back to main menu');
   }
 
@@ -267,18 +220,13 @@ export class WorldMapScene extends Phaser.Scene {
       this.player.globals.corazon.gameScore.courage,
       this.player.globals.corazon.gameScore.fear,
       Help.playerScoreToSave(this));
-    console.log(msg);
     this.gameoverMessage.showMessage(msg);
     this.saveScore(this.playerName, Help.playerScoreToSave(this));
   }
 
   saveScore(name, score) {
-    console.log(`name is : ${name}`);
-    console.log(`score is : ${score}`);
     const response = MicroverseAPI.setScore(name, score, 0);
-    console.log(response);
     MicroverseAPI.getScore(0).then((response) => {
-      console.log(response);
     });
   }
 }

@@ -1,16 +1,13 @@
-import { InitScene } from '../scenes/initscene';
-import { WorldMapScene } from '../scenes/mapscene';
-import { HeroProfile } from '../components/herobject';
 import { DeamonProfile } from '../components/deamonobject';
 
 let deamInstanceObject;
 
 const initGameScore = {
-  skill: 20,
-  courage: 10,
+  skill: 5,
+  courage: 5,
   motivation: 10,
   fear: 10,
-  level: 'nice',
+  level: 'Nice Deamon',
 };
 
 const initHitPower = {
@@ -20,9 +17,9 @@ const initHitPower = {
 };
 
 const firstHitPower = {
-  sword: 0.99,
-  knife: 0.99,
-  punch: 2.52,
+  sword: 1,
+  knife: 1,
+  punch: 2,
 };
 
 beforeAll(() => {

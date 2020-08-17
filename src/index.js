@@ -1,4 +1,4 @@
-/* eslint-disable import/no-unresolved*/
+/* eslint-disable import/no-unresolved */
 import './style.css';
 import Phaser from 'phaser';
 import { CONST } from './components/const';

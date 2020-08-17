@@ -25,9 +25,7 @@ export class MenuItem {
       this.cf.weapon,
       this.cf.name,
       () => {
-        console.log(`From the UI, I got clicked :${this.cf.name}`);
         this.select();
-        console.log(`select is: ${this._selected}`);
         this.cf.callback(this.cf.name, this.cf.item);
       });
     this.deselect();

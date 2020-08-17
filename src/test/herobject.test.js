@@ -8,7 +8,7 @@ const initGameScore = {
   skill: 10,
   courage: 20,
   motivation: 30,
-  fear: 20,
+  fear: 15,
   level: 'student',
 };
 
@@ -19,9 +19,9 @@ const initHitPower = {
 };
 
 const firstHitPower = {
-  sword: 3,
-  knife: 2,
-  punch: 1,
+  sword: 4,
+  knife: 3,
+  punch: 2,
 };
 
 
@@ -64,7 +64,7 @@ describe('Player Scoring Logic - Full Challenge', () => {
 
     // hero attacks
     heroInstanceObject.attackEnemy(heroInstanceObject.hitPower().sword, deamInstanceObject);
-    expect(deamInstanceObject.challengePow).toEqual(6);
+    expect(deamInstanceObject.challengePow).toEqual(3);
   });
 
   test('it attacks and confirms deamon kill', () => {
@@ -90,7 +90,7 @@ describe('Deamon Scoring Logic - Full Challenge', () => {
 
     // hero attacks
     deamInstanceObject.attackEnemy(deamInstanceObject.hitPower().sword, heroInstanceObject);
-    expect(heroInstanceObject.challengePow).toEqual(10 - 0.99);
+    expect(heroInstanceObject.challengePow).toEqual(12);
   });
 
   test('it attacks Hero and confirms hero kill', () => {
@@ -99,6 +99,10 @@ describe('Deamon Scoring Logic - Full Challenge', () => {
     deamInstanceObject.resetChallengePow();
 
     // hero attacks
+    deamInstanceObject.attackEnemy(deamInstanceObject.hitPower().punch, heroInstanceObject);
+    deamInstanceObject.attackEnemy(deamInstanceObject.hitPower().punch, heroInstanceObject);
+    deamInstanceObject.attackEnemy(deamInstanceObject.hitPower().punch, heroInstanceObject);
+    deamInstanceObject.attackEnemy(deamInstanceObject.hitPower().punch, heroInstanceObject);
     deamInstanceObject.attackEnemy(deamInstanceObject.hitPower().punch, heroInstanceObject);
     deamInstanceObject.attackEnemy(deamInstanceObject.hitPower().punch, heroInstanceObject);
     deamInstanceObject.attackEnemy(deamInstanceObject.hitPower().punch, heroInstanceObject);

@@ -10,9 +10,8 @@ export class PreloaderScene extends Phaser.Scene {
     });
   }
 
-  init(data) {
+  init() {
     this.readyCount = 0;
-    console.log(data);
   }
 
   ready() {

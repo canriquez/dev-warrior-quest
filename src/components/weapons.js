@@ -15,13 +15,11 @@ export class Weapon extends Phaser.GameObjects.Container {
     this.add(this.button);
 
     this.button.on('pointerup', () => {
-      console.log(`clicking ${text}`);
       this.callback(text);
     });
 
     this.button.on('pointerover', () => {
       // this.button.setTexture(key2);
-      console.log('attempt to rotate');
       this.rotate(this.button);
     });
 

@@ -12,9 +12,7 @@ export class LeaderBoardScene extends Phaser.Scene {
     });
   }
 
-  init(data) {
-    console.log(data);
-    // this.scale.fullscreenTarget = document.getElementById(config.parent);
+  init() {
   }
 
   preload() {
@@ -24,7 +22,7 @@ export class LeaderBoardScene extends Phaser.Scene {
     this.add.image(240, 175, 'leadboard');
 
 
-    this.saveButton = new Weapon(this, 240, 295, 'bluebtn', 'exit', (text) => {
+    this.saveButton = new Weapon(this, 240, 295, 'bluebtn', 'exit', () => {
       this.hideEvent = null;
       this.visible = false;
       this.backToParent();
@@ -37,10 +35,10 @@ export class LeaderBoardScene extends Phaser.Scene {
         align: 'center',
         fontSize: 18,
         wordWrap:
-                {
-                  width: 240,
-                  useAdvancedWrap: true,
-                },
+        {
+          width: 240,
+          useAdvancedWrap: true,
+        },
       });
     this.add.existing(this.text1);
 
@@ -51,10 +49,10 @@ export class LeaderBoardScene extends Phaser.Scene {
         align: 'center',
         fontSize: 14,
         wordWrap:
-                {
-                  width: 300,
-                  useAdvancedWrap: true,
-                },
+        {
+          width: 300,
+          useAdvancedWrap: true,
+        },
       });
     this.add.existing(this.text2);
 
@@ -64,9 +62,6 @@ export class LeaderBoardScene extends Phaser.Scene {
       response.sort((a, b) => b.score - a.score);
 
       // build score objects
-      console.log(response);
-
-      let scoreObject;
       for (let i = 0; i < 6; i += 1) {
         if (response[i]) {
           const scoreObject = new LeadBoardObject(this, 240, (170 + (i * 25)),

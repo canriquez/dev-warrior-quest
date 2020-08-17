@@ -5,7 +5,6 @@ export class GameOverScreen extends Phaser.GameObjects.Container {
   constructor(scene) {
     super(scene, 240, 100);
     this.scene = scene;
-    console.log('I got to gameover screen !');
     const graphics = this.scene.add.graphics();
     this.add(graphics);
     graphics.lineStyle(1, 0xffffff, 0.8);
@@ -47,10 +46,9 @@ export class GameOverScreen extends Phaser.GameObjects.Container {
     this.text7.setScrollFactor(0);
 
 
-    this.exitButton = new Weapon(this.scene, 0, 460, 'bluebtn', 'exit', (text) => {
+    this.exitButton = new Weapon(this.scene, 0, 460, 'bluebtn', 'exit', () => {
       this.hideEvent = null;
       this.visible = false;
-      console.log(`from endchallenge group :${text}`);
       this.scene.backToParent();
     });
     this.exitButton.alpha = 1;

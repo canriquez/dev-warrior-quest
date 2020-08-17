@@ -1,23 +1,7 @@
 /* eslint-disable class-methods-use-this */
 import Phaser from 'phaser';
-
-import {
-  CONST,
-}
-
-  from '../components/const';
-
-import {
-  Weapon,
-}
-
-  from '../components/weapons';
-
-import {
-  MicroverseAPI,
-}
-
-  from '../components/leaderboardapi';
+import { CONST } from '../components/const';
+import { Weapon } from '../components/weapons';
 
 
 export class PlayerDataScene extends Phaser.Scene {
@@ -27,9 +11,7 @@ export class PlayerDataScene extends Phaser.Scene {
     });
   }
 
-  init(data) {
-    console.log(data);
-    // this.scale.fullscreenTarget = document.getElementById(config.parent);
+  init() {
   }
 
   preload() { }
@@ -43,15 +25,14 @@ export class PlayerDataScene extends Phaser.Scene {
         this.logo = this.add.image(250, 150, 'logo');
         this.logo.scale = 0.5; */
 
-    this.saveButton = new Weapon(this, 240, 280, 'bluebtn', 'exit', (text) => {
+    this.saveButton = new Weapon(this, 240, 280, 'bluebtn', 'exit', () => {
       this.hideEvent = null;
       this.visible = false;
 
-      if (this.inputTag.value == '') {
+      if (this.inputTag.value === '') {
         return;
       }
 
-      console.log(`I cought from the input tag :${this.inputTag.value}`);
       this.saveAndStart();
       // this.scene.backToParent();
     });
@@ -76,15 +57,6 @@ export class PlayerDataScene extends Phaser.Scene {
     this.userName = this.sys.game.globals.settings;
     this.inputTag.classList.remove('showtag');
     this.userName.playerName = this.inputTag.value;
-    console.log(`User name is: ${this.sys.game.globals.settings.playerName}`);
-    console.log(this.sys.game.globals.settings);
-
-    /*     let response = MicroverseAPI.setScore('sussi', 240, 0);
-        console.log(response);
-        MicroverseAPI.getScore(0).then((response) => {
-          console.log(response);
-        }); */
-
     this.scene.start(CONST.SCENES.TITLE, 'Go from UserName Scene');
   }
 }

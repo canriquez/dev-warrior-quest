@@ -7,11 +7,6 @@
   transition: all 0.2s ease-in-out;
 }
 
-body {
-  background-color: #f8f9fa;
-  font-family: futura-light, sans-serif;
-}
-
 /* ================ fonts ================ */
 
 @font-face {
@@ -59,6 +54,8 @@ body {
 /* ================ section ================ */
 body {
   min-width: 320px;
+  background-color: #f8f9fa;
+  font-family: futura-light, sans-serif;
 }
 
 #content {
@@ -79,7 +76,6 @@ body {
   display: none;
   text-align: center;
   text-transform: capitalize;
-
   background-color: transparent;
   color: white;
   font-size: 45px;

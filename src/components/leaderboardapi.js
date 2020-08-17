@@ -24,7 +24,6 @@ export const MicroverseAPI = (() => {
     try {
       const response = await fetch(BASEURL, request);
       const gameId = await response.json();
-      console.log(`game id test :${gameId}`);
       return gameId;
     } catch (err) {
       throw ('Something went wrong with API Game Id request:', err);
@@ -50,7 +49,6 @@ export const MicroverseAPI = (() => {
     try {
       const response = await fetch(appURL[type], request);
       const result = await response.json();
-      console.log(`Result :${result}`);
       return result;
     } catch (err) {
       throw ('Something went wrong with API Game Id request - setScore:', err);

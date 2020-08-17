@@ -33,8 +33,6 @@ export class HeroEnergyBar extends Phaser.GameObjects.Container {
 
   updateEnergyLevel(level) {
     if (level < 0) { level = 0; }
-    console.log('Energy Bar Class: this is the level I got');
-    console.log(level);
     const max = 80;
     const lvl = (level * max) / 100;
     this.pbar.clear();

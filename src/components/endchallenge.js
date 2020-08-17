@@ -33,10 +33,9 @@ export class EndChallenge extends Phaser.GameObjects.Container {
     });
     this.add(this.text5);
 
-    this.exitButton = new Weapon(this.scene, 0, 160, 'bluebtn', 'exit', (text) => {
+    this.exitButton = new Weapon(this.scene, 0, 160, 'bluebtn', 'exit', () => {
       this.hideEvent = null;
       this.visible = false;
-      console.log(`from endchallenge group :${text}`);
       this.scene.backToParent();
     });
     this.exitButton.alpha = 1;

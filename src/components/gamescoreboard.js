@@ -169,9 +169,6 @@ export class GameScoreBoard extends Phaser.GameObjects.Container {
       (fear / maxScore) * 55 * -1,
     ]; // [skill, motivation, courage, fear]
 
-    console.log('Score Board Class: this is the level I got');
-    console.log(scoreObject);
-
     // Update Fear
     this.fBox.clear();
     this.fBox.fillStyle(0xd81e5b, 1);
