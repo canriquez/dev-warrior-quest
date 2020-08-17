@@ -2,19 +2,19 @@
 import Phaser from 'phaser';
 
 import {
-  CONST
+  CONST,
 }
 
   from '../components/const';
 
 import {
-  Weapon
+  Weapon,
 }
 
   from '../components/weapons';
 
 import {
-  MicroverseAPI
+  MicroverseAPI,
 }
 
   from '../components/leaderboardapi';
@@ -24,25 +24,22 @@ export class PlayerDataScene extends Phaser.Scene {
   constructor() {
     super({
       key: CONST.SCENES.INPUT,
-    }
-
-    );
+    });
   }
 
   init(data) {
     console.log(data);
-    //this.scale.fullscreenTarget = document.getElementById(config.parent);
+    // this.scale.fullscreenTarget = document.getElementById(config.parent);
   }
 
   preload() { }
 
   create() {
-
     this.add.image(240, 175, 'usrinput');
     this.inputTag = document.getElementById('utext');
     this.inputTag.classList.add('showtag');
 
-    /* 
+    /*
         this.logo = this.add.image(250, 150, 'logo');
         this.logo.scale = 0.5; */
 
@@ -51,18 +48,16 @@ export class PlayerDataScene extends Phaser.Scene {
       this.visible = false;
 
       if (this.inputTag.value == '') {
-        return
+        return;
       }
 
-      console.log('I cought from the input tag :' + this.inputTag.value);
+      console.log(`I cought from the input tag :${this.inputTag.value}`);
       this.saveAndStart();
-      //this.scene.backToParent();
-    }
-
-    );
+      // this.scene.backToParent();
+    });
     this.saveButton.scale = 0.4;
 
-    this.text1 = new Phaser.GameObjects.Text(this, 225, 270, "GO!",
+    this.text1 = new Phaser.GameObjects.Text(this, 225, 270, 'GO!',
       {
 
         color: '#FFCC00',
@@ -70,21 +65,18 @@ export class PlayerDataScene extends Phaser.Scene {
         fontSize: 24,
         wordWrap: {
           width: 240,
-          useAdvancedWrap: true
-        }
-      }
-
-    );
+          useAdvancedWrap: true,
+        },
+      });
     this.add.existing(this.text1);
   }
 
-  ;
 
   saveAndStart() {
     this.userName = this.sys.game.globals.settings;
     this.inputTag.classList.remove('showtag');
     this.userName.playerName = this.inputTag.value;
-    console.log('User name is: ' + this.sys.game.globals.settings.playerName);
+    console.log(`User name is: ${this.sys.game.globals.settings.playerName}`);
     console.log(this.sys.game.globals.settings);
 
     /*     let response = MicroverseAPI.setScore('sussi', 240, 0);
@@ -93,9 +85,8 @@ export class PlayerDataScene extends Phaser.Scene {
           console.log(response);
         }); */
 
-    this.scene.start(CONST.SCENES.TITLE, "Go from UserName Scene");
+    this.scene.start(CONST.SCENES.TITLE, 'Go from UserName Scene');
   }
-
 }
 
 export default PlayerDataScene;

@@ -1,3 +1,4 @@
+/* eslint-disable import/no-unresolved*/
 import './style.css';
 import Phaser from 'phaser';
 import { CONST } from './components/const';
@@ -12,7 +13,7 @@ import { GlobalSettings } from './components/globalsettings';
 import { ChallengeScene } from './scenes/ChallengeScene';
 import { UIChallScene } from './scenes/UiChallScene';
 import { PlayerDataScene } from './scenes/PlayerDataScene';
-import { LeaderBoardScene } from './scenes/LeaderBoardScene'
+import { LeaderBoardScene } from './scenes/LeaderBoardScene';
 
 // const devGame = new Phaser.Game(config);
 

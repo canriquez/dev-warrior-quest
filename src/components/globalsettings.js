@@ -4,10 +4,10 @@ export class GlobalSettings {
     this._soundOn = true;
     this._musicOn = true;
     this._bgMusicPlaying = false;
-    this._globalScore = {}
+    this._globalScore = {};
     this._nextChallenge = {
       message: '',
-      done: []
+      done: [],
     };
     this._playerName = '';
     this._last = null;
@@ -24,6 +24,7 @@ export class GlobalSettings {
   get playerName() {
     return this._playerName;
   }
+
   set last(value) {
     this._last = value;
   }

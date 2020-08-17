@@ -25,7 +25,7 @@ export class DeamonProfile {
   /*   get challengePow() {
       return this._challengePow;
     }
-  
+
     get gameScore() {
       return this._gameScore;
     }
@@ -69,11 +69,11 @@ export class DeamonProfile {
   }
 
   powBar() {
-    let maxPow = this.gameScore.skill * this.challengeMultiplier.skill;
-    maxPow += this.gameScore.courage * this.challengeMultiplier.courage;
-    maxPow += this.gameScore.motivation * this.challengeMultiplier.motiv;
-    return Math.ceil(this.challengePow / maxPow * 100);
-  };
+    let maxPow = (this.gameScore.skill * this.challengeMultiplier.skill);
+    maxPow += (this.gameScore.courage * this.challengeMultiplier.courage);
+    maxPow += (this.gameScore.motivation * this.challengeMultiplier.motiv);
+    return Math.ceil(this.challengePow / maxPow) * 100;
+  }
 }
 
 

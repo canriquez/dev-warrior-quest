@@ -1,3 +1,4 @@
+/* eslint-disable class-methods-use-this */
 import Phaser from 'phaser';
 
 export class Weapon extends Phaser.GameObjects.Container {

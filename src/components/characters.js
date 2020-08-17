@@ -6,7 +6,7 @@ export class Player extends Phaser.GameObjects.Sprite {
   constructor(config) {
     super(config.scene, config.x, config.y, config.texture);
 
-    if (config.type == 'hero') {
+    if (config.type === 'hero') {
       const corazon = new HeroProfile();
       this.globals = { corazon };
     } else {
@@ -34,12 +34,12 @@ export class Player extends Phaser.GameObjects.Sprite {
     console.log(this.globals.corazon.hitPower().sword);
     console.log(this.globals.corazon.hitPower().knife);
     console.log(this.globals.corazon.hitPower().punch);
-    if (this.type == 'deamon') {
-      console.log('sending deamon message :' + this.deamonId);
+    if (this.type === 'deamon') {
+      console.log(`sending deamon message :${this.deamonId}`);
       this.scene.events.emit('attackDeamon', this.deamonId);
     }
-    if (this.type == 'hero') {
-      console.log('sending deamon message :' + this.deamonId);
+    if (this.type === 'hero') {
+      console.log(`sending deamon message :${this.deamonId}`);
       this.scene.events.emit('notYourself');
     }
   }
@@ -47,11 +47,10 @@ export class Player extends Phaser.GameObjects.Sprite {
   die() {
     if (!this.alive) {
       this.active = false;
-      //call dead animation if possible
+      // call dead animation if possible
       this.visible = false;
     }
   }
-
 }
 
 export default Player;

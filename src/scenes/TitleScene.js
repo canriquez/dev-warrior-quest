@@ -19,11 +19,10 @@ export class TitleScene extends Phaser.Scene {
   }
 
   create() {
-
     this.add.image(240, 175, 'mainmenu');
 
-    let y = Help.posFixTopY(0.37);
-    let sc = 45;
+    const y = Help.posFixTopY(0.37);
+    const sc = 45;
     // Play Game Button
     this.menuButton = new Button(this, Help.posFixLeftX(0.5), y, 'blueButton1', 'blueButton2', 'Play', CONST.SCENES.WORLDMAP);
 

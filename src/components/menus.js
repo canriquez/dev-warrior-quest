@@ -1,44 +1,36 @@
-import Phaser from 'phaser';
-import MenuItem from './menuitems';
-
 export class Menus {
-    constructor() {
-        this.menuItems = [];
-        this.menuItemIndex = 0;
+  constructor() {
+    this.menuItems = [];
+    this.menuItemIndex = 0;
+  }
+
+  addMenuItem(menuItem) {
+    this.menuItems.push(menuItem);
+  }
+
+  cleanTheOthers(item) {
+    for (let i = 0; i < this.menuItems.length; i += 1) {
+      if (!(item === i)) {
+        this.menuItems[i].deselect();
+      }
     }
+  }
 
-    addMenuItem(menuItem) {
-        this.menuItems.push(menuItem);
+  enableMenu() { // enables all but one option in the menu for an attack
+    const r = Math.floor(Math.random() * 2);
+    for (let i = 0; i < this.menuItems.length; i += 1) {
+      if (!(r === i)) {
+        this.menuItems[i].enable();
+      }
     }
+  }
 
-    confirm() {
-        // do the action when enemy to attack is confirmed.
+  disableMenu() {
+    for (let i = 0; i < this.menuItems.length; i += 1) {
+      this.menuItems[i].disable();
     }
-
-    cleanTheOthers(item) {
-        for (let i = 0; i < this.menuItems.length; i += 1) {
-            if (!(item == i)) {
-                this.menuItems[i].deselect();
-            };
-        };
-    };
-
-    enableMenu() { //enables all but one option in the menu for an attack
-        let r = Math.floor(Math.random() * 2);
-        for (let i = 0; i < this.menuItems.length; i += 1) {
-            if (!(r == i)) {
-                this.menuItems[i].enable();
-            };
-        };
-    };
-
-    disableMenu() {
-        for (let i = 0; i < this.menuItems.length; i += 1) {
-            this.menuItems[i].disable();
-        };
-    };
-
-};
+  }
+}
 
 
 export default Menus;

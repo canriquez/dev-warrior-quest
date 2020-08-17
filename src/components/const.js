@@ -9,7 +9,7 @@ export const CONST = {
     CHALLENGE: 'CHALLENGE',
     UICHALL: 'UICHALL',
     INPUT: 'INPUT',
-    LEADER: 'LEADER'
+    LEADER: 'LEADER',
   },
 };
 

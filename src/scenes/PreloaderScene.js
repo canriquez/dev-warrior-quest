@@ -18,12 +18,11 @@ export class PreloaderScene extends Phaser.Scene {
   ready() {
     this.scene.start(CONST.SCENES.INPUT, 'Leader call: - hello from Preloader Scene');
 
-    //this.scene.start(CONST.SCENES.WORLDMAP, "WorldMap call: - hello from Preloader Scene");
+    // this.scene.start(CONST.SCENES.WORLDMAP, "WorldMap call: - hello from Preloader Scene");
     this.readyCount += 1;
     if (this.readyCount === 2) {
       this.scene.start(CONST.SCENES.TITLE, 'hello from Preloader Scene');
       // this.scene.start(CONST.SCENES.CHALLENGE, "Challenge call: - hello from Preloader Scene");
-
     }
   }
 
@@ -120,17 +119,17 @@ export class PreloaderScene extends Phaser.Scene {
     this.load.image('blueButton2', './src/assets/ui/blue_button03.png');
     this.load.image('box', './src/assets/ui/grey_box.png');
     this.load.image('checkedBox', './src/assets/ui/blue_boxCheckmark.png');
-    this.load.audio('bgMusic', ['./src/assets/music/TownTheme.mp3']);
+    this.load.audio('bgMusic', ['./src/assets/music/epic.mp3']);
 
-    //main menu
-    this.load.image("mainmenu", "./src/assets/ui/main_menu.png");
+    // main menu
+    this.load.image('mainmenu', './src/assets/ui/main_menu.png');
 
 
     // load input user name
-    this.load.image("usrinput", "./src/assets/ui/user_input.png");
+    this.load.image('usrinput', './src/assets/ui/user_input.png');
 
-    //Leader Board
-    this.load.image("leadboard", "./src/assets/ui/leader_board.png");
+    // Leader Board
+    this.load.image('leadboard', './src/assets/ui/leader_board.png');
 
 
     // load challanges assets
@@ -143,14 +142,14 @@ export class PreloaderScene extends Phaser.Scene {
     this.load.image('sword', './src/assets/chall/sword.png');
     this.load.image('punch', './src/assets/chall/punch.png');
 
-    //challenge energy bars
-    this.load.image("energycontainer", "./src/assets/chall/energycontainer.png");
-    this.load.image("energybar", "./src/assets/chall/energybar.png");
+    // challenge energy bars
+    this.load.image('energycontainer', './src/assets/chall/energycontainer.png');
+    this.load.image('energybar', './src/assets/chall/energybar.png');
 
 
-    //endchalleng messages
-    this.load.image("brownbtn", "./src/assets/ui/brown_button.png");
-    this.load.image("bluebtn", "./src/assets/ui/blue_button.png");
+    // endchalleng messages
+    this.load.image('brownbtn', './src/assets/ui/brown_button.png');
+    this.load.image('bluebtn', './src/assets/ui/blue_button.png');
   }
 
   create() {

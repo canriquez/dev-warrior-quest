@@ -12,7 +12,7 @@ export class WorldMapScene extends Phaser.Scene {
     super({
       key: CONST.SCENES.WORLDMAP,
     });
-    this.challenges = [false, false, false, false]
+    this.challenges = [false, false, false, false];
   }
 
   init(data) {
@@ -21,11 +21,11 @@ export class WorldMapScene extends Phaser.Scene {
   }
 
   onChallenge1(player, zone) {
-    this.runChallenge(0)
+    this.runChallenge(0);
   }
 
   onChallenge2(player, zone) {
-    this.runChallenge(1)
+    this.runChallenge(1);
     /*     if (Help.challengeDone(this, 1)) { return };
         console.log('Challenge 1 is next');
         this.cameras.main.shake(300);
@@ -37,7 +37,7 @@ export class WorldMapScene extends Phaser.Scene {
   }
 
   onChallenge3(player, zone) {
-    this.runChallenge(2)
+    this.runChallenge(2);
     /*     if (Help.challengeDone(this, 3)) { return };
         console.log('Challenge 1 is next');
         this.cameras.main.shake(300);
@@ -49,7 +49,7 @@ export class WorldMapScene extends Phaser.Scene {
   }
 
   onJobInterview(player, zone) {
-    this.runChallenge(3)
+    this.runChallenge(3);
     /*     console.log('I am here in the on this area method');
         this.cameras.main.shake(300);
         console.log('starting JobInterview');
@@ -69,9 +69,9 @@ export class WorldMapScene extends Phaser.Scene {
   create() {
     console.log('Starting World Map Scene');
     this.playerName = this.sys.game.globals.settings.playerName;
-    //Stores all challenges configurations to be available on other scenes
+    // Stores all challenges configurations to be available on other scenes
 
-    //this.challenges = ChallengeConfig.getAllChallenges;
+    // this.challenges = ChallengeConfig.getAllChallenges;
 
     const map = this.make.tilemap({ key: 'map' });
 
@@ -169,7 +169,7 @@ export class WorldMapScene extends Phaser.Scene {
     this.cameras.main.startFollow(this.player);
     this.cameras.main.roundPixels = false;
 
-    //load score board
+    // load score board
     this.scBoard = new GameScoreBoard(this, 180, 10);
     this.add.existing(this.scBoard);
 
@@ -177,16 +177,13 @@ export class WorldMapScene extends Phaser.Scene {
 
     this.sys.events.on('wake', this.wake, this);
 
-    //Game Over Screen Instance
+    // Game Over Screen Instance
 
-    this.gameoverMessage = new GameOverScreen(this)
+    this.gameoverMessage = new GameOverScreen(this);
     this.add.existing(this.gameoverMessage);
 
     console.log('FInally the total score!: ');
     console.log(Help.playerScoreToSave(this));
-
-    this.finishGame()
-
   }
 
   update() {
@@ -205,12 +202,12 @@ export class WorldMapScene extends Phaser.Scene {
     } else if (this.cursors.down.isDown) {
       this.player.body.setVelocityY(80);
     }
-  };
+  }
 
   wake() {
-    //this.scene.run(CONST.SCENES.WORLDMAP);
+    // this.scene.run(CONST.SCENES.WORLDMAP);
     this.cameras.main.fadeIn(1000);
-    //reset coursor keys 
+    // reset coursor keys
     this.cursors.left.reset();
     this.cursors.right.reset();
     this.cursors.up.reset();
@@ -219,7 +216,7 @@ export class WorldMapScene extends Phaser.Scene {
     console.log('## stored on system storage :(global map side) ');
     console.log(this.sys.game.globals.settings);
 
-    //update player score variable from system 
+    // update player score variable from system
 
     console.log('here just before loading system data for player');
     Help.loadSysPlayerData(this, this.player);
@@ -228,61 +225,57 @@ export class WorldMapScene extends Phaser.Scene {
     console.log(this.player.globals.corazon.gameScore);
     this.scBoard.updateScoreBoard(this);
 
-    //On GAme Over sends message and saves score
+    // On GAme Over sends message and saves score
     if (this.player.globals.corazon.haveILost()) {
       this.gameOver();
       this.saveScore(this.playerName, Help.playerScoreToSave(this));
     }
-
-  };
+  }
 
   runChallenge(data) {
-    if (Help.challengeDone(this, data)) { return };
+    if (Help.challengeDone(this, data)) { return; }
     this.cameras.main.shake(300);
-    Help.updSysNextChallenge(this, data)
-    //saving current player data on system before switing scenes
+    Help.updSysNextChallenge(this, data);
+    // saving current player data on system before switing scenes
     Help.savePlayerDataSys(this, this.player);
     this.scene.switch(CONST.SCENES.CHALLENGE);
   }
 
   gameOver() {
-    console.log("gameOver - this is the message")
-    let msg = Help.gameOverMsg(1,
+    console.log('gameOver - this is the message');
+    const msg = Help.gameOverMsg(1,
       this.player.globals.corazon.gameScore.skill,
       this.player.globals.corazon.gameScore.motivation,
       this.player.globals.corazon.gameScore.courage,
       this.player.globals.corazon.gameScore.fear,
-      Help.playerScoreToSave(this),
-    );
+      Help.playerScoreToSave(this));
     console.log(msg);
     this.gameoverMessage.showMessage(msg);
   }
 
   backToParent() {
     console.log('heading back Main Scene');
-    //this.cameras.main.fade(1000);
-    //this.scene.sleep(CONST.SCENES.CHALLENGE);
+    // this.cameras.main.fade(1000);
+    // this.scene.sleep(CONST.SCENES.CHALLENGE);
     this.scene.start(CONST.SCENES.TITLE, 'back to main menu');
-
   }
 
   finishGame() {
-    let msg = Help.gameOverMsg(0,
+    const msg = Help.gameOverMsg(0,
       this.player.globals.corazon.gameScore.skill,
       this.player.globals.corazon.gameScore.motivation,
       this.player.globals.corazon.gameScore.courage,
       this.player.globals.corazon.gameScore.fear,
-      Help.playerScoreToSave(this),
-    );
+      Help.playerScoreToSave(this));
     console.log(msg);
     this.gameoverMessage.showMessage(msg);
     this.saveScore(this.playerName, Help.playerScoreToSave(this));
   }
 
   saveScore(name, score) {
-    console.log('name is : ' + name);
-    console.log('score is : ' + score);
-    let response = MicroverseAPI.setScore(name, score, 0);
+    console.log(`name is : ${name}`);
+    console.log(`score is : ${score}`);
+    const response = MicroverseAPI.setScore(name, score, 0);
     console.log(response);
     MicroverseAPI.getScore(0).then((response) => {
       console.log(response);

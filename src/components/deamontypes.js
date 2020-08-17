@@ -1,5 +1,3 @@
-import { config } from '../config/config';
-
 export const Deamons = (() => {
   const nice = {
     skill: 5,
