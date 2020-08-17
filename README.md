@@ -2,7 +2,8 @@ Turne-Based RPG Video Game, built with Phase 3 Library
 
 # Project Details - Game Design 
  
-- The game was developed following fundamental Game Design principles, applying them, and building a formal Game Design Document. [Nuclino Original Project Document](https://app.nuclino.com/AnriquezDev/Dev-Warrior-Quest/Game-Control-f5f6fd14-94a2-452d-acbb-d0f5ac2b01de)
+- The game was developed following fundamental Game Design principles, applying them, and building a formal Game Design Document. 
+
 
 ## Game Goal
 
@@ -62,6 +63,9 @@ The overall objective is for the player to make sure fear levels are compensated
 
 On every won challenge, the player will generally increase its skill, courage, and motivation levels. Fear can only increase. The trick here is not to reduce anxiety, but even with fear, go into the challenges and play the game to enhance any other dev warrior treat value.
 
+# Live Link
+
+[Netlify Live Link](https://anriquez-rpg.netlify.app/)
 
 ## Built With
 
