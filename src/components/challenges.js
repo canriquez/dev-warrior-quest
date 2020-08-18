@@ -3,15 +3,15 @@ export const ChallengeConfig = (() => {
     {
       challengeName: 'HTML/CSS Capstone!',
       deamons: 2,
-      badness: [1, 1],
+      badness: [1, 1], // Should be badness defined on deamontypes.
       htextures: ['hero01'],
-      dtextures: ['hero01', 'hero01'],
+      dtextures: ['hero01', 'hero01', 'hero01'],
       positions: [290, 365, 450],
       winFactor: 0.7, // Affects deamons damage on hero 0-1. 0 easy
       extraPower: 1, // increses player power for the match
       hnames: ['dev Warrior'],
-      dnames: ['Deamon-1', 'Deamon-2'],
-      dPBars: [[260, 20], [380, 20]],
+      dnames: ['Demon-1', 'Demon-2', 'Pepe'],
+      dPBars: [[260, 20], [380, 20], [380, 60]],
       prize: {
         skills: 50.0,
         motivation: 50.0,
@@ -27,15 +27,15 @@ export const ChallengeConfig = (() => {
     },
     {
       challengeName: 'Ruby - Ruby on Rails',
-      deamons: 3,
-      badness: [1, 1, 1],
+      deamons: 2,
+      badness: [1, 1, 2],
       htextures: ['hero01'],
       dtextures: ['hero01', 'hero01', 'hero01'],
       positions: [290, 365, 450],
       winFactor: 1, // Affects deamons damage on hero 0-1. 0 easy
       extraPower: 2, // increses player power for the match
       hnames: ['dev Warrior'],
-      dnames: ['Deamon-1', 'Deamon-2', 'Deamon-3'],
+      dnames: ['Demon-1', 'Demon-2', 'Demon-3'],
       dPBars: [[260, 20], [380, 20], [380, 60]],
       prize: {
         skills: 50,
@@ -53,14 +53,14 @@ export const ChallengeConfig = (() => {
     {
       challengeName: 'Javascript! - Ract',
       deamons: 3,
-      badness: [1, 1, 1],
+      badness: [2, 1, 1],
       htextures: ['hero01'],
       dtextures: ['hero01', 'hero01', 'hero01'],
       positions: [290, 365, 450],
       winFactor: 1, // Affects deamons damage on hero 0-1. 0 easy
       extraPower: 2, // increses player power for the match
       hnames: ['dev Warrior'],
-      dnames: ['Deamon-1', 'Deamon-2', 'Deamon-3'],
+      dnames: ['Demon-1', 'Demon-2', 'Demon-3'],
       dPBars: [[260, 20], [380, 20], [380, 60]],
       prize: {
         skills: 50,
@@ -85,7 +85,7 @@ export const ChallengeConfig = (() => {
       winFactor: 1, // Affects deamons damage on hero 0-1. 0 easy
       extraPower: 2, // increses player power for the match
       hnames: ['dev Warrior'],
-      dnames: ['Deamon-1', 'Deamon-2', 'Deamon-3'],
+      dnames: ['Demon-1', 'Demon-2', 'Demon-3'],
       dPBars: [[260, 20], [380, 20], [380, 60]],
       prize: {
         skills: 50,

@@ -14,13 +14,30 @@ export class ChallengeScene extends Phaser.Scene {
 
   init() {
     this.data = this.sys.game.globals.settings.nextChallenge;
-    this.challengeId = this.data.done[this.data.done.length - 1];
+
+    console.log('##: CHallengeScene:');
+    console.log('#: Init(). Contents of Setting.nextChallenge.data.done :');
+    console.log(this.data.done);
+    console.log('#: Init(). Challenge Id :');
+    console.log(this.data.done[0]);
+
+
+    //gets the last challengeId added to the done array
+    let lastRequestedChallengeIndex = this.data.done.length - 1;
+
+    this.challengeId = this.data.done[lastRequestedChallengeIndex];
+
     // retrieve map scene
     this.mapScene = this.scene.get(CONST.SCENES.WORLDMAP);
+
     this.playerData = this.mapScene.player.globals.corazon;
 
     // Obtain challenge data object from Module challenges
     this.challengeData = ChallengeConfig.getChallenge(this.challengeId);
+
+    console.log('##: ChallengeScene:');
+    console.log('#: Init(). Contents of ChallengeConfig.getChallenge(this.challengeId)');
+    console.log(this.challengeData);
   }
 
   preload() {
@@ -69,11 +86,15 @@ export class ChallengeScene extends Phaser.Scene {
       name: this.challengeData.hnames[0],
     });
 
-
+    // loads player info: scores, points, into devWarrior object for this challenge
     Help.loadSysPlayerData(this, devWarrior);
 
     // initializes power for challenge
     devWarrior.globals.corazon.resetChallengePow();
+
+    console.log('##: ChallengeScene:');
+    console.log('#: buildScene(). Shows Hero Pow for challenge - devWarrior.globals.corazon.challengePow');
+    console.log(devWarrior.globals.corazon.challengePow);
 
     // Build Deamons Array
     this.enemies = [];
@@ -85,11 +106,17 @@ export class ChallengeScene extends Phaser.Scene {
         texture: this.challengeData.dtextures[i],
         type: 'deamon',
         name: this.challengeData.dnames[i],
-        deamon: this.challengeData.badness[i],
+        deamon: this.challengeData.badness[i], //defines deamon badness on deamontypes.js
         deamonId: i,
       });
       deamon.globals.corazon.resetChallengePow();
       this.enemies.push(deamon);
+
+      console.log('##: ChallengeScene:');
+      console.log('#: buildScene(). deamon.globals.corazon.challengePow :||: Index : ' + i);
+      console.log(deamon.globals.corazon.challengePow);
+      console.log('#: buildScene(). deamon.globals.corazon.gameScore:||: Index : ' + i);
+      console.log(deamon.globals.corazon.gameScore)
     }
 
     this.anims.create({
@@ -137,7 +164,7 @@ export class ChallengeScene extends Phaser.Scene {
 
     this.dPowBars = [];
 
-    for (let i = 0; i < this.challengeData.dnames.length; i += 1) {
+    for (let i = 0; i < this.enemies.length; i += 1) {
       const deamonPW = new HeroEnergyBar(this,
         this.challengeData.dPBars[i][0],
         this.challengeData.dPBars[i][1],
@@ -197,7 +224,7 @@ export class ChallengeScene extends Phaser.Scene {
     if (power > 0) {
       this.heroEB.updateEnergyLevel(hero.powBar());
       this.events.emit('Message', `${this.characters[this.index].name
-      } attacks DevWarrior for ${power} damage`);
+        } attacks DevWarrior for ${power} damage`);
       this.checkHealth(this.heroes[0], 0);
     }
   }

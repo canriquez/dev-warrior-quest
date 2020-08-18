@@ -16,9 +16,9 @@ export const Deamons = (() => {
   };
 
   const realBad = {
-    skill: 30,
-    courage: 30,
-    motivation: 30,
+    skill: 20,
+    courage: 20,
+    motivation: 20,
     fear: 30,
     level: 'RealBad Deamon',
   };
