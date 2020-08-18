@@ -53,12 +53,12 @@ export const ChallengeConfig = (() => {
     {
       challengeName: 'Javascript! - Ract',
       deamons: 3,
-      badness: [2, 1, 1],
+      badness: [0, 0, 0],
       htextures: ['hero01'],
       dtextures: ['hero01', 'hero01', 'hero01'],
       positions: [290, 365, 450],
       winFactor: 1, // Affects deamons damage on hero 0-1. 0 easy
-      extraPower: 2, // increses player power for the match
+      extraPower: 50, // increses player power for the match
       hnames: ['dev Warrior'],
       dnames: ['Demon-1', 'Demon-2', 'Demon-3'],
       dPBars: [[260, 20], [380, 20], [380, 60]],

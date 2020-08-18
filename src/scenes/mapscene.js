@@ -21,7 +21,11 @@ export class WorldMapScene extends Phaser.Scene {
   }
 
   onChallenge1(player, zone) {
-    this.runChallenge(0);
+
+    console.log('#### Showing Player Name on system before calling @Challenge Scene');
+    console.log(this.sys.game.globals.settings.playerName);
+
+    this.runChallenge(3);
   }
 
   onChallenge2(player, zone) {
@@ -194,7 +198,7 @@ export class WorldMapScene extends Phaser.Scene {
     if (Help.challengeDone(this, data)) { return; }
     this.cameras.main.shake(300);
     Help.updSysNextChallenge(this, data);
-    // saving current player data on system before switing scenes
+    // saving current player data on system before switching scenes
     Help.savePlayerDataSys(this, this.player);
     this.scene.switch(CONST.SCENES.CHALLENGE);
   }

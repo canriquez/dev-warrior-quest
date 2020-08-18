@@ -60,8 +60,17 @@ export const Help = (() => {
 
   const challengeDone = (scene, challenge) => {
     const sysNextChallenge = scene.sys.game.globals.settings.nextChallenge;
+    console.log('checking done challenge :');
+    console.log(sysNextChallenge.done);
+
+    console.log('challenge is: ');
+    console.log(challenge);
+
     const challengeDone = sysNextChallenge.done;
-    return challengeDone[challenge] === challenge;
+    console.log('evaluation is:' + challengeDone.includes(challenge));
+
+    //return challengeDone[challenge] === challenge;
+    return challengeDone.includes(challenge);
   };
 
   const savePlayerDataSys = (scene, obj) => {
@@ -69,7 +78,7 @@ export const Help = (() => {
     const sysPlayerScore = scene.sys.game.globals.settings;
     sysPlayerScore.chScore = playerData.gameScore;
     sysPlayerScore.extras = playerData.extraScore;
-    sysPlayerScore.playerName = playerData.playerName;
+
   };
   const loadSysPlayerData = (scene, obj) => {
     const playerData = obj.globals.corazon;
@@ -92,11 +101,14 @@ export const Help = (() => {
   const battleLog = (array) => {
     let blogTag = document.getElementById('b-log');
     let htmlTag = ''
-    for (let i = array.length; i >= 0; i -= 1) {
-      htmlTag += `<p>${array[i]}<p>`;
+    for (let i = array.length - 1; i >= 0; i -= 1) {
+      htmlTag += `<p>${array[i]}`;
+      htmlTag += '<p>';
+
     }
     blogTag.innerHTML = htmlTag;
-    blogTag.classList.add('showtag')
+    blogTag.classList.add('show')
+    blogTag.classList.remove('hide')
   }
 
 

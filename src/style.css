@@ -99,7 +99,7 @@ body {
   margin-left: 20px;
   width: 200px;
   height: 60px;
-  display: block;
+  display: none;
   text-align: left;
   text-transform: capitalize;
   background-color: transparent;
@@ -140,8 +140,12 @@ body {
 }
 
 #b-log p {
-  font-size: 9px;
+  font-size: 8px;
   margin: 2px 0;
+}
+
+#b-log p:first-child {
+  color: red;
 }
 
 .showtag {

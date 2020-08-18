@@ -57,6 +57,9 @@ export class PlayerDataScene extends Phaser.Scene {
     this.userName = this.sys.game.globals.settings;
     this.inputTag.classList.remove('showtag');
     this.userName.playerName = this.inputTag.value;
+
+    console.log('PLayer name stored in system');
+    console.log(this.userName.playerName);
     this.scene.start(CONST.SCENES.TITLE, 'Go from UserName Scene');
   }
 }

@@ -13,6 +13,11 @@ export class ChallengeScene extends Phaser.Scene {
   }
 
   init() {
+
+    console.log('#### Showing Player Name on system @Challenge Scene');
+    console.log(this.sys.game.globals.settings.playerName);
+
+
     this.data = this.sys.game.globals.settings.nextChallenge;
     this.blogArray = [];
 
@@ -45,6 +50,10 @@ export class ChallengeScene extends Phaser.Scene {
   }
 
   create() {
+    this.playerName = this.sys.game.globals.settings.playerName;
+    console.log('Showing Player Name on system - @Challenge Scene');
+    console.log(this.sys.game.globals.settings);
+
     this.buildScene();
 
     // Launch in parallel UI Challenge Scene
@@ -52,14 +61,15 @@ export class ChallengeScene extends Phaser.Scene {
 
     this.UiChallScene = this.scene.get(CONST.SCENES.UICHALL);
 
-    this.UiChallScene.events.on('demonAttacked', this.onDeamonAtacked, this);
+    this.UiChallScene.events.on('demonAttacked', this.waitAndAttackDeamon, this);
+
     this.UiChallScene.events.on('selectWeapon', this.onweaponMsg, this);
     this.UiChallScene.events.on('notYourself', this.notYourself, this);
 
     this.sys.events.on('wake', this.wake, this);
 
     //add html for battle log element
-    this.blogElement = this.add.dom(300, 200).createFromCache('b-log');
+    this.blogElement = this.add.dom(220, 180).createFromCache('b-log');
     this.add.existing(this.blogElement)
   }
 
@@ -88,7 +98,7 @@ export class ChallengeScene extends Phaser.Scene {
       y: 100,
       texture: this.challengeData.htextures[0],
       type: 'hero',
-      name: this.challengeData.hnames[0],
+      name: this.playerName,
     });
 
     // loads player info: scores, points, into devWarrior object for this challenge
@@ -228,15 +238,15 @@ export class ChallengeScene extends Phaser.Scene {
     const demon = this.characters[this.index].globals.corazon;
     const demonName = demon.name;
     const hero = this.heroes[0].globals.corazon;
-    const heroName = hero.playerName;
     const power = Math.ceil(demon.hitPower()[Help.rndHit()] * this.challengeData.winFactor);
 
     demon.attackEnemy(power, hero);
 
     if (power > 0) {
       this.heroEB.updateEnergyLevel(hero.powBar());
+
       //handling messages to player
-      let logString = `${demonName} attacks ${heroName} for ${power} damage`
+      let logString = ` <-- ${this.enemies[this.index - 1].name} attacks ${this.playerName} (pow left:${hero.challengePow})`;
       this.events.emit('Message', logString);
       this.blogArray.push(logString);
       Help.battleLog(this.blogArray)
@@ -245,12 +255,15 @@ export class ChallengeScene extends Phaser.Scene {
     console.log(`demon ${this.index - 1} attacks hero. Hero power left ` + hero.challengePow);
   }
 
+  waitAndAttackDeamon(data) {
+    this.time.addEvent({ delay: 6000, callback: this.onDeamonAtacked(data), callbackScope: this });
+  }
+
   onDeamonAtacked(data) {
     console.log('## here at onDemonAttacked');
     const sDemon = this.enemies[data.id].globals.corazon; // We get corazon methods with data.id from UIscene
-    const demonName = this.characters[this.index].name;
+    const demonName = this.enemies[data.id].name;
     const hero = this.heroes[0].globals.corazon;
-    const heroName = hero.playerName;
     const power = Math.ceil(hero.hitPower()[data.weapon]) * this.challengeData.extraPower;
 
     hero.attackEnemy(power, sDemon);
@@ -262,9 +275,16 @@ export class ChallengeScene extends Phaser.Scene {
 
     this.dPowBars[data.id].updateEnergyLevel(sDemon.powBar());
 
-    this.events.emit('Message', `${heroName} attacks ${demonName} for ${power} damage`);
-    this.time.addEvent({ delay: 3000, callback: this.nextTurn, callbackScope: this });
-    console.log(`hero attack demon ${data.id} - Power left in demon: ` + sDemon.challengePow);
+    //handling messages to player
+    let logString = ` --> ${this.playerName} attacks ${demonName} (pow left:${sDemon.challengePow})`;
+    this.events.emit('Message', logString);
+    this.blogArray.push(logString);
+    Help.battleLog(this.blogArray)
+    this.checkHealth(this.heroes[0], 0);
+
+    //this.events.emit('Message', `${this.playerName} attacks ${demonName} for ${power} damage`);
+    this.time.addEvent({ delay: 5000, callback: this.nextTurn, callbackScope: this });
+    console.log(`--> ${this.playerName} attacks ${demonName} (pow left:${sDemon.challengePow}` + sDemon.challengePow);
   }
 
   checkHealth(character, index) {
@@ -332,6 +352,8 @@ export class ChallengeScene extends Phaser.Scene {
   }
 
   backToParent() {
+
+    console.log('I got back to parents signal');
     // this.cameras.main.fade(1000);
     // this.scene.sleep(CONST.SCENES.CHALLENGE);
     this.scene.sleep(CONST.SCENES.UICHALL);
