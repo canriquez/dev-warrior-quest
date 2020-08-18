@@ -156,6 +156,8 @@ export class ChallengeScene extends Phaser.Scene {
 
     // GAME STARTS
 
+
+    //build hero Energy Bar
     this.heroEB = new HeroEnergyBar(this, 30, 20, 100, this.challengeData.hnames[0]);
     this.add.existing(this.heroEB);
     this.heroEB.updateEnergyLevel(100);
@@ -217,26 +219,43 @@ export class ChallengeScene extends Phaser.Scene {
   }
 
   onHeroAttacked() {
-    const deamon = this.characters[this.index].globals.corazon;
+    console.log('## here at onHeroAttacked');
+    const demon = this.characters[this.index].globals.corazon;
+    const demonName = demon.name;
     const hero = this.heroes[0].globals.corazon;
-    const power = Math.ceil(deamon.hitPower()[Help.rndHit()] * this.challengeData.winFactor);
-    deamon.attackEnemy(power, hero);
+    const heroName = hero.playerName;
+    const power = Math.ceil(demon.hitPower()[Help.rndHit()] * this.challengeData.winFactor);
+
+    demon.attackEnemy(power, hero);
+
     if (power > 0) {
       this.heroEB.updateEnergyLevel(hero.powBar());
-      this.events.emit('Message', `${this.characters[this.index].name
-        } attacks DevWarrior for ${power} damage`);
+      this.events.emit('Message', `${demonName} attacks ${heroName} for ${power} damage`);
       this.checkHealth(this.heroes[0], 0);
     }
+    console.log(`demon ${this.index - 1} attacks hero. Hero power left ` + hero.challengePow);
   }
 
   onDeamonAtacked(data) {
-    const sDeamon = this.enemies[data.id].globals.corazon;
+    console.log('## here at onDemonAttacked');
+    const sDemon = this.enemies[data.id].globals.corazon; // We get corazon methods with data.id from UIscene
+    const demonName = this.characters[this.index].name;
     const hero = this.heroes[0].globals.corazon;
+    const heroName = hero.playerName;
     const power = Math.ceil(hero.hitPower()[data.weapon]) * this.challengeData.extraPower;
-    hero.attackEnemy(power, sDeamon);
-    this.dPowBars[data.id].updateEnergyLevel(sDeamon.powBar());
-    this.events.emit('Message', `${this.characters[this.index].name} attacks  for ${power} damage`);
+
+    hero.attackEnemy(power, sDemon);
+    console.log(`Deamon corazon score`);
+    console.log(sDemon.gameScore);
+
+    console.log(`deamon ${data.id} challengePow is : ` + sDemon.challengePow)
+    console.log(`deamon ${data.id} pow bar : ` + sDemon.powBar());
+
+    this.dPowBars[data.id].updateEnergyLevel(sDemon.powBar());
+
+    this.events.emit('Message', `${heroName} attacks ${demonName} for ${power} damage`);
     this.time.addEvent({ delay: 3000, callback: this.nextTurn, callbackScope: this });
+    console.log(`hero attack demon ${data.id} - Power left in demon: ` + sDemon.challengePow);
   }
 
   checkHealth(character, index) {

@@ -94,6 +94,7 @@ export class HeroProfile {
   // I plan to call thislike this gamePlayer.attackEnemy(game.Player.hitPower.sword, target);
   // eslint-disable-next-line class-methods-use-this
   attackEnemy(hitPower, target) {
+    console.log('||||=>  HEro attacking ' + target.name)
     target.takeHit(hitPower);
   }
 
