@@ -89,6 +89,16 @@ export const Help = (() => {
     return totalScore;
   };
 
+  const battleLog = (array) => {
+    let blogTag = document.getElementById('b-log');
+    let htmlTag = ''
+    for (let i = array.length; i >= 0; i -= 1) {
+      htmlTag += `<p>${array[i]}<p>`;
+    }
+    blogTag.innerHTML = htmlTag;
+    blogTag.classList.add('showtag')
+  }
+
 
   return {
     adjXpos,
@@ -106,6 +116,7 @@ export const Help = (() => {
     loadSysPlayerData,
     gameOverMsg,
     playerScoreToSave,
+    battleLog,
   };
 })();
 

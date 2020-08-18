@@ -146,9 +146,12 @@ export class PreloaderScene extends Phaser.Scene {
     this.load.image('energybar', './src/assets/chall/energybar.png');
 
 
-    // endchalleng messages
+    // end challeng messages
     this.load.image('brownbtn', './src/assets/ui/brown_button.png');
     this.load.image('bluebtn', './src/assets/ui/blue_button.png');
+
+    // battle log html
+    this.load.html('b-log', './src/assets/blog.html');
   }
 
   create() {

@@ -14,6 +14,7 @@ export class ChallengeScene extends Phaser.Scene {
 
   init() {
     this.data = this.sys.game.globals.settings.nextChallenge;
+    this.blogArray = [];
 
     console.log('##: CHallengeScene:');
     console.log('#: Init(). Contents of Setting.nextChallenge.data.done :');
@@ -56,6 +57,10 @@ export class ChallengeScene extends Phaser.Scene {
     this.UiChallScene.events.on('notYourself', this.notYourself, this);
 
     this.sys.events.on('wake', this.wake, this);
+
+    //add html for battle log element
+    this.blogElement = this.add.dom(300, 200).createFromCache('b-log');
+    this.add.existing(this.blogElement)
   }
 
 
@@ -230,7 +235,11 @@ export class ChallengeScene extends Phaser.Scene {
 
     if (power > 0) {
       this.heroEB.updateEnergyLevel(hero.powBar());
-      this.events.emit('Message', `${demonName} attacks ${heroName} for ${power} damage`);
+      //handling messages to player
+      let logString = `${demonName} attacks ${heroName} for ${power} damage`
+      this.events.emit('Message', logString);
+      this.blogArray.push(logString);
+      Help.battleLog(this.blogArray)
       this.checkHealth(this.heroes[0], 0);
     }
     console.log(`demon ${this.index - 1} attacks hero. Hero power left ` + hero.challengePow);
