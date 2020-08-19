@@ -25,7 +25,7 @@ export class WorldMapScene extends Phaser.Scene {
     console.log('#### Showing Player Name on system before calling @Challenge Scene');
     console.log(this.sys.game.globals.settings.playerName);
 
-    this.runChallenge(3);
+    this.runChallenge(0);
   }
 
   onChallenge2(player, zone) {
@@ -48,6 +48,7 @@ export class WorldMapScene extends Phaser.Scene {
 
   preload() {
     // load resources here
+    this.gameOver = false;
   }
 
   create() {
@@ -154,22 +155,23 @@ export class WorldMapScene extends Phaser.Scene {
 
     this.gameoverMessage = new GameOverScreen(this);
     this.add.existing(this.gameoverMessage);
+
   }
 
   update() {
     // Horizontal movement
     this.player.body.setVelocity(0); // plsyer is normally standing still after one step
 
-    if (this.cursors.left.isDown) {
+    if (this.cursors.left.isDown && !this.gameOver) {
       this.player.body.setVelocityX(-80);
-    } else if (this.cursors.right.isDown) {
+    } else if (this.cursors.right.isDown && !this.gameOver) {
       this.player.body.setVelocityX(80);
     }
 
     // Vertical movement
-    if (this.cursors.up.isDown) {
+    if (this.cursors.up.isDown && !this.gameOver) {
       this.player.body.setVelocityY(-80);
-    } else if (this.cursors.down.isDown) {
+    } else if (this.cursors.down.isDown && !this.gameOver) {
       this.player.body.setVelocityY(80);
     }
   }
@@ -224,6 +226,7 @@ export class WorldMapScene extends Phaser.Scene {
       this.player.globals.corazon.gameScore.courage,
       this.player.globals.corazon.gameScore.fear,
       Help.playerScoreToSave(this));
+    this.gameOver = true;
     this.gameoverMessage.showMessage(msg);
     this.saveScore(this.playerName, Help.playerScoreToSave(this));
   }
@@ -231,7 +234,8 @@ export class WorldMapScene extends Phaser.Scene {
   saveScore(name, score) {
     if (this.saveScore === true) { return; }
     this.saveScore = true;
-    const response = MicroverseAPI.setScore(name, score, 1);
+    console.log('saving game in server')
+    //const response = MicroverseAPI.setScore(name, score, 1); <- Uncomment for delivery
   }
 }
 

@@ -68,8 +68,6 @@ export const Help = (() => {
 
     const challengeDone = sysNextChallenge.done;
     console.log('evaluation is:' + challengeDone.includes(challenge));
-
-    //return challengeDone[challenge] === challenge;
     return challengeDone.includes(challenge);
   };
 

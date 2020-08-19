@@ -1,5 +1,4 @@
 import Phaser from 'phaser';
-import { Weapon } from './weapons';
 
 export class GameOverScreen extends Phaser.GameObjects.Container {
   constructor(scene) {
@@ -32,6 +31,9 @@ export class GameOverScreen extends Phaser.GameObjects.Container {
     this.text5 = new Phaser.GameObjects.Text(scene, 0, 115, '', {
       color: '#ffffff', align: 'left', fontSize: 14, wordWrap: { width: 280, useAdvancedWrap: true },
     });
+    this.text6 = new Phaser.GameObjects.Text(scene, 0, 175, '', {
+      color: '#ffffff', align: 'left', fontSize: 18, wordWrap: { width: 240, useAdvancedWrap: true },
+    }).setInteractive();
     this.add(this.text5);
     this.text7 = new Phaser.GameObjects.Text(scene, 0, 140, '', {
       color: '#d81e5b', align: 'left', fontSize: 14, wordWrap: { width: 280, useAdvancedWrap: true },
@@ -43,23 +45,24 @@ export class GameOverScreen extends Phaser.GameObjects.Container {
     this.text3.setScrollFactor(0);
     this.text4.setScrollFactor(0);
     this.text5.setScrollFactor(0);
+    this.text6.setScrollFactor(0);
     this.text7.setScrollFactor(0);
 
 
-    this.exitButton = new Weapon(this.scene, 0, 460, 'bluebtn', 'exit', () => {
-      this.hideEvent = null;
-      this.visible = false;
+    this.text6.on('pointerup', () => {
       this.scene.backToParent();
     });
-    this.exitButton.alpha = 1;
-    this.exitButton.scale = 0.3;
-    this.add(this.exitButton);
 
-    // this.exitButton.setScrollFactor(0);
-
-    this.text6 = new Phaser.GameObjects.Text(scene, 0, 175, '', {
-      color: '#ffffff', align: 'left', fontSize: 18, wordWrap: { width: 240, useAdvancedWrap: true },
+    this.text6.on('pointerover', () => {
+      // this.button.setTexture(key2);
+      this.text6.setColor('#FFCC00');
     });
+
+    this.text6.on('pointerout', () => {
+      this.text6.setColor('#ffffff')
+    });
+
+
     this.add(this.text6);
     this.text1.setOrigin(0.5);
     this.text2.setOrigin(0.5);
@@ -68,7 +71,7 @@ export class GameOverScreen extends Phaser.GameObjects.Container {
     this.text5.setOrigin(0.5);
     this.text6.setOrigin(0.5);
     this.text7.setOrigin(0.5);
-    this.text6.setScrollFactor(0);
+
 
 
     // Add a back button., this will fire the callback that will enable you to come back to the mai

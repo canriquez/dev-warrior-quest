@@ -14,36 +14,7 @@ export class ChallengeScene extends Phaser.Scene {
 
   init() {
 
-    console.log('#### Showing Player Name on system @Challenge Scene');
-    console.log(this.sys.game.globals.settings.playerName);
-
-
-    this.data = this.sys.game.globals.settings.nextChallenge;
-    this.blogArray = [];
-
-    console.log('##: CHallengeScene:');
-    console.log('#: Init(). Contents of Setting.nextChallenge.data.done :');
-    console.log(this.data.done);
-    console.log('#: Init(). Challenge Id :');
-    console.log(this.data.done[0]);
-
-
-    //gets the last challengeId added to the done array
-    let lastRequestedChallengeIndex = this.data.done.length - 1;
-
-    this.challengeId = this.data.done[lastRequestedChallengeIndex];
-
-    // retrieve map scene
-    this.mapScene = this.scene.get(CONST.SCENES.WORLDMAP);
-
-    this.playerData = this.mapScene.player.globals.corazon;
-
-    // Obtain challenge data object from Module challenges
-    this.challengeData = ChallengeConfig.getChallenge(this.challengeId);
-
-    console.log('##: ChallengeScene:');
-    console.log('#: Init(). Contents of ChallengeConfig.getChallenge(this.challengeId)');
-    console.log(this.challengeData);
+    this.resetScene();
   }
 
   preload() {
@@ -79,7 +50,10 @@ export class ChallengeScene extends Phaser.Scene {
 
     this.index = -1;
 
-    this.add.image(240, 175, 'chall01sm');
+    console.log('challenge data scene image name: ' + this.challengeData.challscene);
+    console.log(this.challengeData);
+
+    this.add.image(240, 175, this.challengeData.challscene);
     this.graphics = this.add.graphics();
     this.graphics.lineStyle(1, 0x000000);
     this.graphics.fillStyle(0x000000, 1);
@@ -391,7 +365,42 @@ export class ChallengeScene extends Phaser.Scene {
     Help.savePlayerDataSys(this, this.heroes[0]);
   }
 
+  resetScene() {
+    console.log('#### Showing Player Name on system @Challenge Scene');
+    console.log(this.sys.game.globals.settings.playerName);
+
+
+    this.data = this.sys.game.globals.settings.nextChallenge;
+    this.blogArray = [];
+
+    console.log('##: CHallengeScene:');
+    console.log('#: Init(). Contents of Setting.nextChallenge.data.done :');
+    console.log(this.data.done);
+    console.log('#: Init(). Challenge Id :');
+    console.log(this.data.done[0]);
+
+
+    //gets the last challengeId added to the done array
+    let lastRequestedChallengeIndex = this.data.done.length - 1;
+
+    this.challengeId = this.data.done[lastRequestedChallengeIndex];
+
+    // retrieve map scene
+    this.mapScene = this.scene.get(CONST.SCENES.WORLDMAP);
+
+    this.playerData = this.mapScene.player.globals.corazon;
+
+    // Obtain challenge data object from Module challenges
+    this.challengeData = ChallengeConfig.getChallenge(this.challengeId);
+
+    console.log('##: ChallengeScene:');
+    console.log('#: Init(). Contents of ChallengeConfig.getChallenge(this.challengeId)');
+    console.log(this.challengeData);
+  }
+
   wake() {
+    console.log('Weaking up');
+    this.resetScene();
     this.buildScene();
     this.scene.run(CONST.SCENES.UICHALL, '####: And so... game starts AGAIN');
     // this.scene.restart();

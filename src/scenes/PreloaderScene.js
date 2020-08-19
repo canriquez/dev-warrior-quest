@@ -133,6 +133,9 @@ export class PreloaderScene extends Phaser.Scene {
 
     // load challanges assets
     this.load.image('chall01sm', './src/assets/chall/chall01_480x350.png');
+    this.load.image('chall02sm', './src/assets/chall/chall02_480x350.png');
+    this.load.image('chall03sm', './src/assets/chall/chall03_480x350.png');
+    this.load.image('chall04sm', './src/assets/chall/chall04_480x350.png');
     this.load.image('board', './src/assets/chall/weapon_board.png');
     this.load.image('ground', './src/assets/chall/ground.png');
     this.load.image('w1', './src/assets/worrior/idle.png');

@@ -14,6 +14,7 @@ export class Weapon extends Phaser.GameObjects.Container {
 
     this.add(this.button);
 
+
     this.button.on('pointerup', () => {
       this.callback(text);
     });

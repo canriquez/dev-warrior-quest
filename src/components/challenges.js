@@ -2,6 +2,7 @@ export const ChallengeConfig = (() => {
   const challenges = [
     {
       challengeName: 'HTML/CSS Capstone!',
+      challscene: 'chall01sm',
       deamons: 2,
       badness: [1, 1], // Should be badness defined on deamontypes.
       htextures: ['hero01'],
@@ -27,6 +28,7 @@ export const ChallengeConfig = (() => {
     },
     {
       challengeName: 'Ruby - Ruby on Rails',
+      challscene: 'chall02sm',
       deamons: 2,
       badness: [1, 1, 2],
       htextures: ['hero01'],
@@ -52,6 +54,7 @@ export const ChallengeConfig = (() => {
     },
     {
       challengeName: 'Javascript! - Ract',
+      challscene: 'chall03sm',
       deamons: 3,
       badness: [0, 0, 0],
       htextures: ['hero01'],
@@ -77,6 +80,7 @@ export const ChallengeConfig = (() => {
     },
     {
       challengeName: 'Job Offer Challenge',
+      challscene: 'chall04sm',
       deamons: 3,
       badness: [1, 1, 1],
       htextures: ['hero01'],
