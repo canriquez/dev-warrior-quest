@@ -4,26 +4,26 @@ export const ChallengeConfig = (() => {
       challengeName: 'HTML/CSS Capstone!',
       challscene: 'chall01sm',
       deamons: 2,
-      badness: [1, 1], // Should be badness defined on deamontypes.
+      badness: [0, 1], // Should be badness defined on deamontypes.
       htextures: ['h2idle'],
       dtextures: ['hero01', 'hero01', 'hero01'],
       positions: [290, 365, 450],
-      winFactor: 0.7, // Affects deamons damage on hero 0-1. 0 easy
-      extraPower: 1, // increses player power for the match
+      winFactor: 1, // Affects deamons damage on hero 0-1. 0 easy
+      extraPower: 0.9, // increses player power for the match
       hnames: ['dev Warrior'],
       dnames: ['Demon-1', 'Demon-2', 'Pepe'],
       dPBars: [[260, 20], [380, 20], [380, 60]],
       prize: {
-        skills: 50.0,
-        motivation: 50.0,
-        courage: 50.0,
-        deamonx: 90.0,
+        skills: 10.0,
+        motivation: 20.0,
+        courage: 20.0,
+        deamonx: 30.0,
       },
       penalty: {
         skills: -2.0,
         motivation: -10.0,
         courage: -10.0,
-        fear: 25.0,
+        fear: 10.0,
       },
     },
     {
@@ -35,41 +35,41 @@ export const ChallengeConfig = (() => {
       dtextures: ['hero01', 'hero01', 'hero01'],
       positions: [290, 365, 450],
       winFactor: 1, // Affects deamons damage on hero 0-1. 0 easy
-      extraPower: 2, // increses player power for the match
+      extraPower: 0.5, // increses player power for the match
       hnames: ['dev Warrior'],
       dnames: ['Demon-1', 'Demon-2', 'Demon-3'],
       dPBars: [[260, 20], [380, 20], [380, 60]],
       prize: {
-        skills: 50,
-        motivation: 50,
-        courage: 50,
-        deamonx: 90,
+        skills: 20,
+        motivation: 20,
+        courage: 20,
+        deamonx: 40,
       },
       penalty: {
         skills: -5,
         motivation: -10,
         courage: -20,
-        fear: 20,
+        fear: 15,
       },
     },
     {
       challengeName: 'Javascript! - Ract',
       challscene: 'chall03sm',
       deamons: 3,
-      badness: [0, 0, 0],
-      htextures: ['hero01'],
+      badness: [1, 2, 2],
+      htextures: ['h2idle'],
       dtextures: ['hero01', 'hero01', 'hero01'],
       positions: [290, 365, 450],
       winFactor: 1, // Affects deamons damage on hero 0-1. 0 easy
-      extraPower: 50, // increses player power for the match
+      extraPower: 2, // increses player power for the match
       hnames: ['dev Warrior'],
       dnames: ['Demon-1', 'Demon-2', 'Demon-3'],
       dPBars: [[260, 20], [380, 20], [380, 60]],
       prize: {
-        skills: 50,
-        motivation: 50,
-        courage: 50,
-        deamonx: 90,
+        skills: 30,
+        motivation: 30,
+        courage: 30,
+        deamonx: 50,
       },
       penalty: {
         skills: -5,
@@ -82,26 +82,26 @@ export const ChallengeConfig = (() => {
       challengeName: 'Job Offer Challenge',
       challscene: 'chall04sm',
       deamons: 3,
-      badness: [1, 1, 1],
-      htextures: ['hero01'],
+      badness: [2, 2, 2],
+      htextures: ['h2idle'],
       dtextures: ['hero01', 'hero01', 'hero01'],
       positions: [290, 365, 450],
       winFactor: 1, // Affects deamons damage on hero 0-1. 0 easy
-      extraPower: 2, // increses player power for the match
+      extraPower: 1, // increses player power for the match
       hnames: ['dev Warrior'],
       dnames: ['Demon-1', 'Demon-2', 'Demon-3'],
       dPBars: [[260, 20], [380, 20], [380, 60]],
       prize: {
-        skills: 50,
-        motivation: 50,
-        courage: 50,
-        deamonx: 90,
+        skills: 40,
+        motivation: 40,
+        courage: 40,
+        deamonx: 50,
       },
       penalty: {
         skills: -5,
         motivation: -10,
         courage: -20,
-        fear: 20,
+        fear: 30,
       },
     },
   ];
