@@ -8,8 +8,8 @@ export const ChallengeConfig = (() => {
       htextures: ['h2idle'],
       dtextures: ['hero01', 'hero01', 'hero01'],
       positions: [290, 365, 450],
-      winFactor: 1, // Affects deamons damage on hero 0-1. 0 easy
-      extraPower: 0.9, // increses player power for the match
+      winFactor: 0.9, // Affects deamons damage on hero 0-1. 0 easy
+      extraPower: 1.1, // increses player power for the match
       hnames: ['dev Warrior'],
       dnames: ['Demon-1', 'Demon-2', 'Pepe'],
       dPBars: [[260, 20], [380, 20], [380, 60]],
@@ -35,7 +35,7 @@ export const ChallengeConfig = (() => {
       dtextures: ['hero01', 'hero01', 'hero01'],
       positions: [290, 365, 450],
       winFactor: 1, // Affects deamons damage on hero 0-1. 0 easy
-      extraPower: 0.5, // increses player power for the match
+      extraPower: 1.2, // increses player power for the match
       hnames: ['dev Warrior'],
       dnames: ['Demon-1', 'Demon-2', 'Demon-3'],
       dPBars: [[260, 20], [380, 20], [380, 60]],
