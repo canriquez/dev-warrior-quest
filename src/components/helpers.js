@@ -67,7 +67,7 @@ export const Help = (() => {
     console.log(challenge);
 
     const challengeDone = sysNextChallenge.done;
-    console.log('evaluation is:' + challengeDone.includes(challenge));
+    console.log(`evaluation is:${challengeDone.includes(challenge)}`);
     return challengeDone.includes(challenge);
   };
 
@@ -76,7 +76,6 @@ export const Help = (() => {
     const sysPlayerScore = scene.sys.game.globals.settings;
     sysPlayerScore.chScore = playerData.gameScore;
     sysPlayerScore.extras = playerData.extraScore;
-
   };
   const loadSysPlayerData = (scene, obj) => {
     const playerData = obj.globals.corazon;
@@ -97,19 +96,19 @@ export const Help = (() => {
   };
 
   const battleLog = (array, test = false) => {
-    let htmlTag = ''
+    let htmlTag = '';
     for (let i = array.length - 1; i >= 0; i -= 1) {
       htmlTag += `<p>${array[i]}`;
       htmlTag += '<p>';
     }
     if (test === false) {
-      let blogTag = document.getElementById('b-log');
+      const blogTag = document.getElementById('b-log');
       blogTag.innerHTML = htmlTag;
-      blogTag.classList.add('show')
-      blogTag.classList.remove('hide')
+      blogTag.classList.add('show');
+      blogTag.classList.remove('hide');
     }
-    return htmlTag
-  }
+    return htmlTag;
+  };
 
 
   return {

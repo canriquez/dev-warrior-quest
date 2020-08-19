@@ -5,7 +5,7 @@ export const ChallengeConfig = (() => {
       challscene: 'chall01sm',
       deamons: 2,
       badness: [1, 1], // Should be badness defined on deamontypes.
-      htextures: ['hero01'],
+      htextures: ['h2idle'],
       dtextures: ['hero01', 'hero01', 'hero01'],
       positions: [290, 365, 450],
       winFactor: 0.7, // Affects deamons damage on hero 0-1. 0 easy
@@ -31,7 +31,7 @@ export const ChallengeConfig = (() => {
       challscene: 'chall02sm',
       deamons: 2,
       badness: [1, 1, 2],
-      htextures: ['hero01'],
+      htextures: ['h2idle'],
       dtextures: ['hero01', 'hero01', 'hero01'],
       positions: [290, 365, 450],
       winFactor: 1, // Affects deamons damage on hero 0-1. 0 easy

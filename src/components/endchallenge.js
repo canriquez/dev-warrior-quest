@@ -67,9 +67,9 @@ export class EndChallenge extends Phaser.GameObjects.Container {
     this.text6.setText('Go Back');
     this.visible = true;
     if (this.hideEvent) this.hideEvent.remove(false);
-    let blogTag = document.getElementById('b-log');
-    blogTag.classList.remove('show')
-    blogTag.classList.add('hide')
+    const blogTag = document.getElementById('b-log');
+    blogTag.classList.remove('show');
+    blogTag.classList.add('hide');
   }
 
   hideMessage() {

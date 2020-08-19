@@ -139,10 +139,20 @@ export class PreloaderScene extends Phaser.Scene {
     this.load.image('board', './src/assets/chall/weapon_board.png');
     this.load.image('ground', './src/assets/chall/ground.png');
     this.load.image('w1', './src/assets/worrior/idle.png');
-    this.load.atlas('hero01', './src/assets/hero01/idle/hero01.png', './src/assets/hero01/idle/hero01.json');
     this.load.image('knife', './src/assets/chall/knife.png');
     this.load.image('sword', './src/assets/chall/sword.png');
     this.load.image('punch', './src/assets/chall/punch.png');
+
+    //animations load
+
+    //hero1
+    this.load.atlas('hero01', './src/assets/hero01/idle/hero01.png', './src/assets/hero01/idle/hero01.json');
+
+    //hero2
+    this.load.atlas('h2idle', './src/assets/hero02/idle/knight.png', './src/assets/hero02/idle/knight.json');
+    this.load.atlas('h2attack', './src/assets/hero02/attack/knight.png', './src/assets/hero02/attack/knight.json');
+    this.load.atlas('h2walk', './src/assets/hero02/walk/knight.png', './src/assets/hero02/walk/knight.json');
+    this.load.atlas('h2hit', './src/assets/hero02/hit/knight.png', './src/assets/hero02/hit/knight.json');
 
     // challenge energy bars
     this.load.image('energycontainer', './src/assets/chall/energycontainer.png');

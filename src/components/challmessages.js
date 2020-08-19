@@ -11,7 +11,6 @@ export class MessageChallenge extends Phaser.GameObjects.Container {
     this.add(this.text);
     this.text.setOrigin(0.5);
     events.on('Message', this.showMessage, this);
-    events.on('Instruc', this.showInstruc, this);
     this.visible = false;
   }
 
@@ -26,16 +25,6 @@ export class MessageChallenge extends Phaser.GameObjects.Container {
     });
   }
 
-  showInstruc(text) {
-    this.text.setText(text);
-    this.visible = true;
-    if (this.hideEvent) this.hideEvent.remove(false);
-    this.hideEvent = this.scene.time.addEvent({
-      delay: 6000,
-      callback: this.hideMessage,
-      callbackScope: this,
-    });
-  }
 
   hideMessage() {
     this.hideEvent = null;

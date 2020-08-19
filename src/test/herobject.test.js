@@ -54,7 +54,6 @@ describe('Player Scoring Logic - Challenge Initiation', () => {
     heroInstanceObject.resetChallengePow();
     expect(heroInstanceObject.hitPower()).toMatchObject(firstHitPower);
   });
-
 });
 
 describe('Player Scoring Logic - Full Challenge', () => {
@@ -165,5 +164,4 @@ describe('Player Scoring Logic - DEMON PowBar Calculation check', () => {
     heroInstanceObject.attackEnemy(heroInstanceObject.hitPower().sword, deamInstanceObject);
     expect(deamInstanceObject.powBar()).toBe(0);
   });
-
 });

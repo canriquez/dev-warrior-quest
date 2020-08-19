@@ -1,14 +1,13 @@
 import Phaser from 'phaser';
 
-export const config= {
+export const config = {
 
   type: Phaser.AUTO,
   parent: 'content',
   dom: {
-    createContainer: true
-  }
+    createContainer: true,
+  },
 
-  ,
   width: 480,
   height: 360,
   zoom: 1.5,
@@ -18,10 +17,9 @@ export const config= {
     default: 'arcade',
     arcade: {
       gravity: {
-        y: 0
-      }
+        y: 0,
+      },
 
-      ,
       debug: false,
     }
 
@@ -29,8 +27,5 @@ export const config= {
   }
 
   ,
-}
-
-;
-
+};
 export default config;

@@ -59,7 +59,7 @@ export class GameOverScreen extends Phaser.GameObjects.Container {
     });
 
     this.text6.on('pointerout', () => {
-      this.text6.setColor('#ffffff')
+      this.text6.setColor('#ffffff');
     });
 
 
@@ -71,7 +71,6 @@ export class GameOverScreen extends Phaser.GameObjects.Container {
     this.text5.setOrigin(0.5);
     this.text6.setOrigin(0.5);
     this.text7.setOrigin(0.5);
-
 
 
     // Add a back button., this will fire the callback that will enable you to come back to the mai

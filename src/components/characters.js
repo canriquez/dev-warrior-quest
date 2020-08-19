@@ -4,7 +4,7 @@ import { DeamonProfile } from './deamonobject';
 
 export class Player extends Phaser.GameObjects.Sprite {
   constructor(config) {
-    super(config.scene, config.x, config.y, config.texture);
+    super(config.scene, config.x, config.y, config.texture, 0);
 
     if (config.type === 'hero') {
       const corazon = new HeroProfile();
@@ -27,7 +27,7 @@ export class Player extends Phaser.GameObjects.Sprite {
   }
 
   clickMe() {
-    console.log(this.type + 'CLicked --- actions below')
+    console.log(`${this.type}CLicked --- actions below`);
     if (this.type === 'deamon') {
       this.scene.events.emit('attackDeamon', this.deamonId);
     }
