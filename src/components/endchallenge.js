@@ -1,5 +1,4 @@
 import Phaser from 'phaser';
-import { Weapon } from './weapons';
 
 export class EndChallenge extends Phaser.GameObjects.Container {
   constructor(scene) {
@@ -33,18 +32,24 @@ export class EndChallenge extends Phaser.GameObjects.Container {
     });
     this.add(this.text5);
 
-    this.exitButton = new Weapon(this.scene, 0, 160, 'bluebtn', 'exit', () => {
-      this.hideEvent = null;
-      this.visible = false;
-      this.scene.backToParent();
-    });
-    this.exitButton.alpha = 1;
-    this.exitButton.scale = 0.3;
-    this.add(this.exitButton);
-
     this.text6 = new Phaser.GameObjects.Text(scene, 0, 160, '', {
       color: '#ffffff', align: 'left', fontSize: 18, wordWrap: { width: 240, useAdvancedWrap: true },
+    }).setInteractive();
+
+    this.text6.on('pointerup', () => {
+      this.scene.backToParent();
     });
+
+    this.text6.on('pointerover', () => {
+      // this.button.setTexture(key2);
+      this.text6.setColor('#FFCC00');
+    });
+
+    this.text6.on('pointerout', () => {
+      this.text6.setColor('#ffffff');
+    });
+
+
     this.add(this.text6);
     this.text1.setOrigin(0.5);
     this.text2.setOrigin(0.5);
