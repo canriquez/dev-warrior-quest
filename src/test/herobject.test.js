@@ -115,11 +115,30 @@ describe('Deamon Scoring Logic - Full Challenge', () => {
 });
 
 describe('Player Scoring Logic - PowBar Calculation check', () => {
-  test.only('it replentish hitPower object, checks pow bar to 100%', () => {
+  test('it replentish hitPower object, checks pow bar to 100%', () => {
     heroInstanceObject.resetChallengePow();
-    console.log(heroInstanceObject.challengePow);
-    console.log('example math Ceil :' + Math.ceil((12.5 / 13) * 100))
-    expect(heroInstanceObject.powBar()).toBe(0);
+    expect(heroInstanceObject.powBar()).toBe(104);
   });
+
+  test('it replentish hitPower object, get 1x hit and verifies pow bar reduction', () => {
+    heroInstanceObject.resetChallengePow();
+    deamInstanceObject.resetChallengePow();
+
+    // demon attacks hero
+    deamInstanceObject.attackEnemy(deamInstanceObject.hitPower().punch, heroInstanceObject);
+    expect(heroInstanceObject.powBar()).toBe(88);
+  });
+
+  test.only('it replentish hitPower object, get 2 hits and verifies pow bar reduction', () => {
+    heroInstanceObject.resetChallengePow();
+    deamInstanceObject.resetChallengePow();
+
+    // demon attacks hero
+    deamInstanceObject.attackEnemy(deamInstanceObject.hitPower().punch, heroInstanceObject);
+    deamInstanceObject.attackEnemy(deamInstanceObject.hitPower().punch, heroInstanceObject);
+
+    expect(heroInstanceObject.powBar()).toBe(72);
+  });
+
 
 });

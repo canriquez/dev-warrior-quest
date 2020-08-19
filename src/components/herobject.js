@@ -110,10 +110,7 @@ export class HeroProfile {
     maxPow += this.gameScore.courage * this.challengeMultiplier.courage;
     maxPow += this.gameScore.motivation * this.challengeMultiplier.motiv;
     maxPow += this.gameScore.fear * this.challengeMultiplier.fear;
-    console.log('methods maxPow: ' + maxPow)
-    console.log('methods challengePow: ' + this.challengePow)
-
-    return Math.ceil(Math.round(this.challengePow / maxPow) * 100);
+    return Math.ceil((this.challengePow / maxPow) * 100);
   }
 }
 
