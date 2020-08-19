@@ -114,7 +114,7 @@ describe('Deamon Scoring Logic - Full Challenge', () => {
   });
 });
 
-describe('Player Scoring Logic - PowBar Calculation check', () => {
+describe('Player Scoring Logic - HERO PowBar Calculation check', () => {
   test('it replentish hitPower object, checks pow bar to 100%', () => {
     heroInstanceObject.resetChallengePow();
     expect(heroInstanceObject.powBar()).toBe(104);
@@ -129,7 +129,7 @@ describe('Player Scoring Logic - PowBar Calculation check', () => {
     expect(heroInstanceObject.powBar()).toBe(88);
   });
 
-  test.only('it replentish hitPower object, get 2 hits and verifies pow bar reduction', () => {
+  test('it replentish hitPower object, get 2 hits and verifies pow bar reduction', () => {
     heroInstanceObject.resetChallengePow();
     deamInstanceObject.resetChallengePow();
 
@@ -139,6 +139,31 @@ describe('Player Scoring Logic - PowBar Calculation check', () => {
 
     expect(heroInstanceObject.powBar()).toBe(72);
   });
+});
 
+describe('Player Scoring Logic - DEMON PowBar Calculation check', () => {
+  test('it replentish hitPower object, checks pow bar to 100%', () => {
+    deamInstanceObject.resetChallengePow();
+    expect(deamInstanceObject.powBar()).toBe(108);
+  });
+
+  test('it replentish hitPower object, get 1x hit and verifies pow bar reduction', () => {
+    heroInstanceObject.resetChallengePow();
+    deamInstanceObject.resetChallengePow();
+
+    // demon attacks hero
+    heroInstanceObject.attackEnemy(heroInstanceObject.hitPower().sword, deamInstanceObject);
+    expect(deamInstanceObject.powBar()).toBe(47);
+  });
+
+  test('it replentish hitPower object, get 2x hit and verifies pow bar reduction', () => {
+    heroInstanceObject.resetChallengePow();
+    deamInstanceObject.resetChallengePow();
+
+    // demon attacks hero
+    heroInstanceObject.attackEnemy(heroInstanceObject.hitPower().sword, deamInstanceObject);
+    heroInstanceObject.attackEnemy(heroInstanceObject.hitPower().sword, deamInstanceObject);
+    expect(deamInstanceObject.powBar()).toBe(0);
+  });
 
 });

@@ -220,13 +220,12 @@ export class ChallengeScene extends Phaser.Scene {
       this.heroEB.updateEnergyLevel(hero.powBar());
 
       //handling messages to player
-      let logString = ` <-- ${this.enemies[this.index - 1].name} attacks ${this.playerName} (pow left:${hero.challengePow})`;
-      this.events.emit('Message', logString);
+      let logString = ` <-- ${this.enemies[this.index - 1].name} attacks ${this.playerName} (pow left:${hero.powBar()}%)`;
+      //this.events.emit('Message', logString);
       this.blogArray.push(logString);
       Help.battleLog(this.blogArray)
       this.checkHealth(this.heroes[0], 0);
     }
-    console.log(`demon ${this.index - 1} attacks hero. Hero power left ` + hero.challengePow);
   }
 
   waitAndAttackDeamon(data) {
@@ -250,8 +249,8 @@ export class ChallengeScene extends Phaser.Scene {
     this.dPowBars[data.id].updateEnergyLevel(sDemon.powBar());
 
     //handling messages to player
-    let logString = ` --> ${this.playerName} attacks ${demonName} (pow left:${sDemon.challengePow})`;
-    this.events.emit('Message', logString);
+    let logString = ` --> ${this.playerName} attacks ${demonName} (pow left:${sDemon.powBar()}%)`;
+    //this.events.emit('Message', logString);
     this.blogArray.push(logString);
     Help.battleLog(this.blogArray)
     this.checkHealth(this.heroes[0], 0);
@@ -280,7 +279,7 @@ export class ChallengeScene extends Phaser.Scene {
   }
 
   initialInstructions() {
-    this.events.emit('Instruc', 'Welcome to the challege: Fait will make one weapon dissaper on each round for you. \n Good luck!');
+    this.events.emit('Instruc', 'Welcome to the challege: On each round, select a weapon and click a demon to attack. \n Good luck!');
   }
 
   checkEndChallenge() {
