@@ -68,15 +68,6 @@ export class WorldMapScene extends Phaser.Scene {
     worldLayer.setCollisionByProperty({ collides: true });
     bombLayer.setCollisionByProperty({ collides: true });
 
-
-    /* Check debug rendering for collide assets in layer */
-    /*     const debugGraphics = this.add.graphics().setAlpha(0.75);
-        worldLayer.renderDebug(debugGraphics, {
-          tileColor: null, // Color of non-colliding tiles
-          collidingTileColor: new Phaser.Display.Color(243, 134, 48, 255), // Color of colliding tiles
-          faceColor: new Phaser.Display.Color(40, 39, 37, 255), // Color of colliding face edges
-        }); */
-
     this.player = new Player({
       scene: this,
       x: 0,
@@ -186,7 +177,16 @@ export class WorldMapScene extends Phaser.Scene {
 
     // On GAme Over sends message and saves score
     if (this.player.globals.corazon.haveILost()) {
-      this.gameOver();
+      // this.gameOver();
+
+      const msg = Help.gameOverMsg(1,
+        this.player.globals.corazon.gameScore.skill,
+        this.player.globals.corazon.gameScore.motivation,
+        this.player.globals.corazon.gameScore.courage,
+        this.player.globals.corazon.gameScore.fear,
+        Help.playerScoreToSave(this));
+      this.gameoverMessage.showMessage(msg);
+
       this.saveScore(this.playerName, Help.playerScoreToSave(this));
     }
   }
