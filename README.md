@@ -96,7 +96,7 @@ To get a local copy up and running, follow these simple example steps.
 ``` $ yarn build ```
 
 ## Test
-The repository currently contains 13 tests that have driven the score calculation main method development. At the repository root,  run the following command to execute the available tests:
+The repository currently contains 26 tests that have driven the score calculation main method development. At the repository root,  run the following command to execute the available tests:
 
 ``` yarn test ```
 
