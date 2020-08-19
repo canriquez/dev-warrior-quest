@@ -40,10 +40,11 @@
   "dependencies": {
     "copy-webpack-plugin": "^6.0.3",
     "core-js": "^3.6.5",
+    "cross-fetch": "^3.0.5",
     "phaser": "^3.24.1",
+    "regenerator-runtime": "^0.13.7",
     "webpack": "^4.44.1",
-    "webpack-cli": "^3.3.12",
-    "regenerator-runtime": "^0.13.7"
+    "webpack-cli": "^3.3.12"
   },
   "jest": {
     "moduleFileExtensions": [

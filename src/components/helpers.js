@@ -96,17 +96,19 @@ export const Help = (() => {
     return totalScore;
   };
 
-  const battleLog = (array) => {
-    let blogTag = document.getElementById('b-log');
+  const battleLog = (array, test = false) => {
     let htmlTag = ''
     for (let i = array.length - 1; i >= 0; i -= 1) {
       htmlTag += `<p>${array[i]}`;
       htmlTag += '<p>';
-
     }
-    blogTag.innerHTML = htmlTag;
-    blogTag.classList.add('show')
-    blogTag.classList.remove('hide')
+    if (test === false) {
+      let blogTag = document.getElementById('b-log');
+      blogTag.innerHTML = htmlTag;
+      blogTag.classList.add('show')
+      blogTag.classList.remove('hide')
+    }
+    return htmlTag
   }
 
 

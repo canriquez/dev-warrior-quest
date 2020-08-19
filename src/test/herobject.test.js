@@ -54,6 +54,7 @@ describe('Player Scoring Logic - Challenge Initiation', () => {
     heroInstanceObject.resetChallengePow();
     expect(heroInstanceObject.hitPower()).toMatchObject(firstHitPower);
   });
+
 });
 
 describe('Player Scoring Logic - Full Challenge', () => {
@@ -111,4 +112,14 @@ describe('Deamon Scoring Logic - Full Challenge', () => {
 
     expect(heroInstanceObject.challengeLost()).toEqual(true);
   });
+});
+
+describe('Player Scoring Logic - PowBar Calculation check', () => {
+  test.only('it replentish hitPower object, checks pow bar to 100%', () => {
+    heroInstanceObject.resetChallengePow();
+    console.log(heroInstanceObject.challengePow);
+    console.log('example math Ceil :' + Math.ceil((12.5 / 13) * 100))
+    expect(heroInstanceObject.powBar()).toBe(0);
+  });
+
 });

@@ -102,10 +102,10 @@ body {
   display: none;
   text-align: left;
   text-transform: capitalize;
-  background-color: transparent;
   color: white;
   font-size: 45px;
   overflow-y: scroll;
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 #b-log:hover {
@@ -145,7 +145,7 @@ body {
 }
 
 #b-log p:first-child {
-  color: red;
+  color: #e2ff00
 }
 
 .showtag {

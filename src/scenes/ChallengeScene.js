@@ -40,7 +40,7 @@ export class ChallengeScene extends Phaser.Scene {
     this.sys.events.on('wake', this.wake, this);
 
     //add html for battle log element
-    this.blogElement = this.add.dom(220, 180).createFromCache('b-log');
+    this.blogElement = this.add.dom(220, 190).createFromCache('b-log');
     this.add.existing(this.blogElement)
   }
 

@@ -1,4 +1,5 @@
 import 'regenerator-runtime';
+import fetch from 'cross-fetch'; //user on testing
 
 export const MicroverseAPI = (() => {
   const appURL = ['https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/76iZcjsds6vK8FEYOUkr/scores/',
@@ -68,18 +69,12 @@ export const MicroverseAPI = (() => {
       const response = await fetch(appURL[type], request);
       const obj = await response.json();
 
-      return obj.result;
-      // return [].sort.call(response, (a, b) => b.score - a.score);
+      //return 10 top scorer list
+      return obj.result.sort((a, b) => b.score - a.score).slice(0, 10);
     } catch (err) {
       throw ('Something went wrong with API Game Id request - getScore:', err);
     }
   };
-
-  /*     sortArgument = (arguments) => {
-            return [].sort.call(arguments).sort(function (a, b) {
-                return b - a;
-            });
-        } */
 
   return {
     getAppId,
