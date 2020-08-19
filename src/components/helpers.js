@@ -60,14 +60,7 @@ export const Help = (() => {
 
   const challengeDone = (scene, challenge) => {
     const sysNextChallenge = scene.sys.game.globals.settings.nextChallenge;
-    console.log('checking done challenge :');
-    console.log(sysNextChallenge.done);
-
-    console.log('challenge is: ');
-    console.log(challenge);
-
     const challengeDone = sysNextChallenge.done;
-    console.log(`evaluation is:${challengeDone.includes(challenge)}`);
     return challengeDone.includes(challenge);
   };
 

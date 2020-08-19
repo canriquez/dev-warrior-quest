@@ -21,8 +21,6 @@ export class ChallengeScene extends Phaser.Scene {
 
   create() {
     this.playerName = this.sys.game.globals.settings.playerName;
-    console.log('Showing Player Name on system - @Challenge Scene');
-    console.log(this.sys.game.globals.settings);
 
     this.buildScene();
 
@@ -47,10 +45,6 @@ export class ChallengeScene extends Phaser.Scene {
     this.challengeStarted = false;
 
     this.index = -1;
-
-    console.log(`challenge data scene image name: ${this.challengeData.challscene}`);
-    console.log(this.challengeData);
-
     this.add.image(240, 175, this.challengeData.challscene);
     this.graphics = this.add.graphics();
     this.graphics.lineStyle(1, 0x000000);
@@ -74,9 +68,6 @@ export class ChallengeScene extends Phaser.Scene {
       type: 'hero',
       name: this.playerName,
     });
-
-    let frameNames = this.textures.get('h2idle').getFrameNames();
-    console.log(frameNames);
 
     this.anims.create({
       key: 'idle',
@@ -104,7 +95,7 @@ export class ChallengeScene extends Phaser.Scene {
       repeat: 1,
     });
 
-    devWarrior.play("idle");
+    devWarrior.play('idle');
 
 
     // loads player info: scores, points, into devWarrior object for this challenge
@@ -112,10 +103,6 @@ export class ChallengeScene extends Phaser.Scene {
 
     // initializes power for challenge
     devWarrior.globals.corazon.resetChallengePow();
-
-    console.log('##: ChallengeScene:');
-    console.log('#: buildScene(). Shows Hero Pow for challenge - devWarrior.globals.corazon.challengePow');
-    console.log(devWarrior.globals.corazon.challengePow);
 
     // Build Deamons Array
     this.enemies = [];
@@ -132,12 +119,6 @@ export class ChallengeScene extends Phaser.Scene {
       });
       deamon.globals.corazon.resetChallengePow();
       this.enemies.push(deamon);
-
-      console.log('##: ChallengeScene:');
-      console.log(`#: buildScene(). deamon.globals.corazon.challengePow :||: Index : ${i}`);
-      console.log(deamon.globals.corazon.challengePow);
-      console.log(`#: buildScene(). deamon.globals.corazon.gameScore:||: Index : ${i}`);
-      console.log(deamon.globals.corazon.gameScore);
     }
 
 
@@ -145,9 +126,9 @@ export class ChallengeScene extends Phaser.Scene {
     devWarrior.body.setCollideWorldBounds(true);
     devWarrior.body.setGravityY(300);
 
-    //this.physics.add.collider(devWarrior, this.ground);
+    // this.physics.add.collider(devWarrior, this.ground);
     this.physics.add.existing(devWarrior);
-    this.physics.add.collider(devWarrior, this.ground)
+    this.physics.add.collider(devWarrior, this.ground);
 
 
     // add physics to deamons
@@ -231,7 +212,6 @@ export class ChallengeScene extends Phaser.Scene {
   }
 
   onHeroAttacked() {
-    console.log('## here at onHeroAttacked');
     const demon = this.characters[this.index].globals.corazon;
     const hero = this.heroes[0].globals.corazon;
     const power = Math.ceil(demon.hitPower()[Help.rndHit()] * this.challengeData.winFactor);
@@ -243,7 +223,6 @@ export class ChallengeScene extends Phaser.Scene {
 
       // handling messages to player
       const logString = ` <-- ${this.enemies[this.index - 1].name} attacks ${this.playerName} (pow left:${hero.powBar()}%)`;
-      // this.events.emit('Message', logString);
       this.blogArray.push(logString);
       Help.battleLog(this.blogArray);
       this.checkHealth(this.heroes[0], 0);
@@ -255,7 +234,6 @@ export class ChallengeScene extends Phaser.Scene {
   }
 
   onDeamonAtacked(data) {
-    console.log('## here at onDemonAttacked');
     // We get corazon methods with data.id from UIscene
     const sDemon = this.enemies[data.id].globals.corazon;
     const demonName = this.enemies[data.id].name;
@@ -263,24 +241,15 @@ export class ChallengeScene extends Phaser.Scene {
     const power = Math.ceil(hero.hitPower()[data.weapon]) * this.challengeData.extraPower;
 
     hero.attackEnemy(power, sDemon);
-    console.log('Deamon corazon score');
-    console.log(sDemon.gameScore);
-
-    console.log(`deamon ${data.id} challengePow is : ${sDemon.challengePow}`);
-    console.log(`deamon ${data.id} pow bar : ${sDemon.powBar()}`);
-
     this.dPowBars[data.id].updateEnergyLevel(sDemon.powBar());
 
     // handling messages to player
     const logString = ` --> ${this.playerName} attacks ${demonName} (pow left:${sDemon.powBar()}%)`;
-    // this.events.emit('Message', logString);
     this.blogArray.push(logString);
     Help.battleLog(this.blogArray);
     this.checkHealth(this.heroes[0], 0);
 
-    // this.events.emit('Message', `${this.playerName} attacks ${demonName} for ${power} damage`);
     this.time.addEvent({ delay: 5000, callback: this.nextTurn, callbackScope: this });
-    console.log(`--> ${this.playerName} attacks ${demonName} (pow left:${sDemon.challengePow}${sDemon.challengePow}`);
   }
 
   checkHealth(character, index) {
@@ -294,11 +263,13 @@ export class ChallengeScene extends Phaser.Scene {
   }
 
   onweaponMsg(data) {
-    this.events.emit('Message', data);
+    this.blogArray.push(data);
+    Help.battleLog(this.blogArray);
   }
 
   notYourself(data) {
-    this.events.emit('Message', data);
+    this.blogArray.push(data);
+    Help.battleLog(this.blogArray);
   }
 
   initialInstructions() {
@@ -349,9 +320,6 @@ export class ChallengeScene extends Phaser.Scene {
   }
 
   backToParent() {
-    console.log('I got back to parents signal');
-    // this.cameras.main.fade(1000);
-    // this.scene.sleep(CONST.SCENES.CHALLENGE);
     this.scene.sleep(CONST.SCENES.UICHALL);
     this.scene.switch(CONST.SCENES.WORLDMAP, 'back from challenge');
   }
@@ -388,19 +356,8 @@ export class ChallengeScene extends Phaser.Scene {
   }
 
   resetScene() {
-    console.log('#### Showing Player Name on system @Challenge Scene');
-    console.log(this.sys.game.globals.settings.playerName);
-
-
     this.data = this.sys.game.globals.settings.nextChallenge;
     this.blogArray = [];
-
-    console.log('##: CHallengeScene:');
-    console.log('#: Init(). Contents of Setting.nextChallenge.data.done :');
-    console.log(this.data.done);
-    console.log('#: Init(). Challenge Id :');
-    console.log(this.data.done[0]);
-
 
     // gets the last challengeId added to the done array
     const lastRequestedChallengeIndex = this.data.done.length - 1;
@@ -414,18 +371,12 @@ export class ChallengeScene extends Phaser.Scene {
 
     // Obtain challenge data object from Module challenges
     this.challengeData = ChallengeConfig.getChallenge(this.challengeId);
-
-    console.log('##: ChallengeScene:');
-    console.log('#: Init(). Contents of ChallengeConfig.getChallenge(this.challengeId)');
-    console.log(this.challengeData);
   }
 
   wake() {
-    console.log('Weaking up');
     this.resetScene();
     this.buildScene();
     this.scene.run(CONST.SCENES.UICHALL, '####: And so... game starts AGAIN');
-    // this.scene.restart();
   }
 }
 

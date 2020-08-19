@@ -27,7 +27,6 @@ export class Player extends Phaser.GameObjects.Sprite {
   }
 
   clickMe() {
-    console.log(`${this.type}CLicked --- actions below`);
     if (this.type === 'deamon') {
       this.scene.events.emit('attackDeamon', this.deamonId);
     }

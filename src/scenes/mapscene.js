@@ -21,9 +21,6 @@ export class WorldMapScene extends Phaser.Scene {
   }
 
   onChallenge1(player, zone) {
-    console.log('#### Showing Player Name on system before calling @Challenge Scene');
-    console.log(this.sys.game.globals.settings.playerName);
-
     this.runChallenge(0);
   }
 
@@ -232,8 +229,7 @@ export class WorldMapScene extends Phaser.Scene {
   saveScore(name, score) {
     if (this.saveScore === true) { return; }
     this.saveScore = true;
-    console.log('saving game in server');
-    // const response = MicroverseAPI.setScore(name, score, 1); <- Uncomment for delivery
+    const response = MicroverseAPI.setScore(name, score, 1);
   }
 }
 
