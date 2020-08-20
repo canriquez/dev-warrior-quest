@@ -101,6 +101,18 @@ export class PreloaderScene extends Phaser.Scene {
     this.timedEvent = this.time.delayedCall(3000, this.ready, [], this);
 
     // load assets needed in our game
+
+
+    // load input user name
+    this.load.image('usrinput', './src/assets/ui/user_input.png');
+
+    // main menu
+    this.load.image('mainmenu', './src/assets/ui/main_menu.png');
+
+    // Leader Board
+    this.load.image('leadboard', './src/assets/ui/leader_board.png');
+
+    //tiledmap
     this.load.image('tgrass', './src/assets/questmap/grass.png');
     this.load.image('tdirt', './src/assets/questmap/dirth.png');
     this.load.image('base', './src/assets/questmap/base.png');
@@ -118,16 +130,6 @@ export class PreloaderScene extends Phaser.Scene {
     this.load.image('box', './src/assets/ui/grey_box.png');
     this.load.image('checkedBox', './src/assets/ui/blue_boxCheckmark.png');
     this.load.audio('bgMusic', ['./src/assets/music/epic.mp3']);
-
-    // main menu
-    this.load.image('mainmenu', './src/assets/ui/main_menu.png');
-
-
-    // load input user name
-    this.load.image('usrinput', './src/assets/ui/user_input.png');
-
-    // Leader Board
-    this.load.image('leadboard', './src/assets/ui/leader_board.png');
 
 
     // load challanges assets
