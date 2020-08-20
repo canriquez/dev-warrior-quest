@@ -1,5 +1,5 @@
 import { Help } from '../components/helpers';
-
+import 'jest-canvas-mock';
 const logPost = [
   '<-- Demon-2 Attacks Carlos (Pow Left:11)',
   'Demon-1 Attacks Carlos (Pow Left:12)',
