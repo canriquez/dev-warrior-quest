@@ -1,7 +1,7 @@
 {
-  "name": "phaser_setup",
+  "name": "dev-warrior-quest",
   "version": "1.0.0",
-  "description": "first setup with phaser, webpack, babel",
+  "description": "RPG game built with JavaScript and Phaser 3 (Final Capstone Project @microverseinc)",
   "private": true,
   "main": "index.js",
   "scripts": {
@@ -9,7 +9,7 @@
     "tw": "jest --watch *.js",
     "build": "webpack --mode production",
     "buildp": "webpack --mode production --watch",
-    "watch": "webpack --mode development --watch"
+    "watch": "webpack --mode production --watch"
   },
   "repository": {
     "type": "git",
@@ -18,24 +18,33 @@
   "author": "Carlos Anriquez",
   "license": "MIT",
   "bugs": {
-    "url": "git@github.com:canriquez/phaser_setup.git"
+    "url": "git@github.com:canriquez/dev-warrior-quest.git"
   },
-  "homepage": "https://github.com/canriquez/phaser_setup",
+  "homepage": "https://github.com/canriquez/dev-warrior-quest.git",
   "devDependencies": {
     "@babel/core": "^7.11.0",
     "@babel/preset-env": "^7.11.0",
     "babel-loader": "^8.1.0",
+    "canvas": "^2.6.1",
     "css-loader": "^3.6.0",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.1.0",
+    "eslint-plugin-import": "^2.20.2",
     "file-loader": "^6.0.0",
     "jest": "^26.2.2",
+    "jest-canvas-mock": "^2.2.0",
     "style-loader": "^1.2.1",
     "stylelint": "^13.3.3",
     "stylelint-config-standard": "^20.0.0",
+    "stylelint-csstree-validator": "^1.8.0",
     "stylelint-scss": "^3.17.2"
   },
   "dependencies": {
     "copy-webpack-plugin": "^6.0.3",
+    "core-js": "^3.6.5",
+    "cross-fetch": "^3.0.5",
     "phaser": "^3.24.1",
+    "regenerator-runtime": "^0.13.7",
     "webpack": "^4.44.1",
     "webpack-cli": "^3.3.12"
   },
