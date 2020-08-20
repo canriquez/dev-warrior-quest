@@ -21,7 +21,6 @@ export class PreloaderScene extends Phaser.Scene {
     this.readyCount += 1;
     if (this.readyCount === 2) {
       this.scene.start(CONST.SCENES.TITLE, 'hello from Preloader Scene');
-      // this.scene.start(CONST.SCENES.CHALLENGE, "Challenge call: - hello from Preloader Scene");
     }
   }
 

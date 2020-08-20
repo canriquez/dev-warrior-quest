@@ -14,7 +14,6 @@ export class InitScene extends Phaser.Scene {
 
   create() {
     this.scene.start(CONST.SCENES.PRELOAD, 'hello from BootScene');
-    // this.scene.start(CONST.SCENES.WORLDMAP, 'hello from BootScene');
   }
 }
 

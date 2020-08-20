@@ -15,9 +15,6 @@ export class OptionsScene extends Phaser.Scene {
   }
 
   create() {
-    // this.musicOn = true;
-    // this.soundOn = true;
-
     this.config = this.sys.game.globals.settings;
 
     this.text = this.add.text(Help.posFixLeftX(0.32), Help.posFixTopY(0.07), 'Options', { fontSize: 40 });

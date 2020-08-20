@@ -3,7 +3,6 @@ import Phaser from 'phaser';
 export class HeroEnergyBar extends Phaser.GameObjects.Container {
   constructor(scene, x, y, total, text) {
     super(scene, x, y);
-    // this.scale = 0.2;
     this.energy = total;
     // display progress bar
     const pBox = this.scene.add.graphics();

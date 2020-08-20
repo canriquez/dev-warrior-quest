@@ -126,7 +126,6 @@ export class ChallengeScene extends Phaser.Scene {
     devWarrior.body.setCollideWorldBounds(true);
     devWarrior.body.setGravityY(300);
 
-    // this.physics.add.collider(devWarrior, this.ground);
     this.physics.add.existing(devWarrior);
     this.physics.add.collider(devWarrior, this.ground);
 

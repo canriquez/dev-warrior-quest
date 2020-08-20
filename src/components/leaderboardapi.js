@@ -8,7 +8,6 @@ export const MicroverseAPI = (() => {
 
 
   const getAppId = async () => {
-    // Game with ID: kZpOvzmDySnCTvoWMzBf added.
     const postObj = JSON.stringify({
       name: 'Dev Warrior Quest',
     });

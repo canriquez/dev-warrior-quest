@@ -13,7 +13,6 @@ export class GameScoreBoard extends Phaser.GameObjects.Container {
       + scene.player.globals.corazon.extraScore;
 
     this.playerName = this.scene.sys.game.globals.settings.playerName;
-    // this.sys.game.globals.settings.userName
     // Background box
 
     const graphics = this.scene.add.graphics();

@@ -24,7 +24,6 @@ export class LeadBoardObject extends Phaser.GameObjects.Container {
       color: '#ffffff', align: 'right', fontSize: 15, wordWrap: { width: 240, useAdvancedWrap: true },
     });
     this.add(this.text2);
-    // this.text2.setOrigin(2);
 
     this.visible = true;
   }

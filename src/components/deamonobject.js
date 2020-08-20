@@ -22,15 +22,6 @@ export class DeamonProfile {
     };
   }
 
-  /*   get challengePow() {
-      return this._challengePow;
-    }
-
-    get gameScore() {
-      return this._gameScore;
-    }
-   */
-
   resetChallengePow() {
     let pow = this.gameScore.skill * this.challengeMultiplier.skill;
     pow += this.gameScore.courage * this.challengeMultiplier.courage;

@@ -20,7 +20,6 @@ export class Weapon extends Phaser.GameObjects.Container {
     });
 
     this.button.on('pointerover', () => {
-      // this.button.setTexture(key2);
       this.rotate(this.button);
     });
 

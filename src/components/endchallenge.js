@@ -4,7 +4,6 @@ export class EndChallenge extends Phaser.GameObjects.Container {
   constructor(scene) {
     super(scene, 240, 80);
     this.scene = scene;
-    // this.callback = callback;
     const graphics = this.scene.add.graphics();
     this.add(graphics);
     graphics.lineStyle(1, 0xffffff, 0.8);
@@ -41,7 +40,6 @@ export class EndChallenge extends Phaser.GameObjects.Container {
     });
 
     this.text6.on('pointerover', () => {
-      // this.button.setTexture(key2);
       this.text6.setColor('#FFCC00');
     });
 

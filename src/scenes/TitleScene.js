@@ -44,7 +44,7 @@ export class TitleScene extends Phaser.Scene {
 
     this.config = this.sys.game.globals.settings;
     if (this.config.musicOn === true && this.config.bgMusicPlaying === false) {
-      this.bgMusic = this.sound.add('bgMusic', { volume: 0.5, loop: true });
+      this.bgMusic = this.sound.add('bgMusic', { volume: 0.3, loop: true });
       this.bgMusic.play();
       this.config.bgMusicPlaying = true;
       this.sys.game.globals.bgMusic = this.bgMusic;

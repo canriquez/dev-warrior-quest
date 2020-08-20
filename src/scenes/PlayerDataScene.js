@@ -21,10 +21,6 @@ export class PlayerDataScene extends Phaser.Scene {
     this.inputTag = document.getElementById('utext');
     this.inputTag.classList.add('showtag');
 
-    /*
-        this.logo = this.add.image(250, 150, 'logo');
-        this.logo.scale = 0.5; */
-
     this.saveButton = new Weapon(this, 240, 280, 'bluebtn', 'exit', () => {
       this.hideEvent = null;
       this.visible = false;
@@ -34,7 +30,6 @@ export class PlayerDataScene extends Phaser.Scene {
       }
 
       this.saveAndStart();
-      // this.scene.backToParent();
     });
     this.saveButton.scale = 0.4;
 

@@ -30,7 +30,6 @@ export class MenuItem {
       });
     this.deselect();
     this.disable();
-    // Phaser.Display.Align.In.Center(this.selBox, this.button);
   }
 
 

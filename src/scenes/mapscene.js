@@ -163,7 +163,6 @@ export class WorldMapScene extends Phaser.Scene {
   }
 
   wake() {
-    // this.scene.run(CONST.SCENES.WORLDMAP);
     this.cameras.main.fadeIn(1000);
     // reset coursor keys
     this.cursors.left.reset();
@@ -177,8 +176,6 @@ export class WorldMapScene extends Phaser.Scene {
 
     // On GAme Over sends message and saves score
     if (this.player.globals.corazon.haveILost()) {
-      // this.gameOver();
-
       const msg = Help.gameOverMsg(1,
         this.player.globals.corazon.gameScore.skill,
         this.player.globals.corazon.gameScore.motivation,

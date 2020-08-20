@@ -54,7 +54,6 @@ export class GameOverScreen extends Phaser.GameObjects.Container {
     });
 
     this.text6.on('pointerover', () => {
-      // this.button.setTexture(key2);
       this.text6.setColor('#FFCC00');
     });
 
