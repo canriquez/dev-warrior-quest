@@ -1,5 +1,5 @@
 import Phaser from 'phaser';
-import { Help } from './helpers';
+import Help from './helpers';
 
 export class GameScoreBoard extends Phaser.GameObjects.Container {
   constructor(scene, x, y) {

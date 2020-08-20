@@ -2,7 +2,7 @@
 import Phaser from 'phaser';
 import { CONST } from '../components/const';
 import { MenuItem } from '../components/menuitems';
-import { Help } from '../components/helpers';
+import Help from '../components/helpers';
 import { Menus } from '../components/menus';
 import { MessageChallenge } from '../components/challmessages';
 import { OnScreenInstructions } from '../components/osinstructions';

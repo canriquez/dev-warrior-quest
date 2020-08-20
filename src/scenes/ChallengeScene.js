@@ -1,7 +1,7 @@
 /* eslint-disable class-methods-use-this, no-lonely-if */
 import Phaser from 'phaser';
 import { CONST } from '../components/const';
-import { Help } from '../components/helpers';
+import Help from '../components/helpers';
 import { Player } from '../components/characters';
 import { HeroEnergyBar } from '../components/energybars';
 import { EndChallenge } from '../components/endchallenge';

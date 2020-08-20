@@ -1,7 +1,7 @@
 /* eslint-disable class-methods-use-this */
 import Phaser from 'phaser';
 import { CONST } from '../components/const';
-import { Help } from '../components/helpers';
+import Help from '../components/helpers';
 import { Button } from '../components/buttons';
 
 export class OptionsScene extends Phaser.Scene {

@@ -1,4 +1,4 @@
-import { Help } from '../components/helpers';
+import Help from '../components/helpers';
 
 const logPost = [
   '<-- Demon-2 Attacks Carlos (Pow Left:11)',

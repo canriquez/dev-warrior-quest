@@ -1,7 +1,7 @@
 /* eslint-disable class-methods-use-this, no-unused-vars, max-len */
 import Phaser from 'phaser';
 import { CONST } from '../components/const';
-import { Help } from '../components/helpers';
+import Help from '../components/helpers';
 import { Player } from '../components/characters';
 import { GameScoreBoard } from '../components/gamescoreboard';
 import { GameOverScreen } from '../components/gameover';

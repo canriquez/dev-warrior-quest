@@ -1,6 +1,6 @@
 import { config } from '../config/config';
 
-export const Help = (() => {
+const Help = (() => {
   const hOptions = {
     0: 'sword',
     1: 'knife',
