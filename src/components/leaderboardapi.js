@@ -3,7 +3,7 @@ import fetch from 'cross-fetch'; // user on testing
 
 export const MicroverseAPI = (() => {
   const appURL = ['https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/76iZcjsds6vK8FEYOUkr/scores/',
-    'https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/uYI4G9Bt3H7ZY8R11dCa/scores/'];
+    'https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/m5FcaRqSWlp8qFrw60FQ/scores/'];
   const BASEURL = 'https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/';
 
 

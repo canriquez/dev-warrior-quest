@@ -43,8 +43,8 @@ export class WorldMapScene extends Phaser.Scene {
   }
 
   preload() {
-    //clean challenges done array
-    const oldD = this.sys.game.globals.settings.nextChallenge.done = [];
+    // clean challenges done array
+    this.sys.game.globals.settings.nextChallenge.done = [];
     // load resources here
     this.gameOver = false;
   }

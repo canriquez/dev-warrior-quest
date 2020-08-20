@@ -109,7 +109,7 @@ export class PreloaderScene extends Phaser.Scene {
     // Leader Board
     this.load.image('leadboard', './src/assets/ui/leader_board.png');
 
-    //tiledmap
+    // tiledmap
     this.load.image('tgrass', './src/assets/questmap/grass.png');
     this.load.image('tdirt', './src/assets/questmap/dirth.png');
     this.load.image('base', './src/assets/questmap/base.png');
