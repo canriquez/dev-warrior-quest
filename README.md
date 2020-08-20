@@ -5,6 +5,8 @@ Turne-Based RPG Video Game, built with Phase 3 Library
 - The game was developed following fundamental Game Design principles, applying them, and building a formal Game Design Document. 
 
 
+![](./src/docs/devwarrior.gif)
+
 ## Game Goal
 
  - The main character, "The Dev Warrior" will go in a hero quest, building skills, courage, and motivation levels to conquer terrifying fear demons, winning the once lost self-confidence back. 
