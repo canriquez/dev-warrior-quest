@@ -2,7 +2,7 @@
 ## Turn-Based RPG Video Game, built with Phase 3 Library
 ---
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/10266faf-c551-43bd-a46a-cca00a23585d/deploy-status)](https://app.netlify.com/sites/anriquez-rpg/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/7828e017-8dbd-4405-95d1-788a2db2d68b/deploy-status)](https://app.netlify.com/sites/anriquez-rpg/deploys)
 
 ## Project Details - Game Design 
  
