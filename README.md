@@ -1,6 +1,10 @@
-Turne-Based RPG Video Game, built with Phase 3 Library
 
-# Project Details - Game Design 
+## Turn-Based RPG Video Game, built with Phase 3 Library
+---
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/10266faf-c551-43bd-a46a-cca00a23585d/deploy-status)](https://app.netlify.com/sites/anriquez-rpg/deploys)
+
+## Project Details - Game Design 
  
 - The game was developed following fundamental Game Design principles, applying them, and building a formal Game Design Document. 
 
